@@ -98,8 +98,8 @@
 		E2028A872B6CD01A00B603E8 /* Selterview */ = {
 			isa = PBXGroup;
 			children = (
-				E2028A882B6CD01A00B603E8 /* SelterviewApp.swift */,
-				E2028A8A2B6CD01A00B603E8 /* ContentView.swift */,
+				E26EC4AC2B6CD11300B1CEEB /* Sources */,
+				E26EC4AB2B6CD0FA00B1CEEB /* Resources */,
 				E2028A8C2B6CD01C00B603E8 /* Assets.xcassets */,
 				E2028A912B6CD01C00B603E8 /* Persistence.swift */,
 				E2028A932B6CD01C00B603E8 /* Selterview.xcdatamodeld */,
@@ -131,6 +131,22 @@
 				E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */,
 			);
 			path = SelterviewUITests;
+			sourceTree = "<group>";
+		};
+		E26EC4AB2B6CD0FA00B1CEEB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E26EC4AC2B6CD11300B1CEEB /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E2028A882B6CD01A00B603E8 /* SelterviewApp.swift */,
+				E2028A8A2B6CD01A00B603E8 /* ContentView.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
