@@ -12,15 +12,12 @@ struct CategoryPickerView: View {
 	var categories: [Category] = [.swift, .ios, .cs]
 	
 	var body: some View {
-		HStack {
-			Picker("카테고리를 선택해주세요.", selection: $selectedCategory) {
-				ForEach(categories, id: \.self) {
-					Text($0.rawValue)
-				}
+		Picker("카테고리를 선택해주세요.", selection: $selectedCategory) {
+			ForEach(categories, id: \.self) {
+				Text($0.rawValue)
 			}
-			.pickerStyle(.menu)
-			.cornerRadius(15)
-			Spacer()
 		}
+		.pickerStyle(.menu)
+		.cornerRadius(15)
 	}
 }

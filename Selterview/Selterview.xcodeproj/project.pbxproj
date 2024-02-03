@@ -18,6 +18,8 @@
 		E26EC4BD2B6CED8500B1CEEB /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */; };
 		E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4C62B6CF2AE00B1CEEB /* Question.swift */; };
 		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
+		E2E3225A2B6E3FCF00D5D081 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322592B6E3FCF00D5D081 /* StartButtonView.swift */; };
+		E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 		E26EC4C62B6CF2AE00B1CEEB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		E2E322592B6E3FCF00D5D081 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
+		E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 		E26EC4AE2B6CE66B00B1CEEB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E2E3225B2B6E41B800D5D081 /* Problem */,
 				E26EC4AF2B6CE76D00B1CEEB /* Main */,
 			);
 			path = Presentation;
@@ -174,6 +179,7 @@
 			children = (
 				E26EC4B72B6CE97C00B1CEEB /* MainView.swift */,
 				E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */,
+				E2E322592B6E3FCF00D5D081 /* StartButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,6 +199,22 @@
 				E26EC4C62B6CF2AE00B1CEEB /* Question.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E2E3225B2B6E41B800D5D081 /* Problem */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3225C2B6E41C400D5D081 /* View */,
+			);
+			path = Problem;
+			sourceTree = "<group>";
+		};
+		E2E3225C2B6E41C400D5D081 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +347,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
+				E2E3225A2B6E3FCF00D5D081 /* StartButtonView.swift in Sources */,
 				E26EC4B62B6CE8F400B1CEEB /* MainViewModel.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
