@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ProblemView: View {
 	@State var questions: [Question]
+	@State var answerText: String = ""
 	var questionStartIndex: Int
 	
  	var body: some View {
-		Text(questions[questionStartIndex].title)
+		VStack {
+			QuestionView(question: questions[questionStartIndex])
+			AnswerView(answerText: $answerText)
+		}
+		.navigationBarTitle("\(questions[questionStartIndex].category.rawValue)", displayMode: .inline)
 	}
 }

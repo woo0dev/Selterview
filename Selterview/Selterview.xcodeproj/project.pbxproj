@@ -17,9 +17,12 @@
 		E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B72B6CE97C00B1CEEB /* MainView.swift */; };
 		E26EC4BD2B6CED8500B1CEEB /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */; };
 		E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4C62B6CF2AE00B1CEEB /* Question.swift */; };
+		E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */; };
 		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
 		E2E3225A2B6E3FCF00D5D081 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322592B6E3FCF00D5D081 /* StartButtonView.swift */; };
 		E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */; };
+		E2E322612B6E4A2C00D5D081 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322602B6E4A2C00D5D081 /* QuestionView.swift */; };
+		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +56,12 @@
 		E26EC4B72B6CE97C00B1CEEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 		E26EC4C62B6CF2AE00B1CEEB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
 		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		E2E322592B6E3FCF00D5D081 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
 		E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
+		E2E322602B6E4A2C00D5D081 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		E2E322632B6E4AB000D5D081 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 		E26EC4AC2B6CD11300B1CEEB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E2E322622B6E4AA800D5D081 /* Extension */,
 				E2028A882B6CD01A00B603E8 /* SelterviewApp.swift */,
 				E26EC4B92B6CEB3F00B1CEEB /* Model */,
 				E26EC4AE2B6CE66B00B1CEEB /* Presentation */,
@@ -213,8 +220,18 @@
 			isa = PBXGroup;
 			children = (
 				E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */,
+				E2E322602B6E4A2C00D5D081 /* QuestionView.swift */,
+				E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E2E322622B6E4AA800D5D081 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E2E322632B6E4AB000D5D081 /* Color+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,12 +365,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
+				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
 				E2E3225A2B6E3FCF00D5D081 /* StartButtonView.swift in Sources */,
 				E26EC4B62B6CE8F400B1CEEB /* MainViewModel.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
 				E26EC4BD2B6CED8500B1CEEB /* MainViewModelProtocol.swift in Sources */,
+				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
 				E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */,
+				E2E322612B6E4A2C00D5D081 /* QuestionView.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +546,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,6 +580,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
