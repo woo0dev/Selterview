@@ -12,7 +12,7 @@ struct StartButtonView: View {
 	@State var questions: [Question] = []
 	
 	var body: some View {
-		NavigationLink(destination: ProblemView(questions: questions, questionStartIndex: 0), label: {
+		NavigationLink(destination: ProblemView(questions: questions, question: questions.isEmpty ? Question(id: 0, title: "", category: .swift, tails: []) : questions[0], questionIndex: 0), label: {
 			Text("랜덤 시작")
 		})
 		.onAppear {

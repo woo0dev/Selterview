@@ -19,3 +19,9 @@ enum Category: String {
 	case ios = "iOS"
 	case cs = "CS"
 }
+
+enum QuestionState {
+	case ing
+	case next
+	case newTail
+}

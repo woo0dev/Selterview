@@ -8,15 +8,47 @@
 import SwiftUI
 
 struct ProblemView: View {
-	@State var questions: [Question]
+	@FocusState var isFocused: Bool
 	@State var answerText: String = ""
-	var questionStartIndex: Int
+	@State var questions: [Question]
+	@State var question: Question
+	@State var questionState: QuestionState = .ing
+	@State var questionIndex: Int
 	
  	var body: some View {
 		VStack {
-			QuestionView(question: questions[questionStartIndex])
-			AnswerView(answerText: $answerText)
+			QuestionView(question: questions[questionIndex])
+				.padding(.top, 20)
+			AnswerView(answerText: $answerText, isFocused: _isFocused)
+				.frame(maxHeight: .infinity)
+				.padding(.top, 20)
+			HStack {
+				RoundedButtonView(questionState: $questionState, state: .newTail, text: "꼬리질문")
+					.padding(.leading, 10)
+				RoundedButtonView(questionState: $questionState, state: .next, text: "다음문제")
+					.padding(.trailing, 10)
+			}
+			.padding(.top, 10)
 		}
-		.navigationBarTitle("\(questions[questionStartIndex].category.rawValue)", displayMode: .inline)
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.padding(20)
+		.navigationBarTitle("\(questions[questionIndex].category.rawValue)", displayMode: .inline)
+		.onTapGesture {
+			isFocused = false
+		}
+		.onChange(of: questionState, perform: { state in
+			if state == .next {
+				if questionIndex + 1 >= questions.count {
+					questionIndex = 0
+				} else {
+					questionIndex += 1
+				}
+				questionState = .ing
+				question = questions[questionIndex]
+			} else if state == .newTail {
+				// TODO: chatGPT 연동 작업
+				questionState = .ing
+			}
+		})
 	}
 }

@@ -25,7 +25,7 @@ struct MainView: View {
 						.padding(.trailing, 20)
 				}
 				List(viewModel.filteredQuestions.indices, id: \.self) { index in
-					NavigationLink(destination: ProblemView(questions: viewModel.filteredQuestions, questionStartIndex: index), label: {
+					NavigationLink(destination: ProblemView(questions: viewModel.filteredQuestions, question: viewModel.filteredQuestions[index], questionIndex: index), label: {
 						Text(viewModel.filteredQuestions[index].title)
 					})
 				}
