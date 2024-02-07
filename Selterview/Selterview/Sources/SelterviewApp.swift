@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct SelterviewApp: App {
     var body: some Scene {
         WindowGroup {
-			MainView()
+			MainView(store: Store(initialState: MainReducer.State()) {
+				MainReducer()
+			})
         }
     }
 }

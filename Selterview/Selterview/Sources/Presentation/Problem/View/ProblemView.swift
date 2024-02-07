@@ -6,49 +6,40 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct ProblemView: View {
 	@FocusState var isFocused: Bool
-	@State var answerText: String = ""
-	@State var questions: [Question]
-	@State var question: Question
-	@State var questionState: QuestionState = .ing
-	@State var questionIndex: Int
+	
+	let store: StoreOf<ProblemReducer>
 	
  	var body: some View {
-		VStack {
-			QuestionView(question: questions[questionIndex])
-				.padding(.top, 20)
-			AnswerView(answerText: $answerText, isFocused: _isFocused)
-				.frame(maxHeight: .infinity)
-				.padding(.top, 20)
-			HStack {
-				RoundedButtonView(questionState: $questionState, state: .newTail, text: "꼬리질문")
-					.padding(.leading, 10)
-				RoundedButtonView(questionState: $questionState, state: .next, text: "다음문제")
-					.padding(.trailing, 10)
-			}
-			.padding(.top, 10)
-		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.padding(20)
-		.navigationBarTitle("\(questions[questionIndex].category.rawValue)", displayMode: .inline)
-		.onTapGesture {
-			isFocused = false
-		}
-		.onChange(of: questionState, perform: { state in
-			if state == .next {
-				if questionIndex + 1 >= questions.count {
-					questionIndex = 0
-				} else {
-					questionIndex += 1
+		WithViewStore(store, observe: { $0 }) { viewStore in
+			VStack {
+				Text(viewStore.question.title)
+					.padding(10)
+					.font(.system(size: 24))
+					.padding(.top, 20)
+				AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
+					.frame(maxHeight: .infinity)
+					.padding(.top, 20)
+				HStack {
+					Button("꼬리질문") {
+						viewStore.send(.newTailQuestionCreateButtonTapped)
+					}
+					.buttonStyle(RoundedButtonStyle())
+					Button("다음질문") {
+						viewStore.send(.nextQuestionButtonTapped)
+					}
+					.buttonStyle(RoundedButtonStyle())
 				}
-				questionState = .ing
-				question = questions[questionIndex]
-			} else if state == .newTail {
-				// TODO: chatGPT 연동 작업
-				questionState = .ing
 			}
-		})
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
+			.padding(20)
+			.navigationBarTitle("\(viewStore.question.category.rawValue)", displayMode: .inline)
+			.onTapGesture {
+				isFocused = false
+			}
+		}
 	}
 }

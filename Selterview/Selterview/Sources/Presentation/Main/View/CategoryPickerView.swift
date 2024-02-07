@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct CategoryPickerView: View {
 	@Binding var selectedCategory: Category
