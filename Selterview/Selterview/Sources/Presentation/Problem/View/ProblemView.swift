@@ -24,14 +24,17 @@ struct ProblemView: View {
 					.frame(maxHeight: .infinity)
 					.padding(.top, 20)
 				HStack {
+					Spacer()
 					Button("꼬리질문") {
 						viewStore.send(.newTailQuestionCreateButtonTapped)
 					}
 					.buttonStyle(RoundedButtonStyle())
+					Spacer()
 					Button("다음질문") {
 						viewStore.send(.nextQuestionButtonTapped)
 					}
 					.buttonStyle(RoundedButtonStyle())
+					Spacer()
 				}
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)

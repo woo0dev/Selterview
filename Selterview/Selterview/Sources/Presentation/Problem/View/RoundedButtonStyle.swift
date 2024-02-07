@@ -10,12 +10,10 @@ import SwiftUI
 struct RoundedButtonStyle: ButtonStyle {
 	func makeBody(configuration: Configuration) -> some View {
 		configuration.label
-			.frame(width: 150, height: 40)
-			.background(Color.mainColor)
+			.frame(maxWidth: 150, maxHeight: 50)
+			.background(Capsule().fill(Color.mainColor))
 			.foregroundColor(.white)
-			.buttonStyle(.borderedProminent)
 			.controlSize(.large)
 			.font(.title3)
-		
 	}
 }
