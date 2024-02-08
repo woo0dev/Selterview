@@ -37,7 +37,7 @@ extension OpenAIClient: DependencyKey {
 			   let firstChoice = choices.first,
 			   let message = firstChoice["message"] as? [String: String],
 			   let text = message["content"] {
-				return Question(id: 0, title: text, category: .tail, tails: [])
+				return Question(id: 0, title: text, category: .tail)
 			} else {
 				throw Failure.jsonParsingError
 			}

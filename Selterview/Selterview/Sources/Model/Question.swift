@@ -11,10 +11,10 @@ struct Question: Identifiable, Hashable {
 	var id: Int
 	var title: String
 	var category: Category
-	var tails: Questions
 }
 
 enum Category: String {
+	case all = "전체"
 	case swift = "Swift"
 	case ios = "iOS"
 	case cs = "CS"
