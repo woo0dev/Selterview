@@ -6,26 +6,34 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct MainView: View {
-	@ObservedObject var viewModel: MainViewModel = MainViewModel()
-	@State var selectedCategory: Category = .swift
+	let store: StoreOf<MainReducer>
 	
 	var body: some View {
-		VStack {
-			CategoryPickerView(selectedCategory: $selectedCategory)
-				.onChange(of: selectedCategory, perform: { value in
-					viewModel.changedCategory(value)
-				})
-			NavigationView {
-				List(viewModel.filteredQuestions) { question in
-					Text(question.title)
+		WithViewStore(self.store, observe: { $0 }) { viewStore in
+			NavigationStack {
+				VStack {
+					HStack {
+						CategoryPickerView(selectedCategory: viewStore.$selectedCategory)
+							.padding(.leading, 20)
+						Spacer()
+					}
+					List(viewStore.filteredQuestions.indices, id: \.self) { index in
+						NavigationLink(destination: ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: index), reducer: {
+							ProblemReducer()
+						})), label: {
+							Text(viewStore.filteredQuestions[index].title)
+						})
+					}
+					.listStyle(.inset)
 				}
-				.listStyle(.inset)
+				.toolbar(.hidden)
 			}
-		}
-		.onAppear {
-			viewModel.viewOnAppear()
+			.onAppear {
+				viewStore.send(.onAppear)
+			}
 		}
 	}
 }

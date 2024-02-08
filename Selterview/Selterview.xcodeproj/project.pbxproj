@@ -13,11 +13,23 @@
 		E2028A9F2B6CD01C00B603E8 /* SelterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028A9E2B6CD01C00B603E8 /* SelterviewTests.swift */; };
 		E2028AA92B6CD01C00B603E8 /* SelterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */; };
 		E2028AAB2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */; };
-		E26EC4B62B6CE8F400B1CEEB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B52B6CE8F400B1CEEB /* MainViewModel.swift */; };
+		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
+		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
+		E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */; };
 		E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B72B6CE97C00B1CEEB /* MainView.swift */; };
-		E26EC4BD2B6CED8500B1CEEB /* MainViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */; };
 		E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4C62B6CF2AE00B1CEEB /* Question.swift */; };
+		E2770F7A2B71229A0059961E /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2770F792B71229A0059961E /* RoundedButtonStyle.swift */; };
+		E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E2770F7E2B738BC90059961E /* ComposableArchitecture */; };
+		E27888E32B7508BF00983FAB /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E22B7508BF00983FAB /* DotView.swift */; };
+		E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E82B750F3800983FAB /* LoadingModifier.swift */; };
+		E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */; };
+		E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0118B2B7390B300CD844D /* MainReducer.swift */; };
 		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
+		E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */; };
+		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
+		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
+		E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */; };
+		E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2E73E8E2B73E9E500510550 /* API_Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,11 +59,22 @@
 		E2028AA42B6CD01C00B603E8 /* SelterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITests.swift; sourceTree = "<group>"; };
 		E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E26EC4B52B6CE8F400B1CEEB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
+		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
 		E26EC4B72B6CE97C00B1CEEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelProtocol.swift; sourceTree = "<group>"; };
 		E26EC4C62B6CF2AE00B1CEEB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		E2770F792B71229A0059961E /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
+		E27888E22B7508BF00983FAB /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
+		E27888E82B750F3800983FAB /* LoadingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModifier.swift; sourceTree = "<group>"; };
+		E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		E2D0118B2B7390B300CD844D /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
 		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
+		E2E322632B6E4AB000D5D081 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		E2E73E852B73AD9500510550 /* ProblemReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemReducer.swift; sourceTree = "<group>"; };
+		E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Selterview++Bundle.swift"; sourceTree = "<group>"; };
+		E2E73E8E2B73E9E500510550 /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,9 +159,21 @@
 			path = SelterviewUITests;
 			sourceTree = "<group>";
 		};
+		E2252B712B74F6BB0076AAF8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E27888E12B7508B100983FAB /* View */,
+				E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */,
+				E27888E82B750F3800983FAB /* LoadingModifier.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		E26EC4AB2B6CD0FA00B1CEEB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */,
+				E2E73E8E2B73E9E500510550 /* API_Key.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -145,6 +181,7 @@
 		E26EC4AC2B6CD11300B1CEEB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E2E322622B6E4AA800D5D081 /* Extension */,
 				E2028A882B6CD01A00B603E8 /* SelterviewApp.swift */,
 				E26EC4B92B6CEB3F00B1CEEB /* Model */,
 				E26EC4AE2B6CE66B00B1CEEB /* Presentation */,
@@ -155,6 +192,8 @@
 		E26EC4AE2B6CE66B00B1CEEB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E2252B712B74F6BB0076AAF8 /* Common */,
+				E2E3225B2B6E41B800D5D081 /* Problem */,
 				E26EC4AF2B6CE76D00B1CEEB /* Main */,
 			);
 			path = Presentation;
@@ -163,8 +202,8 @@
 		E26EC4AF2B6CE76D00B1CEEB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
-				E26EC4B42B6CE8C800B1CEEB /* ViewModel */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -178,21 +217,49 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E26EC4B42B6CE8C800B1CEEB /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E26EC4B52B6CE8F400B1CEEB /* MainViewModel.swift */,
-				E26EC4BC2B6CED8500B1CEEB /* MainViewModelProtocol.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		E26EC4B92B6CEB3F00B1CEEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				E26EC4C62B6CF2AE00B1CEEB /* Question.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E27888E12B7508B100983FAB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E27888E22B7508BF00983FAB /* DotView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E2E3225B2B6E41B800D5D081 /* Problem */ = {
+			isa = PBXGroup;
+			children = (
+				E2E73E852B73AD9500510550 /* ProblemReducer.swift */,
+				E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */,
+				E2E3225C2B6E41C400D5D081 /* View */,
+			);
+			path = Problem;
+			sourceTree = "<group>";
+		};
+		E2E3225C2B6E41C400D5D081 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */,
+				E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */,
+				E2770F792B71229A0059961E /* RoundedButtonStyle.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E2E322622B6E4AA800D5D081 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E2E322632B6E4AB000D5D081 /* Color+.swift */,
+				E2252B6F2B74F5FB0076AAF8 /* View+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +278,9 @@
 			dependencies = (
 			);
 			name = Selterview;
+			packageProductDependencies = (
+				E2770F7E2B738BC90059961E /* ComposableArchitecture */,
+			);
 			productName = Selterview;
 			productReference = E2028A852B6CD01A00B603E8 /* Selterview.app */;
 			productType = "com.apple.product-type.application";
@@ -283,6 +353,9 @@
 				Base,
 			);
 			mainGroup = E2028A7C2B6CD01A00B603E8;
+			packageReferences = (
+				E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = E2028A862B6CD01A00B603E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -300,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
+				E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */,
 				E2028A8D2B6CD01C00B603E8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,11 +399,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26EC4B62B6CE8F400B1CEEB /* MainViewModel.swift in Sources */,
+				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
+				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
+				E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */,
+				E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
+				E27888E32B7508BF00983FAB /* DotView.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
-				E26EC4BD2B6CED8500B1CEEB /* MainViewModelProtocol.swift in Sources */,
+				E2770F7A2B71229A0059961E /* RoundedButtonStyle.swift in Sources */,
+				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
+				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
+				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
+				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
+				E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */,
 				E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */,
+				E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +586,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -535,6 +620,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -668,6 +754,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E2770F7E2B738BC90059961E /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E2028A7D2B6CD01A00B603E8 /* Project object */;
 }
