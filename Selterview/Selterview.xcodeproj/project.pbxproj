@@ -13,18 +13,21 @@
 		E2028A9F2B6CD01C00B603E8 /* SelterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028A9E2B6CD01C00B603E8 /* SelterviewTests.swift */; };
 		E2028AA92B6CD01C00B603E8 /* SelterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */; };
 		E2028AAB2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */; };
+		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
+		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
+		E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */; };
 		E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B72B6CE97C00B1CEEB /* MainView.swift */; };
 		E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4C62B6CF2AE00B1CEEB /* Question.swift */; };
 		E2770F7A2B71229A0059961E /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2770F792B71229A0059961E /* RoundedButtonStyle.swift */; };
 		E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E2770F7E2B738BC90059961E /* ComposableArchitecture */; };
+		E27888E32B7508BF00983FAB /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E22B7508BF00983FAB /* DotView.swift */; };
+		E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E82B750F3800983FAB /* LoadingModifier.swift */; };
 		E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */; };
 		E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0118B2B7390B300CD844D /* MainReducer.swift */; };
 		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
 		E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */; };
 		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
 		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
-		E2E73E892B73E66D00510550 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2E73E882B73E66D00510550 /* OpenAISwift */; };
-		E2E73E8B2B73E69200510550 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8A2B73E69200510550 /* ChatMessage.swift */; };
 		E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */; };
 		E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2E73E8E2B73E9E500510550 /* API_Key.plist */; };
 /* End PBXBuildFile section */
@@ -56,16 +59,20 @@
 		E2028AA42B6CD01C00B603E8 /* SelterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITests.swift; sourceTree = "<group>"; };
 		E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
+		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
 		E26EC4B72B6CE97C00B1CEEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E26EC4C62B6CF2AE00B1CEEB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		E2770F792B71229A0059961E /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
+		E27888E22B7508BF00983FAB /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
+		E27888E82B750F3800983FAB /* LoadingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModifier.swift; sourceTree = "<group>"; };
 		E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
 		E2D0118B2B7390B300CD844D /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
 		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		E2E322632B6E4AB000D5D081 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		E2E73E852B73AD9500510550 /* ProblemReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemReducer.swift; sourceTree = "<group>"; };
-		E2E73E8A2B73E69200510550 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Selterview++Bundle.swift"; sourceTree = "<group>"; };
 		E2E73E8E2B73E9E500510550 /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2E73E892B73E66D00510550 /* OpenAISwift in Frameworks */,
 				E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +159,16 @@
 			path = SelterviewUITests;
 			sourceTree = "<group>";
 		};
+		E2252B712B74F6BB0076AAF8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E27888E12B7508B100983FAB /* View */,
+				E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */,
+				E27888E82B750F3800983FAB /* LoadingModifier.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		E26EC4AB2B6CD0FA00B1CEEB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +192,7 @@
 		E26EC4AE2B6CE66B00B1CEEB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E2252B712B74F6BB0076AAF8 /* Common */,
 				E2E3225B2B6E41B800D5D081 /* Problem */,
 				E26EC4AF2B6CE76D00B1CEEB /* Main */,
 			);
@@ -204,15 +221,23 @@
 			isa = PBXGroup;
 			children = (
 				E26EC4C62B6CF2AE00B1CEEB /* Question.swift */,
-				E2E73E8A2B73E69200510550 /* ChatMessage.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E27888E12B7508B100983FAB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E27888E22B7508BF00983FAB /* DotView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E2E3225B2B6E41B800D5D081 /* Problem */ = {
 			isa = PBXGroup;
 			children = (
 				E2E73E852B73AD9500510550 /* ProblemReducer.swift */,
+				E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */,
 				E2E3225C2B6E41C400D5D081 /* View */,
 			);
 			path = Problem;
@@ -232,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E322632B6E4AB000D5D081 /* Color+.swift */,
+				E2252B6F2B74F5FB0076AAF8 /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -254,7 +280,6 @@
 			name = Selterview;
 			packageProductDependencies = (
 				E2770F7E2B738BC90059961E /* ComposableArchitecture */,
-				E2E73E882B73E66D00510550 /* OpenAISwift */,
 			);
 			productName = Selterview;
 			productReference = E2028A852B6CD01A00B603E8 /* Selterview.app */;
@@ -330,7 +355,6 @@
 			mainGroup = E2028A7C2B6CD01A00B603E8;
 			packageReferences = (
 				E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				E2E73E872B73E66D00510550 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
 			);
 			productRefGroup = E2028A862B6CD01A00B603E8 /* Products */;
 			projectDirPath = "";
@@ -380,10 +404,14 @@
 				E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */,
 				E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
-				E2E73E8B2B73E69200510550 /* ChatMessage.swift in Sources */,
+				E27888E32B7508BF00983FAB /* DotView.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
 				E2770F7A2B71229A0059961E /* RoundedButtonStyle.swift in Sources */,
+				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
+				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
+				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
+				E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */,
 				E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */,
 				E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
@@ -736,14 +764,6 @@
 				minimumVersion = 1.7.3;
 			};
 		};
-		E2E73E872B73E66D00510550 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamrushy/OpenAISwift?source=post_page-----3d36a2661192--------------------------------";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,11 +771,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		E2E73E882B73E66D00510550 /* OpenAISwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2E73E872B73E66D00510550 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
-			productName = OpenAISwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

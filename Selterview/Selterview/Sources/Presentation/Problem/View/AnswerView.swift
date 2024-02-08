@@ -17,14 +17,13 @@ struct AnswerView: View {
 			if answerText.isEmpty {
 				TextEditor(text: $placeholderText)
 					.font(.body)
+					.multilineTextAlignment(.center)
 					.foregroundColor(.gray)
 					.disabled(true)
-					.padding()
 			}
 			TextEditor(text: $answerText)
 				.font(.body)
 				.opacity(answerText.isEmpty ? 0.25 : 1)
-				.padding()
 				.focused($isFocused)
 		}
 	}
