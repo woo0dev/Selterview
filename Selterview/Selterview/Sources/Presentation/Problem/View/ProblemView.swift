@@ -44,7 +44,15 @@ struct ProblemView: View {
 				.padding(20)
 				.navigationBarTitle("\(viewStore.question.category.rawValue)", displayMode: .inline)
 				.onTapGesture {
-					isFocused = false
+					viewStore.send(.disableAnswerFocus)
+				}
+				.onChange(of: viewStore.isFocusedAnswer) {
+					isFocused = $0
+				}
+				.onChange(of: isFocused) { isFocused in
+					if isFocused {
+						viewStore.send(.enableAnswerFocus)
+					}
 				}
 				.showErrorMessage(showAlert: viewStore.$isError, message: "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요.")
 					.onAppear { viewStore.send(.disableError) }
