@@ -20,8 +20,7 @@ struct DotView: View {
 			.frame(maxWidth: 30, maxHeight: 30)
 			.scaleEffect(scale)
 			.foregroundColor(.mainColor)
-			.animation(Animation.easeInOut(duration: 0.6).repeatForever().delay(delay))
-//			.animation(Animation.easeInOut(duration: 0.6).repeatForever().delay(delay), value: true)
+			.animation(.easeInOut(duration: 0.6).repeatForever().delay(delay))
 			.onAppear {
 				withAnimation {
 					self.scale = 1

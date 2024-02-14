@@ -40,9 +40,6 @@ struct ProblemReducer {
 		case binding(BindingAction<State>)
 	}
 	
-	struct Environment {
-	}
-	
 	var body: some Reducer<State, Action> {
 		BindingReducer()
 		Reduce { state, action in

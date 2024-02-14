@@ -14,7 +14,6 @@ struct Question: Identifiable, Hashable {
 }
 
 enum Category: String {
-	case all = "전체"
 	case swift = "Swift"
 	case ios = "iOS"
 	case cs = "CS"
