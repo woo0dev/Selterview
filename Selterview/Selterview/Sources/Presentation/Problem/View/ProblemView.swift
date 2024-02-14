@@ -18,8 +18,9 @@ struct ProblemView: View {
 			ZStack {
 				VStack {
 					ScrollView() {
-						Text(viewStore.question.title)
+						Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
 							.font(.system(size: 24))
+							.showLoadingView(isLoading: viewStore.$isTailQuestionCreating)
 					}
 					.frame(maxWidth: .infinity, maxHeight: 150)
 					.padding(10)
@@ -47,7 +48,6 @@ struct ProblemView: View {
 				}
 				.showErrorMessage(showAlert: viewStore.$isError, message: "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요.")
 					.onAppear { viewStore.send(.disableError) }
-				.showLoadingView(isLoading: viewStore.$isTailQuestionCreating)
 			}
 		}
 	}
