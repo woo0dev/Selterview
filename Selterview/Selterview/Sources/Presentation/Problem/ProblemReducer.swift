@@ -45,6 +45,7 @@ struct ProblemReducer {
 		Reduce { state, action in
 			switch action {
 			case .nextQuestionButtonTapped:
+				if state.isTailQuestionCreating { return .none }
 				if state.questionIndex + 1 >= state.questions.count {
 					state.questionIndex = 0
 				} else {
@@ -53,6 +54,7 @@ struct ProblemReducer {
 				state.question = state.questions[state.questionIndex]
 				return .none
 			case .newTailQuestionCreateButtonTapped:
+				if state.isTailQuestionCreating { return .none }
 				state.isTailQuestionCreating = true
 				return .run { [title = state.question.title, answer = state.answerText] send in
 					if let tailQuestion = try await openAIClient.fetchTailQuestion(title, answer) {
