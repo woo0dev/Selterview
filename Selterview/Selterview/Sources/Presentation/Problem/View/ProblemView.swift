@@ -20,7 +20,7 @@ struct ProblemView: View {
 					ScrollView() {
 						Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
 							.font(.system(size: 24))
-							.showLoadingView(isLoading: viewStore.$isTailQuestionCreating)
+							.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.")
 					}
 					.frame(maxWidth: .infinity, maxHeight: 150)
 					.padding(10)

@@ -12,7 +12,7 @@ extension View {
 		self.modifier(ErrorAlertModifier(isPresented: showAlert, message: message))
 	}
 	
-	func showLoadingView(isLoading: Binding<Bool>) -> some View {
-		self.modifier(LoadingModifier(isLoading: isLoading))
+	func showLoadingView(isLoading: Binding<Bool>, message: String) -> some View {
+		self.modifier(LoadingModifier(isLoading: isLoading, message: message))
 	}
 }
