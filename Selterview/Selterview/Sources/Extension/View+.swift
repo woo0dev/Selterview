@@ -15,4 +15,8 @@ extension View {
 	func showLoadingView(isLoading: Binding<Bool>, message: String) -> some View {
 		self.modifier(LoadingModifier(isLoading: isLoading, message: message))
 	}
+	
+	func roundedStyle(maxWidth: CGFloat, maxHeight: CGFloat, font: Font, backgroundColor: Color) -> some View {
+		self.modifier(RoundedModifier(maxWidth: maxWidth, maxHeight: maxHeight, font: font, backgroundColor: backgroundColor))
+	}
 }

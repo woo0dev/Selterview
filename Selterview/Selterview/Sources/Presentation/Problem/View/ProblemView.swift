@@ -17,13 +17,11 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack {
 				VStack {
-					ScrollView() {
-						Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
-							.font(.system(size: 24))
-							.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.")
-					}
-					.frame(maxWidth: .infinity, maxHeight: 150)
-					.padding(10)
+					Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
+						.multilineTextAlignment(.center)
+						.padding(.bottom, 10)
+						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .mainColor.opacity(0.7))
+						.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.")
 					if viewStore.isTailQuestionCreating {
 						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
 							.frame(maxHeight: .infinity, alignment: .top)
@@ -38,12 +36,12 @@ struct ProblemView: View {
 						Button("꼬리질문") {
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
-						.buttonStyle(RoundedButtonStyle())
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .mainColor)
 						Spacer()
 						Button("다음질문") {
 							viewStore.send(.nextQuestionButtonTapped)
 						}
-						.buttonStyle(RoundedButtonStyle())
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .mainColor)
 						Spacer()
 					}
 				}
