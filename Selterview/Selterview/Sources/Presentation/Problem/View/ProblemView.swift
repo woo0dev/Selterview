@@ -24,8 +24,15 @@ struct ProblemView: View {
 					}
 					.frame(maxWidth: .infinity, maxHeight: 150)
 					.padding(10)
-					AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
-						.frame(maxHeight: .infinity)
+					if viewStore.isTailQuestionCreating {
+						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
+							.frame(maxHeight: .infinity, alignment: .top)
+							.font(.body)
+							.foregroundColor(.gray)
+					} else {
+						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
+							.frame(maxHeight: .infinity)
+					}
 					HStack {
 						Spacer()
 						Button("꼬리질문") {
