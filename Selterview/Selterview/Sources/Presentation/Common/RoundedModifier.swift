@@ -20,8 +20,10 @@ struct RoundedModifier: ViewModifier {
 				.frame(maxWidth: maxWidth, maxHeight: maxHeight)
 				.shadow(radius: 5)
 			content
+				.frame(maxWidth: maxWidth, maxHeight: maxHeight)
 				.font(font)
 				.foregroundStyle(.white)
+				.padding(5)
 		}
 	}
 }

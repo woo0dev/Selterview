@@ -29,7 +29,7 @@ extension OpenAIClient: DependencyKey {
 			
 			let requestData = [
 				"messages": [[ "role": "user", "content": message ]],
-				"max_tokens": 500,
+				"max_tokens": 100, // 테스트 용, 실제는 500
 				"model": "gpt-3.5-turbo",
 			]
 			

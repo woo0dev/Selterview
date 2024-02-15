@@ -12,6 +12,8 @@ struct LoadingModifier: ViewModifier {
 	private let dotDelayMultiplyer = 2.0
 	private let dotDelayValue = 0.20
 	let message: String
+	let maxWidth: CGFloat
+	let maxHeight: CGFloat
 	
 	func body(content: Content) -> some View {
 		ZStack {
@@ -34,5 +36,6 @@ struct LoadingModifier: ViewModifier {
 				.background(Color.clear)
 			}
 		}
+		.frame(maxWidth: maxWidth, maxHeight: maxHeight)
 	}
 }
