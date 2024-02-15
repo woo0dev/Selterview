@@ -17,6 +17,7 @@ struct ProblemReducer {
 		@BindingState var answerText: String
 		@BindingState var isTailQuestionCreating: Bool
 		@BindingState var isError: Bool
+		@BindingState var isQuestionTap: Bool
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
@@ -30,6 +31,7 @@ struct ProblemReducer {
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isError = false
+			self.isQuestionTap = false
 		}
 	}
 	
@@ -41,6 +43,8 @@ struct ProblemReducer {
 		case disableAnswerFocus
 		case enableError
 		case disableError
+		case showQuestionDetailView
+		case hideQuestionDetailView
 		case binding(BindingAction<State>)
 	}
 	
@@ -88,11 +92,11 @@ struct ProblemReducer {
 			case .disableError:
 				state.isError = false
 				return .none
-			case .binding(\.$isError):
+			case .showQuestionDetailView:
+				state.isQuestionTap = true
 				return .none
-			case .binding(\.$isTailQuestionCreating):
-				return .none
-			case .binding(\.$answerText):
+			case .hideQuestionDetailView:
+				state.isQuestionTap = false
 				return .none
 			case .binding(_):
 				return .none
