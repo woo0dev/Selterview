@@ -21,8 +21,8 @@ struct ProblemView: View {
 					// TODO: 질문 카드 페이징 구현(가로)
 					Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
 						.multilineTextAlignment(.center)
-						.padding(.bottom, 20)
 						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .mainColor.opacity(0.7))
+						.padding(.bottom, 20)
 						.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.")
 					if viewStore.isTailQuestionCreating {
 						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
