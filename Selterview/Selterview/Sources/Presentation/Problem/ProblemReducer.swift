@@ -36,6 +36,7 @@ struct ProblemReducer {
 	}
 	
 	enum Action: BindableAction, Equatable {
+		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
@@ -52,6 +53,17 @@ struct ProblemReducer {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
+			case .previousQuestion:
+				if state.isTailQuestionCreating { return .none }
+				state.answerText = ""
+				state.isFocusedAnswer = false
+				if state.questionIndex - 1 >= 0 {
+					state.questionIndex -= 1
+				} else {
+					state.questionIndex = state.questions.count - 1
+				}
+				state.question = state.questions[state.questionIndex]
+				return .none
 			case .nextQuestionButtonTapped:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""

@@ -17,16 +17,21 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack {
 				VStack {
-					// TODO: Tap 상세화면 모달 구현(돋보기 아이콘)
 					// TODO: 질문 카드 페이징 구현(가로)
-					Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
-						.multilineTextAlignment(.center)
-						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .textBackgroundColor)
-						.padding(.bottom, 20)
-						.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.", maxWidth: .infinity, maxHeight: 150)
+					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
 						.onTapGesture {
 							viewStore.send(.showQuestionDetailView)
 						}
+						.gesture(DragGesture()
+							.onEnded { value in
+								if value.startLocation.x < value.location.x - 24 {
+									viewStore.send(.previousQuestion)
+								}
+								if value.startLocation.x > value.location.x + 24 {
+									viewStore.send(.nextQuestionButtonTapped)
+								}
+							}
+						)
 					if viewStore.isTailQuestionCreating {
 						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
 							.frame(maxHeight: .infinity, alignment: .top)
@@ -53,6 +58,9 @@ struct ProblemView: View {
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.padding(20)
 				.navigationBarTitle("\(viewStore.question.category.rawValue)", displayMode: .inline)
+				.onAppear {
+					
+				}
 				.onTapGesture {
 					viewStore.send(.disableAnswerFocus)
 				}
