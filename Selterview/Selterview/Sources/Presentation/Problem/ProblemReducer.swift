@@ -17,37 +17,57 @@ struct ProblemReducer {
 		@BindingState var answerText: String
 		@BindingState var isTailQuestionCreating: Bool
 		@BindingState var isError: Bool
+		@BindingState var isQuestionTap: Bool
+		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
 		var question: Question
 		
 		init(questions: Questions, questionIndex: Int) {
+			self.isFocusedAnswer = false
 			self.questions = questions
 			self.questionIndex = questionIndex
 			self.answerText = ""
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isError = false
+			self.isQuestionTap = false
 		}
 	}
 	
 	enum Action: BindableAction, Equatable {
+		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
+		case enableAnswerFocus
+		case disableAnswerFocus
 		case enableError
 		case disableError
+		case showQuestionDetailView
+		case hideQuestionDetailView
 		case binding(BindingAction<State>)
-	}
-	
-	struct Environment {
 	}
 	
 	var body: some Reducer<State, Action> {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
+			case .previousQuestion:
+				if state.isTailQuestionCreating { return .none }
+				state.answerText = ""
+				state.isFocusedAnswer = false
+				if state.questionIndex - 1 >= 0 {
+					state.questionIndex -= 1
+				} else {
+					state.questionIndex = state.questions.count - 1
+				}
+				state.question = state.questions[state.questionIndex]
+				return .none
 			case .nextQuestionButtonTapped:
+				if state.isTailQuestionCreating { return .none }
+				state.answerText = ""
+				state.isFocusedAnswer = false
 				if state.questionIndex + 1 >= state.questions.count {
 					state.questionIndex = 0
 				} else {
@@ -56,7 +76,10 @@ struct ProblemReducer {
 				state.question = state.questions[state.questionIndex]
 				return .none
 			case .newTailQuestionCreateButtonTapped:
+				if state.isTailQuestionCreating { return .none }
 				state.isTailQuestionCreating = true
+				state.answerText = ""
+				state.isFocusedAnswer = false
 				return .run { [title = state.question.title, answer = state.answerText] send in
 					if let tailQuestion = try await openAIClient.fetchTailQuestion(title, answer) {
 						await send(.newTailQuestionCreated(tailQuestion))
@@ -68,17 +91,24 @@ struct ProblemReducer {
 				state.question = tailQuestion
 				state.isTailQuestionCreating = false
 				return .none
+			case .enableAnswerFocus:
+				state.isFocusedAnswer = true
+				return .none
+			case .disableAnswerFocus:
+				state.isFocusedAnswer = false
+				return .none
 			case .enableError:
 				state.isError = true
+				state.isFocusedAnswer = false
 				return .none
 			case .disableError:
 				state.isError = false
 				return .none
-			case .binding(\.$isError):
+			case .showQuestionDetailView:
+				state.isQuestionTap = true
 				return .none
-			case .binding(\.$isTailQuestionCreating):
-				return .none
-			case .binding(\.$answerText):
+			case .hideQuestionDetailView:
+				state.isQuestionTap = false
 				return .none
 			case .binding(_):
 				return .none

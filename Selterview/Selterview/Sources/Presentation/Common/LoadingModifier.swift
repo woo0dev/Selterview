@@ -11,6 +11,9 @@ struct LoadingModifier: ViewModifier {
 	@Binding var isLoading: Bool
 	private let dotDelayMultiplyer = 2.0
 	private let dotDelayValue = 0.20
+	let message: String
+	let maxWidth: CGFloat
+	let maxHeight: CGFloat
 	
 	func body(content: Content) -> some View {
 		ZStack {
@@ -26,11 +29,13 @@ struct LoadingModifier: ViewModifier {
 						Spacer()
 					}
 					.padding(.bottom, 20)
-					Text("질문을 생성하고 있어요. 조금만 기다려 주세요.")
+					Text(message)
+						.foregroundStyle(Color.white)
 					Spacer()
 				}
 				.background(Color.clear)
 			}
 		}
+		.frame(maxWidth: maxWidth, maxHeight: maxHeight)
 	}
 }

@@ -17,11 +17,10 @@ struct DotView: View {
 	
 	public var body: some View {
 		Circle()
-			.frame(maxWidth: 30, maxHeight: 30)
+			.frame(maxWidth: 20, maxHeight: 20)
 			.scaleEffect(scale)
-			.foregroundColor(.mainColor)
-			.animation(Animation.easeInOut(duration: 0.6).repeatForever().delay(delay))
-//			.animation(Animation.easeInOut(duration: 0.6).repeatForever().delay(delay), value: true)
+			.foregroundStyle(Color.white)
+			.animation(.easeInOut(duration: 0.6).repeatForever().delay(delay))
 			.onAppear {
 				withAnimation {
 					self.scale = 1

@@ -11,7 +11,6 @@ struct Question: Identifiable, Hashable {
 	var id: Int
 	var title: String
 	var category: Category
-	var tails: Questions
 }
 
 enum Category: String {

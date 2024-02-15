@@ -16,7 +16,12 @@ extension OpenAIClient: DependencyKey {
 	static let liveValue = OpenAIClient(
 		fetchTailQuestion: { (question, answer) in
 			guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw Failure.urlConvertError }
-			let message = "문제:\(question)\n답변:\(answer)\n문제의 답변에 대한 꼬리질문을 만들어주세요."
+			var message = ""
+			if answer.isEmpty {
+				message = "문제:\(question) 해당 문제에 대한 정답과 정답에 대한 꼬리질문을 만들어주세요."
+			} else {
+				message = "문제:\(question)\n답변:\(answer)\n문제의 답변에 대한 꼬리질문을 만들어주세요."
+			}
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
 			request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -24,7 +29,7 @@ extension OpenAIClient: DependencyKey {
 			
 			let requestData = [
 				"messages": [[ "role": "user", "content": message ]],
-				"max_tokens": 500,
+				"max_tokens": 100, // 테스트 용, 실제는 500
 				"model": "gpt-3.5-turbo",
 			]
 			
@@ -37,7 +42,7 @@ extension OpenAIClient: DependencyKey {
 			   let firstChoice = choices.first,
 			   let message = firstChoice["message"] as? [String: String],
 			   let text = message["content"] {
-				return Question(id: 0, title: text, category: .tail, tails: [])
+				return Question(id: 0, title: text, category: .tail)
 			} else {
 				throw Failure.jsonParsingError
 			}

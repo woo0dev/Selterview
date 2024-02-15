@@ -13,6 +13,7 @@ struct AnswerView: View {
 	@State var placeholderText: String = "여기에 답을 작성하면 꼬리질문을 받을 수 있습니다."
 	
 	var body: some View {
+		// TODO: longpress wanning
 		ZStack {
 			if answerText.isEmpty {
 				TextEditor(text: $placeholderText)
@@ -25,6 +26,9 @@ struct AnswerView: View {
 				.font(.body)
 				.opacity(answerText.isEmpty ? 0.25 : 1)
 				.focused($isFocused)
+//				.onLongPressGesture(minimumDuration: 0.0) {
+//					isFocused = true
+//				}
 		}
 	}
 }

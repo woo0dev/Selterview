@@ -8,5 +8,6 @@
 import SwiftUI
 
 extension Color {
-	static var mainColor: Color = Color("MainColor")
+	static var textBackgroundColor: Color = Color("MainColor").opacity(0.7)
+	static var buttonBackgroundColor: Color = Color("MainColor")
 }

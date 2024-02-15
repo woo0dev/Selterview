@@ -12,7 +12,11 @@ extension View {
 		self.modifier(ErrorAlertModifier(isPresented: showAlert, message: message))
 	}
 	
-	func showLoadingView(isLoading: Binding<Bool>) -> some View {
-		self.modifier(LoadingModifier(isLoading: isLoading))
+	func showLoadingView(isLoading: Binding<Bool>, message: String, maxWidth: CGFloat, maxHeight: CGFloat) -> some View {
+		self.modifier(LoadingModifier(isLoading: isLoading, message: message, maxWidth: maxWidth, maxHeight: maxHeight))
+	}
+	
+	func roundedStyle(maxWidth: CGFloat, maxHeight: CGFloat, font: Font, backgroundColor: Color) -> some View {
+		self.modifier(RoundedModifier(maxWidth: maxWidth, maxHeight: maxHeight, font: font, backgroundColor: backgroundColor))
 	}
 }

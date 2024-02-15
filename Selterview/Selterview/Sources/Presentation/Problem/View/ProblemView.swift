@@ -17,37 +17,67 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack {
 				VStack {
-					ScrollView() {
-						Text(viewStore.question.title)
-							.font(.system(size: 24))
+					// TODO: 질문 카드 페이징 구현(가로)
+					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
+						.animation(.easeIn, value: viewStore.question)
+						.onTapGesture {
+							viewStore.send(.showQuestionDetailView)
+						}
+						.gesture(DragGesture()
+							.onEnded { value in
+								if value.startLocation.x < value.location.x - 24 {
+									viewStore.send(.previousQuestion)
+								}
+								if value.startLocation.x > value.location.x + 24 {
+									viewStore.send(.nextQuestionButtonTapped)
+								}
+							}
+						)
+					if viewStore.isTailQuestionCreating {
+						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
+							.frame(maxHeight: .infinity, alignment: .top)
+							.font(.body)
+							.foregroundColor(.gray)
+					} else {
+						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
+							.frame(maxHeight: .infinity)
 					}
-					.frame(maxWidth: .infinity, maxHeight: 150)
-					.padding(10)
-					AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
-						.frame(maxHeight: .infinity)
 					HStack {
 						Spacer()
 						Button("꼬리질문") {
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
-						.buttonStyle(RoundedButtonStyle())
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
 						Spacer()
 						Button("다음질문") {
 							viewStore.send(.nextQuestionButtonTapped)
 						}
-						.buttonStyle(RoundedButtonStyle())
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
 						Spacer()
 					}
 				}
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.padding(20)
 				.navigationBarTitle("\(viewStore.question.category.rawValue)", displayMode: .inline)
+				.onAppear {
+					
+				}
 				.onTapGesture {
-					isFocused = false
+					viewStore.send(.disableAnswerFocus)
+				}
+				.onChange(of: viewStore.isFocusedAnswer) {
+					isFocused = $0
+				}
+				.onChange(of: isFocused) { isFocused in
+					if isFocused {
+						viewStore.send(.enableAnswerFocus)
+					}
+				}
+				.sheet(isPresented: viewStore.$isQuestionTap) {
+					QuestionDetailView(questionTitle: viewStore.question.title)
 				}
 				.showErrorMessage(showAlert: viewStore.$isError, message: "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요.")
 					.onAppear { viewStore.send(.disableError) }
-				.showLoadingView(isLoading: viewStore.$isTailQuestionCreating)
 			}
 		}
 	}
