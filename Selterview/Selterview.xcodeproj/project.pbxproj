@@ -35,6 +35,8 @@
 		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
 		E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */; };
 		E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2E73E8E2B73E9E500510550 /* API_Key.plist */; };
+		E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2C92B7E71650008DD9F /* Realm */; };
+		E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,7 @@
 		E2E73E852B73AD9500510550 /* ProblemReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemReducer.swift; sourceTree = "<group>"; };
 		E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Selterview++Bundle.swift"; sourceTree = "<group>"; };
 		E2E73E8E2B73E9E500510550 /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
+		E2F2B2C62B7E705F0008DD9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */,
+				E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */,
 				E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +125,7 @@
 				E2028A9D2B6CD01C00B603E8 /* SelterviewTests */,
 				E2028AA72B6CD01C00B603E8 /* SelterviewUITests */,
 				E2028A862B6CD01A00B603E8 /* Products */,
+				E2F2B2C82B7E71650008DD9F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +142,7 @@
 		E2028A872B6CD01A00B603E8 /* Selterview */ = {
 			isa = PBXGroup;
 			children = (
+				E2F2B2C62B7E705F0008DD9F /* Info.plist */,
 				E26EC4AC2B6CD11300B1CEEB /* Sources */,
 				E26EC4AB2B6CD0FA00B1CEEB /* Resources */,
 				E2028A8C2B6CD01C00B603E8 /* Assets.xcassets */,
@@ -277,6 +284,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E2F2B2C82B7E71650008DD9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -295,6 +309,8 @@
 			name = Selterview;
 			packageProductDependencies = (
 				E2770F7E2B738BC90059961E /* ComposableArchitecture */,
+				E2F2B2C92B7E71650008DD9F /* Realm */,
+				E2F2B2CB2B7E71650008DD9F /* RealmSwift */,
 			);
 			productName = Selterview;
 			productReference = E2028A852B6CD01A00B603E8 /* Selterview.app */;
@@ -370,6 +386,7 @@
 			mainGroup = E2028A7C2B6CD01A00B603E8;
 			packageReferences = (
 				E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = E2028A862B6CD01A00B603E8 /* Products */;
 			projectDirPath = "";
@@ -601,6 +618,7 @@
 				DEVELOPMENT_TEAM = SXSNK823Y9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Selterview/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -635,6 +653,7 @@
 				DEVELOPMENT_TEAM = SXSNK823Y9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Selterview/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -784,6 +803,14 @@
 				minimumVersion = 1.7.3;
 			};
 		};
+		E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -791,6 +818,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		E2F2B2C92B7E71650008DD9F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E2F2B2CB2B7E71650008DD9F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
