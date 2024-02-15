@@ -17,9 +17,11 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack {
 				VStack {
+					// TODO: Tap 상세화면 모달 구현(돋보기 아이콘)
+					// TODO: 질문 카드 페이징 구현(가로)
 					Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
 						.multilineTextAlignment(.center)
-						.padding(.bottom, 10)
+						.padding(.bottom, 20)
 						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .mainColor.opacity(0.7))
 						.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.")
 					if viewStore.isTailQuestionCreating {

@@ -18,6 +18,7 @@ struct RoundedModifier: ViewModifier {
 			RoundedRectangle(cornerRadius: 10, style: .continuous)
 				.fill(backgroundColor)
 				.frame(maxWidth: maxWidth, maxHeight: maxHeight)
+				.shadow(radius: 5)
 			content
 				.font(font)
 				.foregroundStyle(.white)
