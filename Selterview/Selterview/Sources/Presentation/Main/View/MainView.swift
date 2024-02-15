@@ -62,6 +62,7 @@ struct MainView: View {
 			}
 			.sheet(isPresented: viewStore.$isSettingButtonTap) {
 				SettingView()
+					.presentationDetents([.height(80)])
 			}
 		}
 	}
