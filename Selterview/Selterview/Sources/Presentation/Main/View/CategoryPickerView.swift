@@ -19,6 +19,7 @@ struct CategoryPickerView: View {
 			}
 		}
 		.pickerStyle(.menu)
+		.accentColor(Color.accentTextColor)
 		.cornerRadius(15)
 	}
 }
