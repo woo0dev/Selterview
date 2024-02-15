@@ -21,7 +21,7 @@ struct ProblemView: View {
 					// TODO: 질문 카드 페이징 구현(가로)
 					Text(viewStore.isTailQuestionCreating ? "" : viewStore.question.title)
 						.multilineTextAlignment(.center)
-						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .mainColor.opacity(0.7))
+						.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .title2, backgroundColor: .textBackgroundColor)
 						.padding(.bottom, 20)
 						.showLoadingView(isLoading: viewStore.$isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.", maxWidth: .infinity, maxHeight: 150)
 						.onTapGesture {
@@ -41,12 +41,12 @@ struct ProblemView: View {
 						Button("꼬리질문") {
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .mainColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
 						Spacer()
 						Button("다음질문") {
 							viewStore.send(.nextQuestionButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .mainColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
 						Spacer()
 					}
 				}

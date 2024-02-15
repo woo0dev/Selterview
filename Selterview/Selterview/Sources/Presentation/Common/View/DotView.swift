@@ -20,7 +20,6 @@ struct DotView: View {
 			.frame(maxWidth: 20, maxHeight: 20)
 			.scaleEffect(scale)
 			.foregroundStyle(Color.white)
-			.foregroundColor(.white)
 			.animation(.easeInOut(duration: 0.6).repeatForever().delay(delay))
 			.onAppear {
 				withAnimation {
