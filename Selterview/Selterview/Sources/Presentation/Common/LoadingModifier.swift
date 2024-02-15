@@ -28,6 +28,7 @@ struct LoadingModifier: ViewModifier {
 					}
 					.padding(.bottom, 20)
 					Text(message)
+						.foregroundStyle(Color.white)
 					Spacer()
 				}
 				.background(Color.clear)
