@@ -19,6 +19,7 @@ struct ProblemView: View {
 				VStack {
 					// TODO: 질문 카드 페이징 구현(가로)
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
+						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
 							viewStore.send(.showQuestionDetailView)
 						}
