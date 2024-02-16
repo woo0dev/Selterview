@@ -60,3 +60,14 @@ enum ChatGPTFailure: Error {
 	case urlConvertError
 	case jsonParsingError
 }
+
+extension ChatGPTFailure: LocalizedError {
+	var errorDescription: String? {
+		switch self {
+		case .urlConvertError:
+			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
+		case .jsonParsingError:
+			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
+		}
+	}
+}

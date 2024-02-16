@@ -73,8 +73,7 @@ struct ProblemView: View {
 				.sheet(isPresented: viewStore.$isQuestionTap) {
 					QuestionDetailView(questionTitle: viewStore.question.title)
 				}
-				.showErrorMessage(showAlert: viewStore.$isError, message: "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요.")
-					.onAppear { viewStore.send(.disableError) }
+				.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 			}
 		}
 	}
