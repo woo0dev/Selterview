@@ -15,7 +15,7 @@ struct OpenAIClient {
 extension OpenAIClient: DependencyKey {
 	static let liveValue = OpenAIClient(
 		fetchTailQuestion: { (question, answer) in
-			guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw Failure.urlConvertError }
+			guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw ChatGPTFailure.urlConvertError }
 			var message = ""
 			if answer.isEmpty {
 				message = "문제:\(question) 해당 문제에 대한 정답과 정답에 대한 꼬리질문을 만들어주세요."
@@ -42,9 +42,9 @@ extension OpenAIClient: DependencyKey {
 			   let firstChoice = choices.first,
 			   let message = firstChoice["message"] as? [String: String],
 			   let text = message["content"] {
-				return Question(id: 0, title: text, category: .tail)
+				return Question(title: text, category: .tail)
 			} else {
-				throw Failure.jsonParsingError
+				throw ChatGPTFailure.jsonParsingError
 			}
 		})
 }
@@ -56,7 +56,18 @@ extension DependencyValues {
 	}
 }
 
-enum Failure: Error {
+enum ChatGPTFailure: Error {
 	case urlConvertError
 	case jsonParsingError
+}
+
+extension ChatGPTFailure: LocalizedError {
+	var errorDescription: String? {
+		switch self {
+		case .urlConvertError:
+			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
+		case .jsonParsingError:
+			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
+		}
+	}
 }

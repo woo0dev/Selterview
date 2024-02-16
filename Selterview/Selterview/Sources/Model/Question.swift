@@ -6,11 +6,21 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Question: Identifiable, Hashable {
-	var id: Int
-	var title: String
-	var category: Category
+final class Question: Object, ObjectKeyIdentifiable {
+	@Persisted(primaryKey: true) var _id: ObjectId
+	@Persisted var title: String
+	@Persisted var category: Category.RawValue
+	@Persisted var answer: String?
+	
+	convenience init(title: String, category: Category) {
+		self.init()
+		self._id = ObjectId.generate()
+		self.title = title
+		self.category = category.rawValue
+		self.answer = nil
+	}
 }
 
 enum Category: String {

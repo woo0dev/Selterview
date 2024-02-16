@@ -18,6 +18,7 @@ struct ProblemReducer {
 		@BindingState var isTailQuestionCreating: Bool
 		@BindingState var isError: Bool
 		@BindingState var isQuestionTap: Bool
+		var error: ChatGPTFailure?
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
@@ -31,6 +32,7 @@ struct ProblemReducer {
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isError = false
+			self.error = nil
 			self.isQuestionTap = false
 		}
 	}
@@ -42,8 +44,7 @@ struct ProblemReducer {
 		case newTailQuestionCreated(Question)
 		case enableAnswerFocus
 		case disableAnswerFocus
-		case enableError
-		case disableError
+		case catchError(ChatGPTFailure)
 		case showQuestionDetailView
 		case hideQuestionDetailView
 		case binding(BindingAction<State>)
@@ -85,7 +86,7 @@ struct ProblemReducer {
 						await send(.newTailQuestionCreated(tailQuestion))
 					}
 				} catch: { error, send in
-					await send(.enableError)
+					if let error = error as? ChatGPTFailure { await send(.catchError(error)) }
 				}
 			case .newTailQuestionCreated(let tailQuestion):
 				state.question = tailQuestion
@@ -97,12 +98,11 @@ struct ProblemReducer {
 			case .disableAnswerFocus:
 				state.isFocusedAnswer = false
 				return .none
-			case .enableError:
+			case .catchError(let error):
+				// TODO: Error Test
 				state.isError = true
+				state.error = error
 				state.isFocusedAnswer = false
-				return .none
-			case .disableError:
-				state.isError = false
 				return .none
 			case .showQuestionDetailView:
 				state.isQuestionTap = true
