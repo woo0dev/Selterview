@@ -23,6 +23,13 @@ struct MainView: View {
 						})
 					}
 					.listStyle(.inset)
+					.overlay(Group {
+						if viewStore.filteredQuestions.isEmpty {
+							Text("\(viewStore.selectedCategory.rawValue)(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
+								.foregroundStyle(.gray)
+								.multilineTextAlignment(.center)
+						}
+					})
 				}
 				.toolbar {
 					ToolbarItem(placement: .navigationBarLeading) {

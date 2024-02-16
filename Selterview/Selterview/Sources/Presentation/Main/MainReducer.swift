@@ -54,7 +54,7 @@ struct MainReducer {
 				state.isSettingButtonTap = true
 				return .none
 			case .catchError(let error):
-				// TODO: Empty Error 처리
+				if error == .questionsEmpty { return .none }
 				state.isError = true
 				state.error = error
 				return .none
