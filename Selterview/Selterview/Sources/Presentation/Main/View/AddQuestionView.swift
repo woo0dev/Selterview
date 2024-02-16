@@ -15,7 +15,7 @@ struct AddQuestionView: View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			VStack(alignment: .leading) {
 				Text("카테고리 선택")
-					.font(.title3.bold())
+					.font(.title.bold())
 				Picker("카테고리를 선택해주세요.", selection: viewStore.$selectedCategory) {
 					ForEach(viewStore.categories, id: \.self) {
 						Text($0.rawValue)
@@ -24,9 +24,6 @@ struct AddQuestionView: View {
 				.pickerStyle(.segmented)
 				.shadow(radius: 5)
 				.padding(.bottom, 10)
-				Text("예상 질문")
-					.font(.title3.bold())
-					.padding(.bottom, 10)
 				TextEditor(text: viewStore.$questionTitle)
 					.font(.body)
 					.lineSpacing(5)
@@ -45,6 +42,7 @@ struct AddQuestionView: View {
 				UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 			}
 			.padding(20)
+			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 		}
 	}
 }

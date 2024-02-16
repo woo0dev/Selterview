@@ -20,7 +20,8 @@ struct AddReducer {
 	enum Action: BindableAction, Equatable {
 		case onAppear
 		case addButtonTapped
-		case enableError
+		case addCompletion
+		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
 	
@@ -32,15 +33,16 @@ struct AddReducer {
 				return .none
 			case .addButtonTapped:
 				return .run { [title = state.questionTitle, category = state.selectedCategory] send in
-//					RealmManager.addQuestion(<#T##self: RealmManager##RealmManager#>)
-//					if let tailQuestion = try await openAIClient.fetchTailQuestion(title, answer) {
-//						await send(.newTailQuestionCreated(tailQuestion))
-//					}
+					try RealmManager.shared.writeQuestion(Question(title: title, category: category))
+					await send(.addCompletion)
 				} catch: { error, send in
-					await send(.enableError)
+					if let error = error as? RealmFailure { await send(.catchError(error)) }
 				}
-			case .enableError:
+			case .addCompletion:
+				return .none
+			case .catchError(let error):
 				state.isError = true
+				state.error = error
 				return .none
 			case .binding(_):
 				return .none

@@ -64,7 +64,7 @@ struct MainView: View {
 				SettingView()
 					.presentationDetents([.height(80)])
 			}
-			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.localizedDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 		}
 	}
 }
