@@ -58,7 +58,7 @@ struct ProblemView: View {
 				}
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.padding(20)
-				.navigationBarTitle("\(viewStore.question.category.rawValue)", displayMode: .inline)
+				.navigationBarTitle("\(viewStore.question.category)", displayMode: .inline)
 				.onTapGesture {
 					viewStore.send(.disableAnswerFocus)
 				}

@@ -37,6 +37,7 @@
 		E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2E73E8E2B73E9E500510550 /* API_Key.plist */; };
 		E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2C92B7E71650008DD9F /* Realm */; };
 		E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; };
+		E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Selterview++Bundle.swift"; sourceTree = "<group>"; };
 		E2E73E8E2B73E9E500510550 /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
 		E2F2B2C62B7E705F0008DD9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 			children = (
 				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
 				E2327B3F2B7E56EA00397CEF /* AddReducer.swift */,
+				E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
 			);
 			path = Main;
@@ -444,6 +447,7 @@
 				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
+				E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */,
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
 				E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */,
 				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
