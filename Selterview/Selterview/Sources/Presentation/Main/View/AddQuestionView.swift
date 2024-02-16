@@ -9,6 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddQuestionView: View {
+	@Binding var isShowAddModal: Bool
+	
 	let store: StoreOf<AddReducer>
 	
 	var body: some View {
@@ -43,6 +45,11 @@ struct AddQuestionView: View {
 			}
 			.padding(20)
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.onChange(of: viewStore.isComplete) { isComplete in
+				if isComplete {
+					isShowAddModal = false
+				}
+			}
 		}
 	}
 }

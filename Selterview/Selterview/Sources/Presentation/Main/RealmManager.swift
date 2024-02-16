@@ -9,41 +9,31 @@ import Foundation
 import RealmSwift
 
 final class RealmManager: RealmManagerProtocol {
-	static let shared = RealmManager()
+//	static let shared = RealmManager()
 	private(set) var realm: Realm?
 	
-	private init() {
+	init() {
 		openRealm()
 	}
 	
 	func openRealm() {
 		do {
-			let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
-				if oldSchemaVersion > 1 {
-					// Do something, usually updating the schema's variables here
-				}
-			})
-
+			let config = Realm.Configuration(schemaVersion: 1)
 			Realm.Configuration.defaultConfiguration = config
-
 			realm = try Realm()
 		} catch {
 			print("저장소에 문제가 발생했습니다.", error)
 		}
 	}
 	
-	func readQuestions() throws -> Questions? {
-		guard let questions: Questions = realm?.objects(Question.self).map({ $0 }) else { throw RealmFailure.questionsFetchError }
-		if questions.isEmpty {
-			throw RealmFailure.questionsEmpty
-		}
-		return questions
+	func readQuestions() -> Questions? {
+		return realm?.objects(Question.self).map({ $0 })
 	}
 	
 	func writeQuestion(_ question: Question) throws {
 		do {
 			try realm?.write {
-				realm?.add(question, update: .modified)
+				realm?.add(question)
 			}
 		} catch {
 			throw RealmFailure.questionAddError
@@ -62,7 +52,7 @@ final class RealmManager: RealmManagerProtocol {
 }
 
 protocol RealmManagerProtocol {
-	func readQuestions() throws -> Questions?
+	func readQuestions() -> Questions?
 	func writeQuestion(_ question: Question) throws
 	func deleteQuestion(_ question: Question) throws
 }

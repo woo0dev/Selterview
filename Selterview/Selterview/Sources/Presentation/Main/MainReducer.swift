@@ -20,8 +20,7 @@ struct MainReducer {
 	}
 	
 	enum Action: BindableAction, Equatable {
-		case onAppear
-		case updatedQuestions(Questions)
+		case fetchQuestions
 		case addButtonTapped
 		case deleteButtonTapped
 		case settingButtonTapped
@@ -33,17 +32,11 @@ struct MainReducer {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
-			case .onAppear:
-				return .run { send in
-					if let questions = try RealmManager.shared.readQuestions() {
-						await send(.updatedQuestions(questions))
-					}
-				} catch: { error, send in
-					if let error = error as? RealmFailure { await send(.catchError(error)) }
-				}
-			case .updatedQuestions(let questions):
-				state.questions = questions
-				state.filteredQuestions = questions.filter({ $0.category == state.selectedCategory.rawValue })
+			case .fetchQuestions:
+				state.isLoading = true
+				state.questions = RealmManager().readQuestions() ?? []
+				state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory.rawValue })
+				state.isLoading = false
 				return .none
 			case .addButtonTapped:
 				state.isAddButtonTap = true

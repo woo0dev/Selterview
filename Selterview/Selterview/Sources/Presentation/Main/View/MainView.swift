@@ -60,12 +60,15 @@ struct MainView: View {
 				}
 			}
 			.onAppear {
-				viewStore.send(.onAppear)
+				viewStore.send(.fetchQuestions)
 			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
-				AddQuestionView(store: Store(initialState: AddReducer.State()) {
+				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State()) {
 					AddReducer()
 				})
+				.onDisappear {
+					viewStore.send(.fetchQuestions)
+				}
 			}
 			.sheet(isPresented: viewStore.$isSettingButtonTap) {
 				SettingView()
