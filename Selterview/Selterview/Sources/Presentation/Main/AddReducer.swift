@@ -22,7 +22,7 @@ struct AddReducer {
 	enum Action: BindableAction, Equatable {
 		case onAppear
 		case addButtonTapped
-		case addCompletion
+		case addCompleted
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -34,13 +34,15 @@ struct AddReducer {
 			case .onAppear:
 				return .none
 			case .addButtonTapped:
-				return .run { [title = state.questionTitle, category = state.selectedCategory] send in
-					try RealmManager().writeQuestion(Question(title: title, category: category))
-					await send(.addCompletion)
-				} catch: { error, send in
-					if let error = error as? RealmFailure { await send(.catchError(error)) }
+				do {
+					try RealmManager.shared.writeQuestion(Question(title: state.questionTitle, category: state.selectedCategory))
+					let effect: Effect<Action> = .send(.addCompleted)
+					return .concatenate(effect)
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(RealmFailure.questionAddError))
+					return .concatenate(effect)
 				}
-			case .addCompletion:
+			case .addCompleted:
 				state.isComplete = true
 				return .none
 			case .catchError(let error):

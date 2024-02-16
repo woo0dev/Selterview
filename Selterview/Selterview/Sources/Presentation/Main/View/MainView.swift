@@ -15,12 +15,19 @@ struct MainView: View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			NavigationStack {
 				VStack {
-					List(viewStore.filteredQuestions.indices, id: \.self) { index in
-						NavigationLink(destination: ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: index), reducer: {
-							ProblemReducer()
-						})), label: {
-							Text(viewStore.filteredQuestions[index].title)
-						})
+					List {
+						ForEach(viewStore.filteredQuestions.indices, id: \.self) { index in
+							NavigationLink(destination: ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: index), reducer: {
+								ProblemReducer()
+							})), label: {
+								Text(viewStore.filteredQuestions[index].title)
+							})
+						}
+						.onDelete { indexSet in
+							for index in indexSet{
+								viewStore.send(.deleteButtonTapped(viewStore.filteredQuestions[index]))
+							}
+						}
 					}
 					.listStyle(.inset)
 					.overlay(Group {

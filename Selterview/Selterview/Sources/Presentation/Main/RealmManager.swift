@@ -9,41 +9,39 @@ import Foundation
 import RealmSwift
 
 final class RealmManager: RealmManagerProtocol {
-//	static let shared = RealmManager()
-	private(set) var realm: Realm?
+	static let shared = RealmManager()
 	
 	init() {
-		openRealm()
+		let config = Realm.Configuration(schemaVersion: 1)
+		Realm.Configuration.defaultConfiguration = config
 	}
 	
-	func openRealm() {
+	func readQuestions() throws -> Questions? {
 		do {
-			let config = Realm.Configuration(schemaVersion: 1)
-			Realm.Configuration.defaultConfiguration = config
-			realm = try Realm()
+			let realm = try Realm()
+			return realm.objects(Question.self).map({ $0 })
 		} catch {
-			print("저장소에 문제가 발생했습니다.", error)
+			throw RealmFailure.questionsFetchError
 		}
-	}
-	
-	func readQuestions() -> Questions? {
-		return realm?.objects(Question.self).map({ $0 })
 	}
 	
 	func writeQuestion(_ question: Question) throws {
 		do {
-			try realm?.write {
-				realm?.add(question)
+			let realm = try Realm()
+			try realm.write {
+				realm.add(question)
 			}
 		} catch {
 			throw RealmFailure.questionAddError
 		}
 	}
 	
-	func deleteQuestion(_ question: Question) throws {
+	func deleteQuestion(_ id: ObjectId) throws {
 		do {
-			try realm?.write {
-				realm?.delete(question)
+			let realm = try Realm()
+			try realm.write {
+				guard let question = realm.object(ofType: Question.self, forPrimaryKey: id) else { throw RealmFailure.questionDeleteError }
+				realm.delete(question)
 			}
 		} catch {
 			throw RealmFailure.questionDeleteError
@@ -52,9 +50,9 @@ final class RealmManager: RealmManagerProtocol {
 }
 
 protocol RealmManagerProtocol {
-	func readQuestions() -> Questions?
+	func readQuestions() throws -> Questions?
 	func writeQuestion(_ question: Question) throws
-	func deleteQuestion(_ question: Question) throws
+	func deleteQuestion(_ id: ObjectId) throws
 }
 
 enum RealmFailure: Error, Equatable {

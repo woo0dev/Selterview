@@ -5,6 +5,7 @@
 //  Created by woo0 on 2/7/24.
 //
 
+import Foundation
 import ComposableArchitecture
 
 @Reducer
@@ -22,7 +23,7 @@ struct MainReducer {
 	enum Action: BindableAction, Equatable {
 		case fetchQuestions
 		case addButtonTapped
-		case deleteButtonTapped
+		case deleteButtonTapped(Question)
 		case settingButtonTapped
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
@@ -33,15 +34,24 @@ struct MainReducer {
 		Reduce { state, action in
 			switch action {
 			case .fetchQuestions:
-				state.isLoading = true
-				state.questions = RealmManager().readQuestions() ?? []
-				state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory.rawValue })
-				state.isLoading = false
+				do {
+					state.questions = try RealmManager.shared.readQuestions() ?? []
+					state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory.rawValue })
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(RealmFailure.questionsFetchError))
+					return .concatenate(effect)
+				}
 				return .none
 			case .addButtonTapped:
 				state.isAddButtonTap = true
 				return .none
-			case .deleteButtonTapped:
+			case .deleteButtonTapped(let question):
+				do {
+					try RealmManager.shared.deleteQuestion(question._id)
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(RealmFailure.questionDeleteError))
+					return .concatenate(effect)
+				}
 				return .none
 			case .settingButtonTapped:
 				state.isSettingButtonTap = true
