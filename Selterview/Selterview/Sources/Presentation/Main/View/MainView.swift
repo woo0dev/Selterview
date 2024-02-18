@@ -51,7 +51,7 @@ struct MainView: View {
 								Label("새 질문 추가하기" , systemImage: "text.badge.plus")
 							}
 							Button {
-								print("랜덤 질문 시작하기 클릭")
+								viewStore.send(.randomStartButtonTapped)
 							} label : {
 								Label("랜덤 질문 시작하기" , systemImage: "play.fill")
 							}
@@ -64,6 +64,15 @@ struct MainView: View {
 							Image(systemName: "ellipsis")
 								.foregroundStyle(Color.accentTextColor)
 						}
+					}
+				}
+				.navigationDestination(isPresented: viewStore.$isRandomStartButtonTap) {
+					if viewStore.filteredQuestions.isEmpty {
+						EmptyView()
+					} else {
+						ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: Int.random(in: 0..<viewStore.filteredQuestions.count)), reducer: {
+							ProblemReducer()
+						   }))
 					}
 				}
 			}
