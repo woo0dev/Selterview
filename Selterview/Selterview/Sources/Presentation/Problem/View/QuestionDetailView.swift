@@ -13,7 +13,7 @@ struct QuestionDetailView: View {
 	var body: some View {
 		VStack {
 			Text(questionTitle)
-				.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .title2, backgroundColor: .textBackgroundColor)
+				.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundColor)
 				.padding(20)
 		}
 	}

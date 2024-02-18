@@ -36,7 +36,7 @@ struct ProblemView: View {
 					if viewStore.isTailQuestionCreating {
 						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
 							.frame(maxHeight: .infinity, alignment: .top)
-							.font(.body)
+							.font(.defaultFont(.body))
 							.foregroundColor(.gray)
 					} else {
 						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
@@ -47,12 +47,12 @@ struct ProblemView: View {
 						Button("꼬리질문") {
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
 						Button("다음질문") {
 							viewStore.send(.nextQuestionButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
 					}
 				}

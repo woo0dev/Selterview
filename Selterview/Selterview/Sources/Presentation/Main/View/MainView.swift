@@ -21,6 +21,7 @@ struct MainView: View {
 								ProblemReducer()
 							})), label: {
 								Text(viewStore.filteredQuestions[index].title)
+									.font(.defaultFont(.body))
 							})
 						}
 						.onDelete { indexSet in

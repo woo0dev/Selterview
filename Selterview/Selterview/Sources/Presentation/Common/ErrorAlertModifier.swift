@@ -13,8 +13,8 @@ struct ErrorAlertModifier: ViewModifier {
 
 	func body(content: Content) -> some View {
 		content.alert(isPresented: isPresented) {
-			Alert(title: Text("Error"),
-				  message: Text(message),
+			Alert(title: Text("Error").font(.defaultFont(.body)),
+				  message: Text(message).font(.defaultFont(.body)),
 				  dismissButton: .cancel(Text("확인")))
 		}
 	}
