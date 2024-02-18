@@ -43,7 +43,7 @@ struct AddReducer {
 					let effect: Effect<Action> = .send(.addCompleted)
 					return .concatenate(effect)
 				} catch {
-					let effect: Effect<Action> = .send(.catchError(RealmFailure.questionAddError))
+					let effect: Effect<Action> = .send(.catchError(.questionAddError))
 					return .concatenate(effect)
 				}
 			case .addCompleted:

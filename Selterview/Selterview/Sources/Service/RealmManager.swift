@@ -36,6 +36,19 @@ final class RealmManager: RealmManagerProtocol {
 		}
 	}
 	
+	func updateQuestion(_ question: Question, _ answer: String) throws {
+		do {
+			let realm = try Realm()
+			try realm.write {
+				let question = question
+				question.answer = answer
+				realm.create(Question.self, value: question, update: .modified)
+			}
+		} catch {
+			throw RealmFailure.questionUpdateError
+		}
+	}
+	
 	func deleteQuestion(_ id: ObjectId) throws {
 		do {
 			let realm = try Realm()
@@ -52,6 +65,7 @@ final class RealmManager: RealmManagerProtocol {
 protocol RealmManagerProtocol {
 	func readQuestions() throws -> Questions?
 	func writeQuestion(_ question: Question) throws
+	func updateQuestion(_ question: Question, _ answer: String) throws
 	func deleteQuestion(_ id: ObjectId) throws
 }
 
@@ -60,6 +74,7 @@ enum RealmFailure: Error, Equatable {
 	case questionsFetchError
 	case questionsEmpty
 	case questionAddError
+	case questionUpdateError
 	case questionDeleteError
 }
 
@@ -74,6 +89,8 @@ extension RealmFailure: LocalizedError {
 			return "질문이 존재하지 않습니다."
 		case .questionAddError:
 			return "질문 생성에 실패했습니다."
+		case .questionUpdateError:
+			return "답변 저장을 실패했습니다."
 		case .questionDeleteError:
 			return "질문 삭제에 실패했습니다."
 		}

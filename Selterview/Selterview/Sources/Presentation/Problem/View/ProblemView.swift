@@ -25,6 +25,9 @@ struct ProblemView: View {
 						}
 						.gesture(DragGesture()
 							.onEnded { value in
+								if viewStore.answerText.count > 0 {
+									viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+								}
 								if value.startLocation.x < value.location.x - 24 {
 									viewStore.send(.previousQuestion)
 								}
@@ -38,18 +41,26 @@ struct ProblemView: View {
 							.frame(maxHeight: .infinity, alignment: .top)
 							.font(.defaultFont(.body))
 							.foregroundColor(.gray)
+							.animation(.easeIn, value: viewStore.question)
 					} else {
 						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
 							.frame(maxHeight: .infinity)
+							.animation(.easeIn, value: viewStore.question)
 					}
 					HStack {
 						Spacer()
 						Button("꼬리질문") {
+							if viewStore.answerText.count > 0 {
+								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+							}
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
 						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
 						Button("다음질문") {
+							if viewStore.answerText.count > 0 {
+								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+							}
 							viewStore.send(.nextQuestionButtonTapped)
 						}
 						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
@@ -73,7 +84,11 @@ struct ProblemView: View {
 				.sheet(isPresented: viewStore.$isQuestionTap) {
 					QuestionDetailView(questionTitle: viewStore.question.title)
 				}
-				.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+				.showErrorMessage(showAlert: viewStore.$isNetworkError, message: viewStore.networkError?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+				.showErrorMessage(showAlert: viewStore.$isRealmError, message: viewStore.realmError?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			}
+			.onDisappear {
+				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 			}
 		}
 	}
