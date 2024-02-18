@@ -15,6 +15,7 @@ struct AddReducer {
 		@BindingState var questionTitle: String = ""
 		@BindingState var isError: Bool = false
 		var isComplete: Bool = false
+		var isFocused: Bool = false
 		var error: RealmFailure? = nil
 		var categories: [Category] = [.swift, .ios, .cs]
 	}
@@ -23,6 +24,8 @@ struct AddReducer {
 		case onAppear
 		case addButtonTapped
 		case addCompleted
+		case enableFocus
+		case disableFocus
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -34,6 +37,7 @@ struct AddReducer {
 			case .onAppear:
 				return .none
 			case .addButtonTapped:
+				state.isFocused = false
 				do {
 					try RealmManager.shared.writeQuestion(Question(title: state.questionTitle, category: state.selectedCategory))
 					let effect: Effect<Action> = .send(.addCompleted)
@@ -44,6 +48,12 @@ struct AddReducer {
 				}
 			case .addCompleted:
 				state.isComplete = true
+				return .none
+			case .enableFocus:
+				state.isFocused = true
+				return .none
+			case .disableFocus:
+				state.isFocused = false
 				return .none
 			case .catchError(let error):
 				state.isError = true

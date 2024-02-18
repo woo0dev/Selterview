@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct AddQuestionView: View {
 	@Binding var isShowAddModal: Bool
+	@FocusState var isFocused: Bool
 	
 	let store: StoreOf<AddReducer>
 	
@@ -29,10 +30,22 @@ struct AddQuestionView: View {
 				TextEditor(text: viewStore.$questionTitle)
 					.font(.body)
 					.lineSpacing(5)
+					.focused($isFocused)
 					.overlay(
 						RoundedRectangle(cornerRadius: 20)
 							.stroke(Color.borderColor, lineWidth: 3)
 					)
+					.onTapGesture {
+						viewStore.send(.disableFocus)
+					}
+					.onChange(of: viewStore.isFocused) {
+						isFocused = $0
+					}
+					.onChange(of: isFocused) { isFocused in
+						if isFocused {
+							viewStore.send(.enableFocus)
+						}
+					}
 				Button("추가하기") {
 					viewStore.send(.addButtonTapped)
 				}
