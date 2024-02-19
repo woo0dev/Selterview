@@ -12,7 +12,7 @@ final class RealmManager: RealmManagerProtocol {
 	static let shared = RealmManager()
 	
 	init() {
-		let config = Realm.Configuration(schemaVersion: 1)
+		let config = Realm.Configuration(schemaVersion: 3)
 		Realm.Configuration.defaultConfiguration = config
 	}
 	

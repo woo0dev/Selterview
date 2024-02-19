@@ -113,7 +113,6 @@ struct ProblemReducer {
 			case .updateQuestions:
 				do {
 					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
-					print(state.questions)
 				} catch {
 					return .concatenate(.send(.catchRealmError(.questionsFetchError)))
 				}

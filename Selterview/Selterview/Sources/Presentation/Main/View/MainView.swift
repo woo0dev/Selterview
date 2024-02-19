@@ -17,9 +17,7 @@ struct MainView: View {
 				VStack {
 					List {
 						ForEach(viewStore.filteredQuestions.indices, id: \.self) { index in
-							NavigationLink(destination: ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: index), reducer: {
-								ProblemReducer()
-							})), label: {
+							NavigationLink(value: index, label: {
 								Text(viewStore.filteredQuestions[index].title)
 									.font(.defaultFont(.body))
 							})
@@ -29,6 +27,11 @@ struct MainView: View {
 								viewStore.send(.deleteButtonTapped(viewStore.filteredQuestions[index]))
 							}
 						}
+					}
+					.navigationDestination(for: Int.self) { index in
+						ProblemView(store: Store(initialState: ProblemReducer.State(questions: viewStore.filteredQuestions, questionIndex: index), reducer: {
+							ProblemReducer()
+						}))
 					}
 					.listStyle(.inset)
 					.overlay(Group {
