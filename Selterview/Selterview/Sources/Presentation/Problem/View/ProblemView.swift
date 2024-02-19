@@ -21,7 +21,9 @@ struct ProblemView: View {
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
 						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
-							viewStore.send(.showQuestionDetailView)
+							if viewStore.isTailQuestionCreating == false {
+								viewStore.send(.showQuestionDetailView)
+							}
 						}
 						.gesture(DragGesture()
 							.onEnded { value in
