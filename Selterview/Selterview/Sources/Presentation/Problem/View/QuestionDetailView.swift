@@ -11,10 +11,10 @@ struct QuestionDetailView: View {
 	let questionTitle: String
 	
 	var body: some View {
-		VStack {
+		ScrollView {
 			Text(questionTitle)
-				.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundColor)
-				.padding(20)
 		}
+		.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundColor)
+		.padding(20)
 	}
 }
