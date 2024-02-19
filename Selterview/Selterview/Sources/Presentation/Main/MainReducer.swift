@@ -5,6 +5,7 @@
 //  Created by woo0 on 2/7/24.
 //
 
+import Foundation
 import ComposableArchitecture
 
 @Reducer
@@ -12,6 +13,7 @@ struct MainReducer {
 	struct State: Equatable {
 		@BindingState var selectedCategory: Category = .swift
 		@BindingState var isAddButtonTap: Bool = false
+		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isSettingButtonTap: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
@@ -20,10 +22,10 @@ struct MainReducer {
 	}
 	
 	enum Action: BindableAction, Equatable {
-		case onAppear
-		case updatedQuestions(Questions)
+		case fetchQuestions
 		case addButtonTapped
-		case deleteButtonTapped
+		case deleteButtonTapped(Question)
+		case randomStartButtonTapped
 		case settingButtonTapped
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
@@ -33,28 +35,38 @@ struct MainReducer {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
-			case .onAppear:
-				return .run { send in
-					if let questions = try RealmManager.shared.readQuestions() {
-						await send(.updatedQuestions(questions))
-					}
-				} catch: { error, send in
-					if let error = error as? RealmFailure { await send(.catchError(error)) }
+			case .fetchQuestions:
+				do {
+					state.questions = try RealmManager.shared.readQuestions() ?? []
+					state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory.rawValue })
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionsFetchError))
+					return .concatenate(effect)
 				}
-			case .updatedQuestions(let questions):
-				state.questions = questions
-				state.filteredQuestions = questions.filter({ $0.category == state.selectedCategory.rawValue })
 				return .none
 			case .addButtonTapped:
 				state.isAddButtonTap = true
 				return .none
-			case .deleteButtonTapped:
+			case .deleteButtonTapped(let question):
+				do {
+					try RealmManager.shared.deleteQuestion(question._id)
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionDeleteError))
+					return .concatenate(effect)
+				}
+				return .none
+			case .randomStartButtonTapped:
+				if state.filteredQuestions.isEmpty {
+					let effect: Effect<Action> = .send(.catchError(.questionsEmpty))
+					return .concatenate(effect)
+				} else {
+					state.isRandomStartButtonTap = true
+				}
 				return .none
 			case .settingButtonTapped:
 				state.isSettingButtonTap = true
 				return .none
 			case .catchError(let error):
-				// TODO: Empty Error 처리
 				state.isError = true
 				state.error = error
 				return .none

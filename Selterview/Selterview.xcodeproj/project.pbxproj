@@ -13,6 +13,8 @@
 		E2028A9F2B6CD01C00B603E8 /* SelterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028A9E2B6CD01C00B603E8 /* SelterviewTests.swift */; };
 		E2028AA92B6CD01C00B603E8 /* SelterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */; };
 		E2028AAB2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */; };
+		E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E205A3272B81E5D40029890E /* NPSfont_regular.ttf */; };
+		E205A32A2B81E6170029890E /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205A3292B81E6170029890E /* Font+.swift */; };
 		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
 		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
 		E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */; };
@@ -67,6 +69,8 @@
 		E2028AA42B6CD01C00B603E8 /* SelterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2028AA82B6CD01C00B603E8 /* SelterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITests.swift; sourceTree = "<group>"; };
 		E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E205A3272B81E5D40029890E /* NPSfont_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPSfont_regular.ttf; sourceTree = "<group>"; };
+		E205A3292B81E6170029890E /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
@@ -178,20 +182,46 @@
 			path = SelterviewUITests;
 			sourceTree = "<group>";
 		};
+		E205A3262B81E59B0029890E /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				E205A3272B81E5D40029890E /* NPSfont_regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		E2252B712B74F6BB0076AAF8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E23E4EDB2B8207AD0018BB92 /* Modifier */,
 				E27888E12B7508B100983FAB /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E23E4EDB2B8207AD0018BB92 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
 				E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */,
 				E27888E82B750F3800983FAB /* LoadingModifier.swift */,
 				E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */,
 			);
-			path = Common;
+			path = Modifier;
+			sourceTree = "<group>";
+		};
+		E23E4EDC2B8207EF0018BB92 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */,
+				E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		E26EC4AB2B6CD0FA00B1CEEB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E205A3262B81E59B0029890E /* Font */,
 				E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */,
 				E2E73E8E2B73E9E500510550 /* API_Key.plist */,
 			);
@@ -201,8 +231,9 @@
 		E26EC4AC2B6CD11300B1CEEB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E2E322622B6E4AA800D5D081 /* Extension */,
 				E2028A882B6CD01A00B603E8 /* SelterviewApp.swift */,
+				E23E4EDC2B8207EF0018BB92 /* Service */,
+				E2E322622B6E4AA800D5D081 /* Extension */,
 				E26EC4B92B6CEB3F00B1CEEB /* Model */,
 				E26EC4AE2B6CE66B00B1CEEB /* Presentation */,
 			);
@@ -224,7 +255,6 @@
 			children = (
 				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
 				E2327B3F2B7E56EA00397CEF /* AddReducer.swift */,
-				E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
 			);
 			path = Main;
@@ -261,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E73E852B73AD9500510550 /* ProblemReducer.swift */,
-				E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */,
 				E2E3225C2B6E41C400D5D081 /* View */,
 			);
 			path = Problem;
@@ -283,6 +312,7 @@
 			children = (
 				E2E322632B6E4AB000D5D081 /* Color+.swift */,
 				E2252B6F2B74F5FB0076AAF8 /* View+.swift */,
+				E205A3292B81E6170029890E /* Font+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -407,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */,
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
 				E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */,
 				E2028A8D2B6CD01C00B603E8 /* Assets.xcassets in Resources */,
@@ -444,6 +475,7 @@
 				E26307CD2B7E1309004847DF /* QuestionDetailView.swift in Sources */,
 				E27888E32B7508BF00983FAB /* DotView.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
+				E205A32A2B81E6170029890E /* Font+.swift in Sources */,
 				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,

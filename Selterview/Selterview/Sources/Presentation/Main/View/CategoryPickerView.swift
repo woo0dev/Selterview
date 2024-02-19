@@ -13,13 +13,18 @@ struct CategoryPickerView: View {
 	var categories: [Category] = [.swift, .ios, .cs]
 	
 	var body: some View {
-		Picker("카테고리를 선택해주세요.", selection: $selectedCategory) {
-			ForEach(categories, id: \.self) {
-				Text($0.rawValue)
+		Menu {
+			ForEach(categories, id: \.self) { category in
+				Button {
+					selectedCategory = category
+				} label: {
+					Text(category.rawValue)
+				}
 			}
+		} label: {
+			Text(selectedCategory.rawValue)
+				.font(.defaultFont(.title))
 		}
-		.pickerStyle(.menu)
 		.accentColor(Color.accentTextColor)
-		.cornerRadius(15)
 	}
 }

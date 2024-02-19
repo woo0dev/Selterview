@@ -9,32 +9,48 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddQuestionView: View {
+	@Binding var isShowAddModal: Bool
+	@FocusState var isFocused: Bool
+	
 	let store: StoreOf<AddReducer>
 	
 	var body: some View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			VStack(alignment: .leading) {
 				Text("카테고리 선택")
-					.font(.title.bold())
+					.font(.defaultFont(.title2))
 				Picker("카테고리를 선택해주세요.", selection: viewStore.$selectedCategory) {
 					ForEach(viewStore.categories, id: \.self) {
 						Text($0.rawValue)
+							.font(.defaultFont(.body))
 					}
 				}
 				.pickerStyle(.segmented)
 				.shadow(radius: 5)
 				.padding(.bottom, 10)
 				TextEditor(text: viewStore.$questionTitle)
-					.font(.body)
+					.font(.defaultFont(.body))
 					.lineSpacing(5)
+					.focused($isFocused)
 					.overlay(
 						RoundedRectangle(cornerRadius: 20)
 							.stroke(Color.borderColor, lineWidth: 3)
 					)
+					.onTapGesture {
+						viewStore.send(.disableFocus)
+					}
+					.onChange(of: viewStore.isFocused) {
+						isFocused = $0
+					}
+					.onChange(of: isFocused) { isFocused in
+						if isFocused {
+							viewStore.send(.enableFocus)
+						}
+					}
 				Button("추가하기") {
 					viewStore.send(.addButtonTapped)
 				}
-				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .title3, backgroundColor: .buttonBackgroundColor)
+				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 			}
 			.onAppear {
 				UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.buttonBackgroundColor)
@@ -43,6 +59,11 @@ struct AddQuestionView: View {
 			}
 			.padding(20)
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.onChange(of: viewStore.isComplete) { isComplete in
+				if isComplete {
+					isShowAddModal = false
+				}
+			}
 		}
 	}
 }

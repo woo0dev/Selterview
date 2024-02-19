@@ -5,6 +5,7 @@
 //  Created by woo0 on 2/15/24.
 //
 
+import Foundation
 import ComposableArchitecture
 
 @Reducer
@@ -13,6 +14,8 @@ struct AddReducer {
 		@BindingState var selectedCategory: Category = .swift
 		@BindingState var questionTitle: String = ""
 		@BindingState var isError: Bool = false
+		var isComplete: Bool = false
+		var isFocused: Bool = false
 		var error: RealmFailure? = nil
 		var categories: [Category] = [.swift, .ios, .cs]
 	}
@@ -20,7 +23,9 @@ struct AddReducer {
 	enum Action: BindableAction, Equatable {
 		case onAppear
 		case addButtonTapped
-		case addCompletion
+		case addCompleted
+		case enableFocus
+		case disableFocus
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -32,13 +37,23 @@ struct AddReducer {
 			case .onAppear:
 				return .none
 			case .addButtonTapped:
-				return .run { [title = state.questionTitle, category = state.selectedCategory] send in
-					try RealmManager.shared.writeQuestion(Question(title: title, category: category))
-					await send(.addCompletion)
-				} catch: { error, send in
-					if let error = error as? RealmFailure { await send(.catchError(error)) }
+				state.isFocused = false
+				do {
+					try RealmManager.shared.writeQuestion(Question(title: state.questionTitle, category: state.selectedCategory))
+					let effect: Effect<Action> = .send(.addCompleted)
+					return .concatenate(effect)
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionAddError))
+					return .concatenate(effect)
 				}
-			case .addCompletion:
+			case .addCompleted:
+				state.isComplete = true
+				return .none
+			case .enableFocus:
+				state.isFocused = true
+				return .none
+			case .disableFocus:
+				state.isFocused = false
 				return .none
 			case .catchError(let error):
 				state.isError = true
