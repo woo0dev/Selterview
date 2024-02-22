@@ -89,4 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-~/API_Key.plist
+API_Key.plist
