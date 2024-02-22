@@ -10,9 +10,9 @@ import Foundation
 extension Bundle {
 	var openAIAPIKey: String {
 		var fileString: String
-		if let file = self.path(forResource: "API_Key", ofType: "plist") {
+		if let file = self.path(forResource: "CI_Key", ofType: "plist") {
 			fileString = file
-		} else if let file = self.path(forResource: "CI_Key", ofType: "plist") {
+		} else if let file = self.path(forResource: "API_Key", ofType: "plist") {
 			fileString = file
 		} else {
 			return ""
