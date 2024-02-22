@@ -5,7 +5,7 @@
 defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 
 # Environment variable. Create API_Key.plist
-PLIST_PATH="/Volumes/workspace/repository/Selterview/Selterview/Resources/API.plist"
+PLIST_PATH="/Volumes/workspace/repository/Selterview/Selterview/Resources/API_Key.plist"
 
 # plist 파일 생성 및 Key-Value 설정
 /usr/libexec/PlistBuddy -c "Add :OpenAIAPIKey string" $PLIST_PATH
