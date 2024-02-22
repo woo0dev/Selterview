@@ -3,10 +3,8 @@
 
 echo "Environment scripts has been activated .... "
 
-cd ..
-
-plutil -create ./Selterview/Selterview/Resources/API_Key.plist
-plutil -insert OpenAIAPIKey -string $API_Key ./Selterview/Selterview/Resources/API_Key.plist
+plutil -create /Volumes/workspace/repository/Selterview/Selterview/Resources/API_Key.plist
+plutil -insert OpenAIAPIKey -string $API_Key /Volumes/workspace/repository/Selterview/Selterview/Resources/API_Key.plist
 
 echo "Environment scripts has been DONE .... "
 
