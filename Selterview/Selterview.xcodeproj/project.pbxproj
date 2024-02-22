@@ -40,7 +40,6 @@
 		E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; };
 		E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */; };
 		E2F985282B874B7D0053D46F /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F985272B874B7D0053D46F /* API_Key.plist */; };
-		E2F9852A2B874DBD0053D46F /* CI_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F985292B874DBD0053D46F /* CI_Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +94,6 @@
 		E2F2B2C62B7E705F0008DD9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E2F985272B874B7D0053D46F /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
-		E2F985292B874DBD0053D46F /* CI_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CI_Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,7 +224,6 @@
 				E205A3262B81E59B0029890E /* Font */,
 				E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */,
 				E2F985272B874B7D0053D46F /* API_Key.plist */,
-				E2F985292B874DBD0053D46F /* CI_Key.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -440,7 +437,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F9852A2B874DBD0053D46F /* CI_Key.plist in Resources */,
 				E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */,
 				E2F985282B874B7D0053D46F /* API_Key.plist in Resources */,
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
