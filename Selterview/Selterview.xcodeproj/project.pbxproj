@@ -36,10 +36,10 @@
 		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
 		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
 		E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */; };
-		E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2E73E8E2B73E9E500510550 /* API_Key.plist */; };
 		E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2C92B7E71650008DD9F /* Realm */; };
 		E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; };
 		E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */; };
+		E2F985282B874B7D0053D46F /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F985272B874B7D0053D46F /* API_Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,9 +91,9 @@
 		E2E322632B6E4AB000D5D081 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		E2E73E852B73AD9500510550 /* ProblemReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemReducer.swift; sourceTree = "<group>"; };
 		E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Selterview++Bundle.swift"; sourceTree = "<group>"; };
-		E2E73E8E2B73E9E500510550 /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
 		E2F2B2C62B7E705F0008DD9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		E2F985272B874B7D0053D46F /* API_Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API_Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +223,7 @@
 			children = (
 				E205A3262B81E59B0029890E /* Font */,
 				E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */,
-				E2E73E8E2B73E9E500510550 /* API_Key.plist */,
+				E2F985272B874B7D0053D46F /* API_Key.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -438,8 +438,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */,
+				E2F985282B874B7D0053D46F /* API_Key.plist in Resources */,
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
-				E2E73E8F2B73E9E500510550 /* API_Key.plist in Resources */,
 				E2028A8D2B6CD01C00B603E8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
