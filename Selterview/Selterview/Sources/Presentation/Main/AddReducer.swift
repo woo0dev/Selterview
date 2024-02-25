@@ -11,13 +11,13 @@ import ComposableArchitecture
 @Reducer
 struct AddReducer {
 	struct State: Equatable {
-		@BindingState var selectedCategory: Category = .swift
+		@BindingState var selectedCategory: String = ""
 		@BindingState var questionTitle: String = ""
 		@BindingState var isError: Bool = false
 		var isComplete: Bool = false
 		var isFocused: Bool = false
 		var error: RealmFailure? = nil
-		var categories: [Category] = [.swift, .ios, .cs]
+		var categories: [String]? = nil
 	}
 	
 	enum Action: BindableAction, Equatable {
@@ -26,6 +26,7 @@ struct AddReducer {
 		case addCompleted
 		case enableFocus
 		case disableFocus
+		case fetchCategories
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -54,6 +55,14 @@ struct AddReducer {
 				return .none
 			case .disableFocus:
 				state.isFocused = false
+				return .none
+			case .fetchCategories:
+				state.categories = UserDefaults.standard.array(forKey: "Categories") as? [String]
+				if let selectedCategory = state.categories?.first {
+					state.selectedCategory = selectedCategory
+				} else {
+					// Category 생성
+				}
 				return .none
 			case .catchError(let error):
 				state.isError = true

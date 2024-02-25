@@ -36,7 +36,7 @@ struct MainView: View {
 					.listStyle(.inset)
 					.overlay(Group {
 						if viewStore.filteredQuestions.isEmpty {
-							Text("\(viewStore.selectedCategory.rawValue)(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
+							Text("\(viewStore.selectedCategory ?? "")(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
 								.foregroundStyle(.gray)
 								.multilineTextAlignment(.center)
 						}
@@ -44,24 +44,39 @@ struct MainView: View {
 				}
 				.toolbar {
 					ToolbarItem(placement: .navigationBarLeading) {
-						CategoryPickerView(selectedCategory: viewStore.$selectedCategory)
+						if let _ = viewStore.selectedCategory {
+							CategoryPickerView(selectedCategory: viewStore.$selectedCategory, categories: viewStore.categories ?? [])
+						} else {
+							Button {
+								viewStore.send(.addCategoryTapped)
+							} label: {
+								Text("+")
+									.padding([.leading, .trailing], 30)
+							}
+							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray)
+						}
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
 						Menu {
 							Button {
 								viewStore.send(.addButtonTapped)
-							} label : {
-								Label("새 질문 추가하기" , systemImage: "text.badge.plus")
+							} label: {
+								Label("새 질문 추가하기", systemImage: "text.badge.plus")
 							}
 							Button {
 								viewStore.send(.randomStartButtonTapped)
+							} label: {
+								Label("랜덤 질문 시작하기", systemImage: "play.fill")
+							}
+							Button {
+								viewStore.send(.addCategoryTapped)
 							} label : {
-								Label("랜덤 질문 시작하기" , systemImage: "play.fill")
+								Label("새 카테고리 추가하기", systemImage: "plus.rectangle")
 							}
 							Button {
 								viewStore.send(.settingButtonTapped)
-							} label : {
-								Label("설정" , systemImage: "gear")
+							} label: {
+								Label("설정", systemImage: "gear")
 							}
 						} label: {
 							Image(systemName: "ellipsis")
@@ -81,6 +96,18 @@ struct MainView: View {
 			}
 			.onAppear {
 				viewStore.send(.fetchQuestions)
+				viewStore.send(.fetchCategories)
+			}
+			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
+				TextField("카테고리 이름", text: viewStore.$addCategoryText)
+				Button("취소") {
+					viewStore.send(.addCategoryCancel)
+				}
+				Button("추가") {
+					viewStore.send(.addCategory)
+				}
+			} message: {
+				Text("카테고리 이름을 입력해 주세요.")
 			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
 				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State()) {

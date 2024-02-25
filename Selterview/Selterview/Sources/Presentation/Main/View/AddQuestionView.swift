@@ -20,12 +20,11 @@ struct AddQuestionView: View {
 				Text("카테고리 선택")
 					.font(.defaultFont(.title2))
 				Picker("카테고리를 선택해주세요.", selection: viewStore.$selectedCategory) {
-					ForEach(viewStore.categories, id: \.self) {
-						Text($0.rawValue)
+					ForEach(viewStore.categories ?? [], id: \.self) {
+						Text($0)
 							.font(.defaultFont(.body))
 					}
 				}
-				.pickerStyle(.segmented)
 				.shadow(radius: 5)
 				.padding(.bottom, 10)
 				TextEditor(text: viewStore.$questionTitle)

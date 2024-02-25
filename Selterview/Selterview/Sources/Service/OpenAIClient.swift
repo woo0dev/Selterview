@@ -42,7 +42,7 @@ extension OpenAIClient: DependencyKey {
 			   let firstChoice = choices.first,
 			   let message = firstChoice["message"] as? [String: String],
 			   let text = message["content"] {
-				return Question(title: text, category: .tail)
+				return Question(title: text, category: "Tail")
 			} else {
 				throw ChatGPTFailure.jsonParsingError
 			}
