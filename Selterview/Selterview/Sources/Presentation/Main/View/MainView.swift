@@ -36,9 +36,15 @@ struct MainView: View {
 					.listStyle(.inset)
 					.overlay(Group {
 						if viewStore.filteredQuestions.isEmpty {
-							Text("\(viewStore.selectedCategory ?? "")(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
-								.foregroundStyle(.gray)
-								.multilineTextAlignment(.center)
+							if let _ = viewStore.selectedCategory {
+								Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
+									.foregroundStyle(.gray)
+									.multilineTextAlignment(.center)
+							} else {
+								Text("\(viewStore.selectedCategory ?? "")(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
+									.foregroundStyle(.gray)
+									.multilineTextAlignment(.center)
+							}
 						}
 					})
 				}
@@ -97,6 +103,9 @@ struct MainView: View {
 			.onAppear {
 				viewStore.send(.fetchQuestions)
 				viewStore.send(.fetchCategories)
+//				for key in UserDefaults.standard.dictionaryRepresentation().keys {
+//					UserDefaults.standard.removeObject(forKey: "Categories")
+//				}
 			}
 			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
 				TextField("카테고리 이름", text: viewStore.$addCategoryText)
