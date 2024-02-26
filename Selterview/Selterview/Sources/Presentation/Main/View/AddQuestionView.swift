@@ -17,7 +17,6 @@ struct AddQuestionView: View {
 	var body: some View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			VStack(alignment: .leading) {
-				// TODO: 카테고리 선택 픽커를 메뉴로 변경, 디폴트를 카테고리 선택으로. 추가 버튼 클릭 시 카테고리 선택이면 토스트메세지 출력
 				Menu {
 					ForEach(viewStore.categories, id: \.self) { category in
 						Button {
