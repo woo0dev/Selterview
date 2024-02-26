@@ -6,7 +6,6 @@
  <br/>
  <br/>
 
-
  </div>
 <br/>
 <br/>
@@ -25,6 +24,7 @@
 <br/>
  
 ## 🖼 Screenshot
+![Selterview-git-readme-image](https://github.com/woo0dev/Selterview/assets/57060443/fab228d0-412a-454c-99cf-5c37582bc68c)
 
 
 
@@ -54,7 +54,7 @@ Selterview
     │
     ├── Sources
     │       ├── SelterviewApp
-    │       ├──                  
+    │       │                  
     │       ├── Presentation
     |       │       ├── Main
     |       |       │     ├── MainReducer
@@ -65,9 +65,9 @@ Selterview
     |       |       │       ├── Client
     |       │       │       └── View
     |       │       │
-    |       │       ├── Common
-    |       |       │       ├── Modifier
-    |       |       │       └── View
+    |       │       └── Common
+    |       |               ├── Modifier
+    |       |               └── View
     |       |
     │       ├── Model
     │       └── Extensions
