@@ -21,6 +21,7 @@
 		E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */; };
 		E2327B3E2B7E54DF00397CEF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3D2B7E54DF00397CEF /* SettingView.swift */; };
 		E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3F2B7E56EA00397CEF /* AddReducer.swift */; };
+		E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2345A272B8CBDCD00281186 /* ToastModifier.swift */; };
 		E26307CD2B7E1309004847DF /* QuestionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CC2B7E1309004847DF /* QuestionDetailView.swift */; };
 		E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CE2B7E1A00004847DF /* QuestionCard.swift */; };
 		E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B72B6CE97C00B1CEEB /* MainView.swift */; };
@@ -77,6 +78,7 @@
 		E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionView.swift; sourceTree = "<group>"; };
 		E2327B3D2B7E54DF00397CEF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E2327B3F2B7E56EA00397CEF /* AddReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReducer.swift; sourceTree = "<group>"; };
+		E2345A272B8CBDCD00281186 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		E26307CC2B7E1309004847DF /* QuestionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailView.swift; sourceTree = "<group>"; };
 		E26307CE2B7E1A00004847DF /* QuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		E26EC4B72B6CE97C00B1CEEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */,
 				E27888E82B750F3800983FAB /* LoadingModifier.swift */,
 				E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */,
+				E2345A272B8CBDCD00281186 /* ToastModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
 				E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */,
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
+				E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */,
 				E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */,
 				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
 				E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */,

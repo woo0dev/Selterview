@@ -17,6 +17,7 @@ struct MainReducer {
 		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isSettingButtonTap: Bool = false
 		@BindingState var isCategoryAddButtonTap: Bool = false
+		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
 		var questions: Questions = []
@@ -52,7 +53,12 @@ struct MainReducer {
 				}
 				return .none
 			case .addButtonTapped:
-				state.isAddButtonTap = true
+				if state.categories == nil {
+					state.isCategoryAddButtonTap = true
+					state.isShowToast = true
+				} else {
+					state.isAddButtonTap = true
+				}
 				return .none
 			case .deleteButtonTapped(let question):
 				do {

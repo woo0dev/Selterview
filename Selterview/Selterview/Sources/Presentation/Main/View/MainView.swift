@@ -36,7 +36,7 @@ struct MainView: View {
 					.listStyle(.inset)
 					.overlay(Group {
 						if viewStore.filteredQuestions.isEmpty {
-							if let _ = viewStore.selectedCategory {
+							if viewStore.selectedCategory == nil {
 								Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
 									.foregroundStyle(.gray)
 									.multilineTextAlignment(.center)
@@ -59,7 +59,7 @@ struct MainView: View {
 								Text("+")
 									.padding([.leading, .trailing], 30)
 							}
-							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray)
+							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray.opacity(0.2))
 						}
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
@@ -103,9 +103,6 @@ struct MainView: View {
 			.onAppear {
 				viewStore.send(.fetchQuestions)
 				viewStore.send(.fetchCategories)
-//				for key in UserDefaults.standard.dictionaryRepresentation().keys {
-//					UserDefaults.standard.removeObject(forKey: "Categories")
-//				}
 			}
 			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
 				TextField("카테고리 이름", text: viewStore.$addCategoryText)
@@ -131,6 +128,7 @@ struct MainView: View {
 					.presentationDetents([.height(80)])
 			}
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: "카테고리를 먼저 추가해주세요.")
 		}
 	}
 }
