@@ -18,9 +18,9 @@ extension OpenAIClient: DependencyKey {
 			guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw ChatGPTFailure.urlConvertError }
 			var message = ""
 			if answer.isEmpty {
-				message = "문제:\(question) 해당 문제에 대한 정답과 정답에 대한 꼬리질문을 만들어주세요."
+				message = "문제:\(question) 해당 문제에 대한 정답과 정답에 대한 꼬리질문을 만들어"
 			} else {
-				message = "문제:\(question)\n답변:\(answer)\n문제의 답변에 대한 꼬리질문을 만들어주세요."
+				message = "문제:\(question)\n답변:\(answer)\n문제와 답변을 참고해 답변에 대한 꼬리질문을 만들어"
 			}
 			var request = URLRequest(url: url)
 			request.httpMethod = "POST"
@@ -29,7 +29,7 @@ extension OpenAIClient: DependencyKey {
 			
 			let requestData = [
 				"messages": [[ "role": "user", "content": message ]],
-				"max_tokens": 300, // 테스트 용, 실제는 500
+				"max_tokens": 500,
 				"model": "gpt-3.5-turbo",
 			]
 			

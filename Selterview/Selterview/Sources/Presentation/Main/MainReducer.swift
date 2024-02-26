@@ -82,7 +82,7 @@ struct MainReducer {
 			case .fetchCategories:
 				state.categories = UserDefaults.standard.array(forKey: "Categories") as? [String]
 				state.selectedCategory = state.categories?.first
-				return .none
+				return .concatenate(.send(.fetchQuestions))
 			case .addCategoryTapped:
 				state.isCategoryAddButtonTap = true
 				return .none

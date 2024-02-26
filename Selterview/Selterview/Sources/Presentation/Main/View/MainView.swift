@@ -101,7 +101,6 @@ struct MainView: View {
 				}
 			}
 			.onAppear {
-				viewStore.send(.fetchQuestions)
 				viewStore.send(.fetchCategories)
 			}
 			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
@@ -116,7 +115,7 @@ struct MainView: View {
 				Text("카테고리 이름을 입력해 주세요.")
 			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
-				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State()) {
+				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State(selectedCategory: viewStore.selectedCategory ?? "카테고리 선택")) {
 					AddReducer()
 				})
 				.onDisappear {

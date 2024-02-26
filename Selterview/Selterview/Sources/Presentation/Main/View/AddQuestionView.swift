@@ -18,14 +18,19 @@ struct AddQuestionView: View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			VStack(alignment: .leading) {
 				// TODO: 카테고리 선택 픽커를 메뉴로 변경, 디폴트를 카테고리 선택으로. 추가 버튼 클릭 시 카테고리 선택이면 토스트메세지 출력
-				Text("카테고리 선택")
-					.font(.defaultFont(.title2))
-				Picker("카테고리를 선택해주세요.", selection: viewStore.$selectedCategory) {
-					ForEach(viewStore.categories ?? [], id: \.self) {
-						Text($0)
-							.font(.defaultFont(.body))
+				Menu {
+					ForEach(viewStore.categories, id: \.self) { category in
+						Button {
+							viewStore.send(.changeCategory(category))
+						} label: {
+							Text(category)
+						}
 					}
+				} label: {
+					Text(viewStore.selectedCategory)
+						.font(.defaultFont(.title))
 				}
+				.accentColor(Color.accentTextColor)
 				.shadow(radius: 5)
 				.padding(.bottom, 10)
 				TextEditor(text: viewStore.$questionTitle)
@@ -53,12 +58,14 @@ struct AddQuestionView: View {
 				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 			}
 			.onAppear {
+				viewStore.send(.fetchCategories)
 				UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.buttonBackgroundColor)
 				UISegmentedControl.appearance().backgroundColor = UIColor(Color.textBackgroundColor)
 				UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 			}
 			.padding(20)
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: "카테고리를 먼저 추가해주세요.")
 			.onChange(of: viewStore.isComplete) { isComplete in
 				if isComplete {
 					isShowAddModal = false
