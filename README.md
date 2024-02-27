@@ -3,12 +3,8 @@
 # 셀터뷰 Selterview
 <!---- 배너 이미지 추가 ---->
  'Selterview'는 Self + Interview로 혼자서도 인터뷰 연습을 할 수 있도록 도와주는 iOS Application 입니다.
- <br/>
- <br/>
 
  </div>
-<br/>
-<br/>
 
 ## 📱 Features
 
