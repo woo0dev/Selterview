@@ -86,12 +86,11 @@ struct ProblemView: View {
 				.sheet(isPresented: viewStore.$isQuestionTap) {
 					QuestionDetailView(questionTitle: viewStore.question.title)
 				}
-				.showErrorMessage(showAlert: viewStore.$isNetworkError, message: viewStore.networkError?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
-				.showErrorMessage(showAlert: viewStore.$isRealmError, message: viewStore.realmError?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 			}
+			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}
 }

@@ -59,7 +59,7 @@ struct AddQuestionView: View {
 			.onAppear {
 				viewStore.send(.fetchCategories)
 				UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.buttonBackgroundColor)
-				UISegmentedControl.appearance().backgroundColor = UIColor(Color.textBackgroundColor)
+				UISegmentedControl.appearance().backgroundColor = UIColor(Color.textBackgroundLightPurple)
 				UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 			}
 			.padding(20)

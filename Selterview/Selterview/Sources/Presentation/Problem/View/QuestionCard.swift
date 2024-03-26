@@ -14,7 +14,7 @@ struct QuestionCard: View {
 	var body: some View {
 		Text(isTailQuestionCreating ? "" : question.title)
 			.multilineTextAlignment(.center)
-			.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .defaultFont(.title2), backgroundColor: .textBackgroundColor)
+			.roundedStyle(maxWidth: .infinity, maxHeight: 150, font: .defaultFont(.title2), backgroundColor: .textBackgroundLightPurple)
 			.padding(.bottom, 20)
 			.showLoadingView(isLoading: $isTailQuestionCreating, message: "질문을 생성하고 있어요. 조금만 기다려 주세요.", maxWidth: .infinity, maxHeight: 150)
 	}

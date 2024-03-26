@@ -14,7 +14,7 @@ struct QuestionDetailView: View {
 		ScrollView {
 			Text(questionTitle)
 		}
-		.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundColor)
+		.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundLightPurple)
 		.padding(20)
 	}
 }

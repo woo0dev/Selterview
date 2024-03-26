@@ -59,7 +59,7 @@ struct MainView: View {
 								Text("+")
 									.padding([.leading, .trailing], 30)
 							}
-							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray.opacity(0.2))
+							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .textBackgroundLightGray)
 						}
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
