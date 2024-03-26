@@ -3,13 +3,8 @@
 # 셀터뷰 Selterview
 <!---- 배너 이미지 추가 ---->
  'Selterview'는 Self + Interview로 혼자서도 인터뷰 연습을 할 수 있도록 도와주는 iOS Application 입니다.
- <br/>
- <br/>
-
 
  </div>
-<br/>
-<br/>
 
 ## 📱 Features
 
@@ -25,6 +20,7 @@
 <br/>
  
 ## 🖼 Screenshot
+![Selterview-git-readme-image](https://github.com/woo0dev/Selterview/assets/57060443/fab228d0-412a-454c-99cf-5c37582bc68c)
 
 
 
@@ -54,7 +50,7 @@ Selterview
     │
     ├── Sources
     │       ├── SelterviewApp
-    │       ├──                  
+    │       │                  
     │       ├── Presentation
     |       │       ├── Main
     |       |       │     ├── MainReducer
@@ -65,9 +61,9 @@ Selterview
     |       |       │       ├── Client
     |       │       │       └── View
     |       │       │
-    |       │       ├── Common
-    |       |       │       ├── Modifier
-    |       |       │       └── View
+    |       │       └── Common
+    |       |               ├── Modifier
+    |       |               └── View
     |       |
     │       ├── Model
     │       └── Extensions

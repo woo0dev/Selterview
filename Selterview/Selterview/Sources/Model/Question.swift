@@ -11,23 +11,16 @@ import RealmSwift
 final class Question: Object, ObjectKeyIdentifiable {
 	@Persisted(primaryKey: true) var _id: ObjectId
 	@Persisted var title: String
-	@Persisted var category: Category.RawValue
+	@Persisted var category: String
 	@Persisted var answer: String?
 	
-	convenience init(title: String, category: Category) {
+	convenience init(title: String, category: String) {
 		self.init()
 		self._id = ObjectId.generate()
 		self.title = title
-		self.category = category.rawValue
+		self.category = category
 		self.answer = nil
 	}
-}
-
-enum Category: String {
-	case swift = "Swift"
-	case ios = "iOS"
-	case cs = "CS"
-	case tail = "꼬리질문"
 }
 
 typealias Questions = [Question]

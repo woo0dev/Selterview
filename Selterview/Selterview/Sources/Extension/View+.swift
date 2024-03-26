@@ -19,4 +19,8 @@ extension View {
 	func roundedStyle(maxWidth: CGFloat, maxHeight: CGFloat, font: Font, backgroundColor: Color) -> some View {
 		self.modifier(RoundedModifier(maxWidth: maxWidth, maxHeight: maxHeight, font: font, backgroundColor: backgroundColor))
 	}
+	
+	func showToastView(isShowToast: Binding<Bool>, message: Binding<String>) -> some View {
+		self.modifier(ToastModifier(isShowToast: isShowToast, message: message))
+	}
 }

@@ -36,32 +36,58 @@ struct MainView: View {
 					.listStyle(.inset)
 					.overlay(Group {
 						if viewStore.filteredQuestions.isEmpty {
-							Text("\(viewStore.selectedCategory.rawValue)(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
-								.foregroundStyle(.gray)
-								.multilineTextAlignment(.center)
+							if viewStore.selectedCategory == nil {
+								Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
+									.foregroundStyle(.gray)
+									.multilineTextAlignment(.center)
+							} else {
+								Text("\(viewStore.selectedCategory ?? "")(으)로 등록된 질문이 없습니다.\n새 질문을 등록해주세요.")
+									.foregroundStyle(.gray)
+									.multilineTextAlignment(.center)
+							}
 						}
 					})
 				}
 				.toolbar {
 					ToolbarItem(placement: .navigationBarLeading) {
-						CategoryPickerView(selectedCategory: viewStore.$selectedCategory)
+						if let _ = viewStore.selectedCategory {
+							CategoryPickerView(selectedCategory: viewStore.$selectedCategory, categories: viewStore.categories ?? [])
+						} else {
+							Button {
+								viewStore.send(.addCategoryTapped)
+							} label: {
+								Text("+")
+									.padding([.leading, .trailing], 30)
+							}
+							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray.opacity(0.2))
+						}
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
 						Menu {
 							Button {
 								viewStore.send(.addButtonTapped)
-							} label : {
-								Label("새 질문 추가하기" , systemImage: "text.badge.plus")
+							} label: {
+								Label("새 질문 추가하기", systemImage: "text.badge.plus")
 							}
 							Button {
 								viewStore.send(.randomStartButtonTapped)
+							} label: {
+								Label("랜덤 질문 시작하기", systemImage: "play.fill")
+							}
+							Button {
+								viewStore.send(.addCategoryTapped)
 							} label : {
-								Label("랜덤 질문 시작하기" , systemImage: "play.fill")
+								Label("새 카테고리 추가하기", systemImage: "plus.rectangle")
+							}
+							Button {
+								viewStore.send(.deleteCategoryButtonTapped)
+							} label : {
+								Label("현재 카테고리 삭제", systemImage: "trash")
 							}
 							Button {
 								viewStore.send(.settingButtonTapped)
-							} label : {
-								Label("설정" , systemImage: "gear")
+							} label: {
+								Label("설정", systemImage: "gear")
 							}
 						} label: {
 							Image(systemName: "ellipsis")
@@ -80,10 +106,31 @@ struct MainView: View {
 				}
 			}
 			.onAppear {
-				viewStore.send(.fetchQuestions)
+				viewStore.send(.fetchCategories)
+			}
+			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
+				TextField("카테고리 이름", text: viewStore.$addCategoryText)
+				Button("취소") {
+					viewStore.send(.addCategoryCancel)
+				}
+				Button("추가") {
+					viewStore.send(.addCategory)
+				}
+			} message: {
+				Text("카테고리 이름을 입력해 주세요.")
+			}
+			.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
+				Button("취소") {
+					viewStore.send(.deleteCategoryCancle)
+				}
+				Button("삭제") {
+					viewStore.send(.deleteCategory)
+				}
+			} message: {
+				Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
 			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
-				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State()) {
+				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State(selectedCategory: viewStore.selectedCategory ?? "카테고리 선택")) {
 					AddReducer()
 				})
 				.onDisappear {
@@ -95,6 +142,7 @@ struct MainView: View {
 					.presentationDetents([.height(80)])
 			}
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}
 }

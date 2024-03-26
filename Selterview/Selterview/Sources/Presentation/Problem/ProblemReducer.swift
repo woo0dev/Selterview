@@ -89,10 +89,11 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
+				var answerText = state.answerText
 				state.isTailQuestionCreating = true
 				state.answerText = ""
 				state.isFocusedAnswer = false
-				return .run { [title = state.question.title, answer = state.answerText] send in
+				return .run { [title = state.question.title, answer = answerText] send in
 					if let tailQuestion = try await openAIClient.fetchTailQuestion(title, answer) {
 						await send(.newTailQuestionCreated(tailQuestion))
 					}

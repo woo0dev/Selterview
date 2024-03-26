@@ -9,8 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 
 struct CategoryPickerView: View {
-	@Binding var selectedCategory: Category
-	var categories: [Category] = [.swift, .ios, .cs]
+	@Binding var selectedCategory: String?
+	var categories: [String] = []
 	
 	var body: some View {
 		Menu {
@@ -18,11 +18,11 @@ struct CategoryPickerView: View {
 				Button {
 					selectedCategory = category
 				} label: {
-					Text(category.rawValue)
+					Text(category)
 				}
 			}
 		} label: {
-			Text(selectedCategory.rawValue)
+			Text(selectedCategory ?? "")
 				.font(.defaultFont(.title))
 		}
 		.accentColor(Color.accentTextColor)
