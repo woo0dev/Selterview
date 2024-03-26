@@ -13,6 +13,7 @@ struct AddReducer {
 	struct State: Equatable {
 		@BindingState var selectedCategory: String
 		@BindingState var questionTitle: String = ""
+		@BindingState var toastMessage: String = ""
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var isComplete: Bool = false
@@ -45,6 +46,7 @@ struct AddReducer {
 			case .addButtonTapped:
 				state.isFocused = false
 				if state.selectedCategory == "카테고리 선택" {
+					state.toastMessage = "카테고리를 먼저 추가해주세요."
 					state.isShowToast = true
 					state.isComplete = true
 					return .none

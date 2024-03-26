@@ -13,6 +13,7 @@ struct MainReducer {
 	struct State: Equatable {
 		@BindingState var selectedCategory: String? = nil
 		@BindingState var addCategoryText: String = ""
+		@BindingState var toastMessage: String = ""
 		@BindingState var isAddButtonTap: Bool = false
 		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isSettingButtonTap: Bool = false
@@ -59,6 +60,7 @@ struct MainReducer {
 			case .addButtonTapped:
 				if state.categories == nil {
 					state.isCategoryAddButtonTap = true
+					state.toastMessage = "카테고리를 먼저 추가해주세요."
 					state.isShowToast = true
 				} else {
 					state.isAddButtonTap = true
@@ -91,7 +93,14 @@ struct MainReducer {
 				state.isCategoryAddButtonTap = true
 				return .none
 			case .addCategory:
-				UserDefaults.standard.set((state.categories ?? []) + [state.addCategoryText], forKey: "Categories")
+				let categories = UserDefaults.standard.array(forKey: "Categories") as? [String] ?? []
+				if categories.contains(state.addCategoryText) {
+					state.toastMessage = "이미 존재하는 카테고리입니다."
+					state.isShowToast = true
+					state.addCategoryText = ""
+					return .none
+				}
+				UserDefaults.standard.set(categories + [state.addCategoryText], forKey: "Categories")
 				state.addCategoryText = ""
 				return .concatenate(.send(.fetchCategories))
 			case .addCategoryCancel:

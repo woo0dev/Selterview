@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ToastModifier: ViewModifier {
 	@Binding var isShowToast: Bool
-	@State var message: String
+	@Binding var message: String
 	
 	func body(content: Content) -> some View {
 		VStack {

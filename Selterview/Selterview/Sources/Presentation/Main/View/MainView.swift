@@ -142,7 +142,7 @@ struct MainView: View {
 					.presentationDetents([.height(80)])
 			}
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
-			.showToastView(isShowToast: viewStore.$isShowToast, message: "카테고리를 먼저 추가해주세요.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}
 }
