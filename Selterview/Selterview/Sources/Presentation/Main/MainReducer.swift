@@ -17,6 +17,7 @@ struct MainReducer {
 		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isSettingButtonTap: Bool = false
 		@BindingState var isCategoryAddButtonTap: Bool = false
+		@BindingState var isCategoryDeleteButtonTap: Bool = false
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
@@ -35,6 +36,9 @@ struct MainReducer {
 		case addCategoryTapped
 		case addCategory
 		case addCategoryCancel
+		case deleteCategoryButtonTapped
+		case deleteCategory
+		case deleteCategoryCancle
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -93,6 +97,30 @@ struct MainReducer {
 			case .addCategoryCancel:
 				state.addCategoryText = ""
 				state.isCategoryAddButtonTap = false
+				return .none
+			case .deleteCategoryButtonTapped:
+				state.isCategoryDeleteButtonTap = true
+				return .none
+			case .deleteCategory:
+				guard let category = state.selectedCategory else { return .none }
+				var categories = state.categories ?? []
+				do {
+					for question in state.filteredQuestions {
+						try RealmManager.shared.deleteQuestion(question._id)
+					}
+				} catch {
+					return .concatenate(.send(.catchError(.questionDeleteError)))
+				}
+				for index in categories.indices {
+					if categories[index] == category {
+						categories.remove(at: index)
+						break
+					}
+				}
+				UserDefaults.standard.set(categories, forKey: "Categories")
+				return .concatenate(.send(.fetchCategories))
+			case .deleteCategoryCancle:
+				state.isCategoryDeleteButtonTap = false
 				return .none
 			case .catchError(let error):
 				state.isError = true

@@ -80,6 +80,11 @@ struct MainView: View {
 								Label("새 카테고리 추가하기", systemImage: "plus.rectangle")
 							}
 							Button {
+								viewStore.send(.deleteCategoryButtonTapped)
+							} label : {
+								Label("현재 카테고리 삭제", systemImage: "trash")
+							}
+							Button {
 								viewStore.send(.settingButtonTapped)
 							} label: {
 								Label("설정", systemImage: "gear")
@@ -113,6 +118,16 @@ struct MainView: View {
 				}
 			} message: {
 				Text("카테고리 이름을 입력해 주세요.")
+			}
+			.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
+				Button("취소") {
+					viewStore.send(.deleteCategoryCancle)
+				}
+				Button("삭제") {
+					viewStore.send(.deleteCategory)
+				}
+			} message: {
+				Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
 			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
 				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State(selectedCategory: viewStore.selectedCategory ?? "카테고리 선택")) {
