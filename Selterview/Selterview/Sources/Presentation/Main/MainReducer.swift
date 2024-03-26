@@ -133,6 +133,8 @@ struct MainReducer {
 				return .none
 			case .catchError(let error):
 				state.isError = true
+				state.toastMessage = error.errorDescription ?? "알 수 없는 에러가 발생했습니다."
+				state.isShowToast = true
 				state.error = error
 				return .none
 			case .binding(\.$selectedCategory):
