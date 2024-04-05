@@ -79,7 +79,7 @@ enum RealmFailure: Error, Equatable {
 }
 
 extension RealmFailure: LocalizedError {
-	var errorDescription: String? {
+	var errorDescription: String {
 		switch self {
 		case .realmCreationError:
 			return "저장소 접속에 실패했습니다."

@@ -15,14 +15,12 @@ struct ProblemReducer {
 	
 	struct State: Equatable {
 		@BindingState var answerText: String
+		@BindingState var toastMessage: String = ""
 		@BindingState var isTailQuestionCreating: Bool
-		@BindingState var isNetworkError: Bool
-		@BindingState var isRealmError: Bool
 		@BindingState var isQuestionTap: Bool
+		@BindingState var isShowToast: Bool = false
 		var question: Question
 		var isAnswerSave: Bool
-		var networkError: ChatGPTFailure?
-		var realmError: RealmFailure?
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
@@ -35,10 +33,6 @@ struct ProblemReducer {
 			self.answerText = questions[questionIndex].answer ?? ""
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
-			self.isNetworkError = false
-			self.isRealmError = false
-			self.networkError = nil
-			self.realmError = nil
 			self.isQuestionTap = false
 		}
 	}
@@ -50,10 +44,11 @@ struct ProblemReducer {
 		case newTailQuestionCreated(Question)
 		case questionSave(Question, String)
 		case updateQuestions
+		case startSpeak
+		case stopSpeak
 		case enableAnswerFocus
 		case disableAnswerFocus
-		case catchNetworkError(ChatGPTFailure)
-		case catchRealmError(RealmFailure)
+		case catchError(String)
 		case showQuestionDetailView
 		case hideQuestionDetailView
 		case binding(BindingAction<State>)
@@ -89,7 +84,11 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
-				var answerText = state.answerText
+				// FIXME: 두번째 호출 시 항상 false가 반환됨
+				if Network.shared.networkChack() == false {
+					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
+				}
+				let answerText = state.answerText
 				state.isTailQuestionCreating = true
 				state.answerText = ""
 				state.isFocusedAnswer = false
@@ -98,7 +97,7 @@ struct ProblemReducer {
 						await send(.newTailQuestionCreated(tailQuestion))
 					}
 				} catch: { error, send in
-					if let error = error as? ChatGPTFailure { await send(.catchNetworkError(error)) }
+					if let error = error as? ChatGPTFailure { await send(.catchError(error.errorDescription)) }
 				}
 			case .newTailQuestionCreated(let tailQuestion):
 				state.question = tailQuestion
@@ -109,14 +108,20 @@ struct ProblemReducer {
 					try RealmManager.shared.updateQuestion(question, answer)
 					return .concatenate(.send(.updateQuestions))
 				} catch {
-					return .concatenate(.send(.catchRealmError(.questionUpdateError)))
+					return .concatenate(.send(.catchError(RealmFailure.questionUpdateError.errorDescription)))
 				}
 			case .updateQuestions:
 				do {
 					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
 				} catch {
-					return .concatenate(.send(.catchRealmError(.questionsFetchError)))
+					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
 				}
+				return .none
+			case .startSpeak:
+				TTSManager.shared.play(state.question.title)
+				return .none
+			case .stopSpeak:
+				TTSManager.shared.stop()
 				return .none
 			case .enableAnswerFocus:
 				state.isFocusedAnswer = true
@@ -124,15 +129,9 @@ struct ProblemReducer {
 			case .disableAnswerFocus:
 				state.isFocusedAnswer = false
 				return .none
-			case .catchNetworkError(let error):
-				state.isNetworkError = true
-				state.networkError = error
-				state.isFocusedAnswer = false
-				return .none
-			case .catchRealmError(let error):
-				state.isRealmError = true
-				state.realmError = error
-				state.isFocusedAnswer = false
+			case .catchError(let error):
+				state.toastMessage = error
+				state.isShowToast = true
 				return .none
 			case .showQuestionDetailView:
 				state.isQuestionTap = true
