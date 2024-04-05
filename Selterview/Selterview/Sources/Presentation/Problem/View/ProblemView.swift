@@ -15,18 +15,21 @@ struct ProblemView: View {
 	
  	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
-			ZStack {
+			ZStack(alignment: .topTrailing) {
 				VStack {
 					// TODO: 질문 카드 페이징 구현(가로)
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
 						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
+							viewStore.send(.stopSpeak)
 							if viewStore.isTailQuestionCreating == false {
 								viewStore.send(.showQuestionDetailView)
 							}
 						}
-						.gesture(DragGesture()
+						.gesture(
+							DragGesture()
 							.onEnded { value in
+								viewStore.send(.stopSpeak)
 								if viewStore.answerText.count > 0 {
 									viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 								}
@@ -52,6 +55,7 @@ struct ProblemView: View {
 					HStack {
 						Spacer()
 						Button("꼬리질문") {
+							viewStore.send(.stopSpeak)
 							if viewStore.answerText.count > 0 {
 								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 							}
@@ -60,6 +64,7 @@ struct ProblemView: View {
 						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
 						Button("다음질문") {
+							viewStore.send(.stopSpeak)
 							if viewStore.answerText.count > 0 {
 								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 							}
@@ -84,11 +89,22 @@ struct ProblemView: View {
 					}
 				}
 				.sheet(isPresented: viewStore.$isQuestionTap) {
-					QuestionDetailView(questionTitle: viewStore.question.title)
+					DetailQuestionView(store: Store(initialState: DetailQuestionReducer.State(question: viewStore.question), reducer: {
+						DetailQuestionReducer()
+					}))
 				}
+				Button {
+					viewStore.send(.startSpeak)
+				} label: {
+					Image(systemName: "speaker.wave.3")
+						.symbolRenderingMode(.monochrome)
+						.foregroundStyle(.white)
+				}
+				.padding(30)
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+				viewStore.send(.stopSpeak)
 			}
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}

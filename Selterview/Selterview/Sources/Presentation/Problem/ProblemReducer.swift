@@ -44,6 +44,8 @@ struct ProblemReducer {
 		case newTailQuestionCreated(Question)
 		case questionSave(Question, String)
 		case updateQuestions
+		case startSpeak
+		case stopSpeak
 		case enableAnswerFocus
 		case disableAnswerFocus
 		case catchError(String)
@@ -82,6 +84,7 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
+				// FIXME: 두번째 호출 시 항상 false가 반환됨
 				if Network.shared.networkChack() == false {
 					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
 				}
@@ -113,6 +116,12 @@ struct ProblemReducer {
 				} catch {
 					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
 				}
+				return .none
+			case .startSpeak:
+				TTSManager.shared.play(state.question.title)
+				return .none
+			case .stopSpeak:
+				TTSManager.shared.stop()
 				return .none
 			case .enableAnswerFocus:
 				state.isFocusedAnswer = true
