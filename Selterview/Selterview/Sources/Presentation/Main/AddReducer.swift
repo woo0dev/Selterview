@@ -13,6 +13,7 @@ struct AddReducer {
 	struct State: Equatable {
 		@BindingState var selectedCategory: String
 		@BindingState var questionTitle: String = ""
+		@BindingState var toastMessage: String = ""
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var isComplete: Bool = false
@@ -45,6 +46,7 @@ struct AddReducer {
 			case .addButtonTapped:
 				state.isFocused = false
 				if state.selectedCategory == "카테고리 선택" {
+					state.toastMessage = "카테고리를 먼저 추가해주세요."
 					state.isShowToast = true
 					state.isComplete = true
 					return .none
@@ -71,6 +73,8 @@ struct AddReducer {
 				return .none
 			case .catchError(let error):
 				state.isError = true
+				state.toastMessage = error.errorDescription ?? "알 수 없는 에러가 발생했습니다."
+				state.isShowToast = true
 				state.error = error
 				return .none
 			case .binding(_):

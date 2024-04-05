@@ -20,7 +20,7 @@ extension View {
 		self.modifier(RoundedModifier(maxWidth: maxWidth, maxHeight: maxHeight, font: font, backgroundColor: backgroundColor))
 	}
 	
-	func showToastView(isShowToast: Binding<Bool>, message: String) -> some View {
+	func showToastView(isShowToast: Binding<Bool>, message: Binding<String>) -> some View {
 		self.modifier(ToastModifier(isShowToast: isShowToast, message: message))
 	}
 }

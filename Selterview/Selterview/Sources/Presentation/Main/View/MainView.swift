@@ -59,7 +59,7 @@ struct MainView: View {
 								Text("+")
 									.padding([.leading, .trailing], 30)
 							}
-							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .gray.opacity(0.2))
+							.roundedStyle(maxWidth: 100, maxHeight: 40, font: .defaultFont(.title), backgroundColor: .textBackgroundLightGray)
 						}
 					}
 					ToolbarItem(placement: .navigationBarTrailing) {
@@ -78,6 +78,11 @@ struct MainView: View {
 								viewStore.send(.addCategoryTapped)
 							} label : {
 								Label("새 카테고리 추가하기", systemImage: "plus.rectangle")
+							}
+							Button {
+								viewStore.send(.deleteCategoryButtonTapped)
+							} label : {
+								Label("현재 카테고리 삭제", systemImage: "trash")
 							}
 							Button {
 								viewStore.send(.settingButtonTapped)
@@ -114,6 +119,16 @@ struct MainView: View {
 			} message: {
 				Text("카테고리 이름을 입력해 주세요.")
 			}
+			.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
+				Button("취소") {
+					viewStore.send(.deleteCategoryCancle)
+				}
+				Button("삭제") {
+					viewStore.send(.deleteCategory)
+				}
+			} message: {
+				Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
+			}
 			.sheet(isPresented: viewStore.$isAddButtonTap) {
 				AddQuestionView(isShowAddModal: viewStore.$isAddButtonTap, store: Store(initialState: AddReducer.State(selectedCategory: viewStore.selectedCategory ?? "카테고리 선택")) {
 					AddReducer()
@@ -127,7 +142,7 @@ struct MainView: View {
 					.presentationDetents([.height(80)])
 			}
 			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
-			.showToastView(isShowToast: viewStore.$isShowToast, message: "카테고리를 먼저 추가해주세요.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}
 }
