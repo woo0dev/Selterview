@@ -7,23 +7,32 @@
 
 import Foundation
 import Network
+import ComposableArchitecture
 
-final class Network {
-	static let shared = Network()
-	private let queue = DispatchQueue.global()
-	private let monitor: NWPathMonitor
-	
-	private init() {
-		monitor = NWPathMonitor()
-	}
-	
-	public func networkChack() -> Bool {
-		var monitoringResult = false
-		monitor.start(queue: queue)
-		monitor.pathUpdateHandler = { path in
-			monitoringResult = path.status == .satisfied
-		}
-		monitor.cancel()
-		return monitoringResult
+struct Network {
+	var networkCheck: () -> Bool
+}
+
+extension Network: DependencyKey {
+	static let liveValue = Network(
+		networkCheck: {
+			let queue = DispatchQueue.global()
+			let monitor: NWPathMonitor = NWPathMonitor()
+			var monitoringResult = false
+			
+			monitor.start(queue: queue)
+			monitor.pathUpdateHandler = { path in
+				monitoringResult = path.status == .satisfied
+			}
+			print(monitoringResult)
+			monitor.cancel()
+			return monitoringResult
+		})
+}
+
+extension DependencyValues {
+	var network: Network {
+		get { self[Network.self] }
+		set { self[Network.self] = newValue }
 	}
 }
