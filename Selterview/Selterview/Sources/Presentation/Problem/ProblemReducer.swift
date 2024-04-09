@@ -12,6 +12,7 @@ import Dependencies
 @Reducer
 struct ProblemReducer {
 	@Dependency(\.openAIClient) var openAIClient
+	@Dependency(\.network) var network
 	
 	struct State: Equatable {
 		@BindingState var answerText: String
@@ -84,8 +85,7 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
-				// FIXME: 두번째 호출 시 항상 false가 반환됨
-				if Network.shared.networkChack() == false {
+				if network.networkCheck() == false {
 					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
 				}
 				let answerText = state.answerText
