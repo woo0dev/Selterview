@@ -23,6 +23,7 @@
 		E2327B3E2B7E54DF00397CEF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3D2B7E54DF00397CEF /* SettingView.swift */; };
 		E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3F2B7E56EA00397CEF /* AddReducer.swift */; };
 		E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2345A272B8CBDCD00281186 /* ToastModifier.swift */; };
+		E25881D42BC5670700266A4E /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E25881D32BC5670700266A4E /* CustomDump */; };
 		E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CC2B7E1309004847DF /* DetailQuestionView.swift */; };
 		E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CE2B7E1A00004847DF /* QuestionCard.swift */; };
 		E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */; };
@@ -112,6 +113,7 @@
 				E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */,
 				E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */,
 				E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */,
+				E25881D42BC5670700266A4E /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +358,7 @@
 				E2770F7E2B738BC90059961E /* ComposableArchitecture */,
 				E2F2B2C92B7E71650008DD9F /* Realm */,
 				E2F2B2CB2B7E71650008DD9F /* RealmSwift */,
+				E25881D32BC5670700266A4E /* CustomDump */,
 			);
 			productName = Selterview;
 			productReference = E2028A852B6CD01A00B603E8 /* Selterview.app */;
@@ -432,6 +435,7 @@
 			packageReferences = (
 				E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				E25881D22BC5670700266A4E /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 			);
 			productRefGroup = E2028A862B6CD01A00B603E8 /* Products */;
 			projectDirPath = "";
@@ -682,7 +686,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woo0.Hatchling.Selterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -717,7 +721,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woo0.Hatchling.Selterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -847,12 +851,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E25881D22BC5670700266A4E /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 		E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.3;
+				kind = exactVersion;
+				version = 1.9.2;
 			};
 		};
 		E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
@@ -866,6 +878,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E25881D32BC5670700266A4E /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E25881D22BC5670700266A4E /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
+		};
 		E2770F7E2B738BC90059961E /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
