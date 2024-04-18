@@ -19,12 +19,15 @@ struct ProblemReducer {
 		@BindingState var toastMessage: String = ""
 		@BindingState var isTailQuestionCreating: Bool
 		@BindingState var isQuestionTap: Bool
-		@BindingState var isShowToast: Bool = false
+		@BindingState var isShowToast: Bool
+		@BindingState var isSpeech: Bool
 		var question: Question
 		var isAnswerSave: Bool
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
+		
+		var speechState: SpeechReducer.State = SpeechReducer.State()
 		
 		init(questions: Questions, questionIndex: Int) {
 			self.isAnswerSave = UserDefaults.standard.bool(forKey:"AnswerSave")
@@ -35,10 +38,14 @@ struct ProblemReducer {
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isQuestionTap = false
+			self.isShowToast = false
+			self.isSpeech = false
 		}
 	}
 	
 	enum Action: BindableAction, Equatable {
+		case speechAction(SpeechReducer.Action)
+		
 		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
@@ -47,6 +54,7 @@ struct ProblemReducer {
 		case updateQuestions
 		case startSpeak
 		case stopSpeak
+		case startSpeechButtonTapped
 		case enableAnswerFocus
 		case disableAnswerFocus
 		case catchError(String)
@@ -56,9 +64,18 @@ struct ProblemReducer {
 	}
 	
 	var body: some Reducer<State, Action> {
+		Scope(state: \.speechState, action: /Action.speechAction) {
+			SpeechReducer()
+		}
+		
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
+			case .speechAction:
+				if state.speechState.transcript.count > 0 {
+					state.answerText = state.speechState.transcript
+				}
+				return .none
 			case .previousQuestion:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""
@@ -123,6 +140,9 @@ struct ProblemReducer {
 			case .stopSpeak:
 				TTSManager.shared.stop()
 				return .none
+			case .startSpeechButtonTapped:
+				state.isSpeech = true
+				return .none
 			case .enableAnswerFocus:
 				state.isFocusedAnswer = true
 				return .none
@@ -140,6 +160,8 @@ struct ProblemReducer {
 				state.isQuestionTap = false
 				return .none
 			case .binding(_):
+				return .none
+			default:
 				return .none
 			}
 		}

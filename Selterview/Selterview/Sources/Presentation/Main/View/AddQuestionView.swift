@@ -27,13 +27,13 @@ struct AddQuestionView: View {
 					}
 				} label: {
 					Text(viewStore.selectedCategory)
-						.font(.defaultFont(.title))
+						.font(.defaultMidiumFont(.title))
 				}
 				.accentColor(Color.accentTextColor)
 				.shadow(radius: 5)
 				.padding(.bottom, 10)
 				TextEditor(text: viewStore.$questionTitle)
-					.font(.defaultFont(.body))
+					.font(.defaultMidiumFont(.body))
 					.lineSpacing(5)
 					.focused($isFocused)
 					.overlay(
@@ -54,7 +54,7 @@ struct AddQuestionView: View {
 				Button("추가하기") {
 					viewStore.send(.addButtonTapped)
 				}
-				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
+				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
 			}
 			.onAppear {
 				viewStore.send(.fetchCategories)

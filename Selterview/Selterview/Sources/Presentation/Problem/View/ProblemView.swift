@@ -44,8 +44,9 @@ struct ProblemView: View {
 					if viewStore.isTailQuestionCreating {
 						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
 							.frame(maxHeight: .infinity, alignment: .top)
-							.font(.defaultFont(.body))
+							.font(.defaultMidiumFont(.body))
 							.foregroundColor(.gray)
+							.lineSpacing(5)
 							.animation(.easeIn, value: viewStore.question)
 					} else {
 						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
@@ -61,7 +62,15 @@ struct ProblemView: View {
 							}
 							viewStore.send(.newTailQuestionCreateButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
+						Spacer()
+						Button {
+							viewStore.send(.startSpeechButtonTapped)
+						} label: {
+							Image(systemName: "mic")
+								.symbolRenderingMode(.monochrome)
+						}
+						.roundedStyle(maxWidth: 50, maxHeight: 50, radius: 25, backgroundColor: .textBackgroundLightPurple)
 						Spacer()
 						Button("다음질문") {
 							viewStore.send(.stopSpeak)
@@ -70,7 +79,7 @@ struct ProblemView: View {
 							}
 							viewStore.send(.nextQuestionButtonTapped)
 						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
+						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
 					}
 				}
@@ -93,18 +102,24 @@ struct ProblemView: View {
 						DetailQuestionReducer()
 					}))
 				}
-				Button {
-					viewStore.send(.startSpeak)
-				} label: {
-					Image(systemName: "speaker.wave.3")
-						.symbolRenderingMode(.monochrome)
-						.foregroundStyle(.white)
+				HStack {
+					Button {
+						viewStore.send(.startSpeak)
+					} label: {
+						Image(systemName: "speaker.wave.3")
+							.symbolRenderingMode(.monochrome)
+							.foregroundStyle(.white)
+					}
 				}
 				.padding(30)
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 				viewStore.send(.stopSpeak)
+			}
+			.fullScreenCover(isPresented: viewStore.$isSpeech) {
+				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
+					.clearBackground()
 			}
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}

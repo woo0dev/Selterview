@@ -17,15 +17,17 @@ struct AnswerView: View {
 		ZStack {
 			if answerText.isEmpty {
 				TextEditor(text: $placeholderText)
-					.font(.defaultFont(.body))
+					.font(.defaultMidiumFont(.body))
 					.multilineTextAlignment(.center)
 					.foregroundColor(.gray)
+					.lineSpacing(5)
 					.disabled(true)
 			}
 			TextEditor(text: $answerText)
-				.font(.defaultFont(.body))
+				.font(.defaultMidiumFont(.body))
 				.opacity(answerText.isEmpty ? 0.25 : 1)
 				.focused($isFocused)
+				.lineSpacing(5)
 //				.onLongPressGesture(minimumDuration: 0.0) {
 //					isFocused = true
 //				}
