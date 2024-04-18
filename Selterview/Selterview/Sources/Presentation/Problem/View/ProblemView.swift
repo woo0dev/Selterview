@@ -63,6 +63,14 @@ struct ProblemView: View {
 						}
 						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultFont(.title3), backgroundColor: .buttonBackgroundColor)
 						Spacer()
+						Button {
+							viewStore.send(.startSpeechButtonTapped)
+						} label: {
+							Image(systemName: "mic")
+								.symbolRenderingMode(.monochrome)
+						}
+						.roundedStyle(maxWidth: 50, maxHeight: 50, radius: 25, backgroundColor: .textBackgroundLightPurple)
+						Spacer()
 						Button("다음질문") {
 							viewStore.send(.stopSpeak)
 							if viewStore.answerText.count > 0 {
@@ -101,26 +109,16 @@ struct ProblemView: View {
 							.symbolRenderingMode(.monochrome)
 							.foregroundStyle(.white)
 					}
-					Button {
-						viewStore.send(.startSpeech)
-					} label: {
-						Image(systemName: "mic")
-							.symbolRenderingMode(.monochrome)
-							.foregroundStyle(.white)
-					}
-					Button {
-						viewStore.send(.stopSpeech)
-					} label: {
-						Image(systemName: "stop")
-							.symbolRenderingMode(.monochrome)
-							.foregroundStyle(.white)
-					}
 				}
 				.padding(30)
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 				viewStore.send(.stopSpeak)
+			}
+			.sheet(isPresented: viewStore.$isSpeech) {
+				SpeechView()
+					.presentationDetents([.height(200)])
 			}
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}

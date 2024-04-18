@@ -19,7 +19,8 @@ struct ProblemReducer {
 		@BindingState var toastMessage: String = ""
 		@BindingState var isTailQuestionCreating: Bool
 		@BindingState var isQuestionTap: Bool
-		@BindingState var isShowToast: Bool = false
+		@BindingState var isShowToast: Bool
+		@BindingState var isSpeech: Bool
 		var question: Question
 		var isAnswerSave: Bool
 		var isFocusedAnswer: Bool
@@ -35,6 +36,8 @@ struct ProblemReducer {
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isQuestionTap = false
+			self.isShowToast = false
+			self.isSpeech = false
 		}
 	}
 	
@@ -47,8 +50,7 @@ struct ProblemReducer {
 		case updateQuestions
 		case startSpeak
 		case stopSpeak
-		case startSpeech
-		case stopSpeech
+		case startSpeechButtonTapped
 		case enableAnswerFocus
 		case disableAnswerFocus
 		case catchError(String)
@@ -125,13 +127,8 @@ struct ProblemReducer {
 			case .stopSpeak:
 				TTSManager.shared.stop()
 				return .none
-			case .startSpeech:
-				return .run { send in
-					STTManager.shared.startTranscribing()
-				}
-			case .stopSpeech:
-				print(STTManager.shared.transcript)
-				STTManager.shared.stopTranscribing()
+			case .startSpeechButtonTapped:
+				state.isSpeech = true
 				return .none
 			case .enableAnswerFocus:
 				state.isFocusedAnswer = true
