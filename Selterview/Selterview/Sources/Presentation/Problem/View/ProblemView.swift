@@ -93,12 +93,28 @@ struct ProblemView: View {
 						DetailQuestionReducer()
 					}))
 				}
-				Button {
-					viewStore.send(.startSpeak)
-				} label: {
-					Image(systemName: "speaker.wave.3")
-						.symbolRenderingMode(.monochrome)
-						.foregroundStyle(.white)
+				HStack {
+					Button {
+						viewStore.send(.startSpeak)
+					} label: {
+						Image(systemName: "speaker.wave.3")
+							.symbolRenderingMode(.monochrome)
+							.foregroundStyle(.white)
+					}
+					Button {
+						viewStore.send(.startSpeech)
+					} label: {
+						Image(systemName: "mic")
+							.symbolRenderingMode(.monochrome)
+							.foregroundStyle(.white)
+					}
+					Button {
+						viewStore.send(.stopSpeech)
+					} label: {
+						Image(systemName: "stop")
+							.symbolRenderingMode(.monochrome)
+							.foregroundStyle(.white)
+					}
 				}
 				.padding(30)
 			}

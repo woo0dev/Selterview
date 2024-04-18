@@ -24,6 +24,7 @@
 		E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3F2B7E56EA00397CEF /* AddReducer.swift */; };
 		E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2345A272B8CBDCD00281186 /* ToastModifier.swift */; };
 		E25881D42BC5670700266A4E /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E25881D32BC5670700266A4E /* CustomDump */; };
+		E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881D52BD0DB3F00266A4E /* STTManager.swift */; };
 		E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CC2B7E1309004847DF /* DetailQuestionView.swift */; };
 		E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CE2B7E1A00004847DF /* QuestionCard.swift */; };
 		E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */; };
@@ -84,6 +85,7 @@
 		E2327B3D2B7E54DF00397CEF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E2327B3F2B7E56EA00397CEF /* AddReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReducer.swift; sourceTree = "<group>"; };
 		E2345A272B8CBDCD00281186 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
+		E25881D52BD0DB3F00266A4E /* STTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STTManager.swift; sourceTree = "<group>"; };
 		E26307CC2B7E1309004847DF /* DetailQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuestionView.swift; sourceTree = "<group>"; };
 		E26307CE2B7E1A00004847DF /* QuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSManager.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */,
 				E222A05C2BB2C5F80067CA7A /* Network.swift */,
 				E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */,
+				E25881D52BD0DB3F00266A4E /* STTManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */,
 				E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */,
 				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
+				E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */,
 				E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */,
 				E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
@@ -675,6 +679,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Selterview/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -710,6 +716,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Selterview/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

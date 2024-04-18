@@ -47,6 +47,8 @@ struct ProblemReducer {
 		case updateQuestions
 		case startSpeak
 		case stopSpeak
+		case startSpeech
+		case stopSpeech
 		case enableAnswerFocus
 		case disableAnswerFocus
 		case catchError(String)
@@ -122,6 +124,14 @@ struct ProblemReducer {
 				return .none
 			case .stopSpeak:
 				TTSManager.shared.stop()
+				return .none
+			case .startSpeech:
+				return .run { send in
+					STTManager.shared.startTranscribing()
+				}
+			case .stopSpeech:
+				print(STTManager.shared.transcript)
+				STTManager.shared.stopTranscribing()
 				return .none
 			case .enableAnswerFocus:
 				state.isFocusedAnswer = true
