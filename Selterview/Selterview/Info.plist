@@ -5,6 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>NPSfont_regular.ttf</string>
+		<string>GmarketSansLight.otf</string>
+		<string>GmarketSansMedium.otf</string>
+		<string>GmarketSansBold.otf</string>
 	</array>
 </dict>
 </plist>

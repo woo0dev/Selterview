@@ -23,7 +23,7 @@ struct CategoryPickerView: View {
 			}
 		} label: {
 			Text(selectedCategory ?? "")
-				.font(.defaultFont(.title))
+				.font(.defaultMidiumFont(.title))
 		}
 		.accentColor(Color.accentTextColor)
 	}

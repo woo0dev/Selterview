@@ -24,6 +24,11 @@
 		E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3F2B7E56EA00397CEF /* AddReducer.swift */; };
 		E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2345A272B8CBDCD00281186 /* ToastModifier.swift */; };
 		E25881D42BC5670700266A4E /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E25881D32BC5670700266A4E /* CustomDump */; };
+		E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881D52BD0DB3F00266A4E /* STTManager.swift */; };
+		E25881D82BD0F09300266A4E /* SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881D72BD0F09300266A4E /* SpeechView.swift */; };
+		E25881DA2BD0F90D00266A4E /* SpeechReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881D92BD0F90D00266A4E /* SpeechReducer.swift */; };
+		E25881DC2BD10F1900266A4E /* ClearBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881DB2BD10F1900266A4E /* ClearBackgroundView.swift */; };
+		E25881DE2BD10F5500266A4E /* ClearBackgroundViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881DD2BD10F5500266A4E /* ClearBackgroundViewModifier.swift */; };
 		E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CC2B7E1309004847DF /* DetailQuestionView.swift */; };
 		E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CE2B7E1A00004847DF /* QuestionCard.swift */; };
 		E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */; };
@@ -34,6 +39,15 @@
 		E27888E32B7508BF00983FAB /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E22B7508BF00983FAB /* DotView.swift */; };
 		E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E82B750F3800983FAB /* LoadingModifier.swift */; };
 		E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */; };
+		E2984FC42BD131D900A9964B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */; };
+		E2984FC52BD131D900A9964B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */; };
+		E2984FC62BD131D900A9964B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */; };
+		E2984FC72BD131D900A9964B /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC22BD131D900A9964B /* GmarketSansBold.otf */; };
+		E2984FC82BD131D900A9964B /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC22BD131D900A9964B /* GmarketSansBold.otf */; };
+		E2984FC92BD131D900A9964B /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC22BD131D900A9964B /* GmarketSansBold.otf */; };
+		E2984FCA2BD131D900A9964B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC32BD131D900A9964B /* GmarketSansLight.otf */; };
+		E2984FCB2BD131D900A9964B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC32BD131D900A9964B /* GmarketSansLight.otf */; };
+		E2984FCC2BD131D900A9964B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC32BD131D900A9964B /* GmarketSansLight.otf */; };
 		E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */; };
 		E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0118B2B7390B300CD844D /* MainReducer.swift */; };
 		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
@@ -84,6 +98,11 @@
 		E2327B3D2B7E54DF00397CEF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E2327B3F2B7E56EA00397CEF /* AddReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReducer.swift; sourceTree = "<group>"; };
 		E2345A272B8CBDCD00281186 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
+		E25881D52BD0DB3F00266A4E /* STTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STTManager.swift; sourceTree = "<group>"; };
+		E25881D72BD0F09300266A4E /* SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechView.swift; sourceTree = "<group>"; };
+		E25881D92BD0F90D00266A4E /* SpeechReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechReducer.swift; sourceTree = "<group>"; };
+		E25881DB2BD10F1900266A4E /* ClearBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBackgroundView.swift; sourceTree = "<group>"; };
+		E25881DD2BD10F5500266A4E /* ClearBackgroundViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBackgroundViewModifier.swift; sourceTree = "<group>"; };
 		E26307CC2B7E1309004847DF /* DetailQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuestionView.swift; sourceTree = "<group>"; };
 		E26307CE2B7E1A00004847DF /* QuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
 		E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSManager.swift; sourceTree = "<group>"; };
@@ -93,6 +112,9 @@
 		E27888E22B7508BF00983FAB /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		E27888E82B750F3800983FAB /* LoadingModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModifier.swift; sourceTree = "<group>"; };
 		E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
+		E2984FC22BD131D900A9964B /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		E2984FC32BD131D900A9964B /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
 		E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModifier.swift; sourceTree = "<group>"; };
 		E2D0118B2B7390B300CD844D /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
 		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
@@ -195,6 +217,9 @@
 		E205A3262B81E59B0029890E /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				E2984FC22BD131D900A9964B /* GmarketSansBold.otf */,
+				E2984FC32BD131D900A9964B /* GmarketSansLight.otf */,
+				E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */,
 				E205A3272B81E5D40029890E /* NPSfont_regular.ttf */,
 			);
 			path = Font;
@@ -216,6 +241,7 @@
 				E27888E82B750F3800983FAB /* LoadingModifier.swift */,
 				E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */,
 				E2345A272B8CBDCD00281186 /* ToastModifier.swift */,
+				E25881DD2BD10F5500266A4E /* ClearBackgroundViewModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -227,6 +253,7 @@
 				E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */,
 				E222A05C2BB2C5F80067CA7A /* Network.swift */,
 				E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */,
+				E25881D52BD0DB3F00266A4E /* STTManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -296,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				E27888E22B7508BF00983FAB /* DotView.swift */,
+				E25881DB2BD10F1900266A4E /* ClearBackgroundView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,6 +333,7 @@
 			children = (
 				E2E73E852B73AD9500510550 /* ProblemReducer.swift */,
 				E26D4B2C2BB6B4C300C2F249 /* DetailQuestionReducer.swift */,
+				E25881D92BD0F90D00266A4E /* SpeechReducer.swift */,
 				E2E3225C2B6E41C400D5D081 /* View */,
 			);
 			path = Problem;
@@ -317,6 +346,7 @@
 				E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */,
 				E26307CC2B7E1309004847DF /* DetailQuestionView.swift */,
 				E26307CE2B7E1A00004847DF /* QuestionCard.swift */,
+				E25881D72BD0F09300266A4E /* SpeechView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,9 +484,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */,
+				E2984FC72BD131D900A9964B /* GmarketSansBold.otf in Resources */,
 				E2F985282B874B7D0053D46F /* API_Key.plist in Resources */,
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
+				E2984FCA2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
 				E2028A8D2B6CD01C00B603E8 /* Assets.xcassets in Resources */,
+				E2984FC42BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +497,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2984FC52BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
+				E2984FCB2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
+				E2984FC82BD131D900A9964B /* GmarketSansBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +507,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2984FC62BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
+				E2984FCC2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
+				E2984FC92BD131D900A9964B /* GmarketSansBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +525,9 @@
 				E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */,
 				E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */,
 				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
+				E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */,
 				E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */,
+				E25881DE2BD10F5500266A4E /* ClearBackgroundViewModifier.swift in Sources */,
 				E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */,
 				E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */,
 				E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */,
@@ -496,15 +537,18 @@
 				E205A32A2B81E6170029890E /* Font+.swift in Sources */,
 				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
+				E25881DC2BD10F1900266A4E /* ClearBackgroundView.swift in Sources */,
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
 				E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */,
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
 				E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */,
+				E25881DA2BD0F90D00266A4E /* SpeechReducer.swift in Sources */,
 				E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */,
 				E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */,
 				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
 				E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */,
 				E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */,
+				E25881D82BD0F09300266A4E /* SpeechView.swift in Sources */,
 				E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */,
 				E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
@@ -675,6 +719,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Selterview/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -710,6 +756,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Selterview/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성인식 기능을 사용하기 위해 마이크에 접근합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

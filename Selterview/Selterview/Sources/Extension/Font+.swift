@@ -27,7 +27,16 @@ extension Font {
 			}
 		}
 	}
-	static func defaultFont(_ size: Size) -> Font {
-		return .custom("NPS-font-Regular", size: size.value)
+	
+	static func defaultLightFont(_ size: Size) -> Font {
+		return .custom("GmarketSansLight", size: size.value)
+	}
+	
+	static func defaultMidiumFont(_ size: Size) -> Font {
+		return .custom("GmarketSansMedium", size: size.value)
+	}
+	
+	static func defaultBoldFont(_ size: Size) -> Font {
+		return .custom("GmarketSansBold", size: size.value)
 	}
 }
