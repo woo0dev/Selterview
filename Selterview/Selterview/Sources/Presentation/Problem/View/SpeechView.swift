@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct SpeechView: View {
+	@Binding var isSpeech: Bool
 	
 	let store: StoreOf<SpeechReducer>
 	
@@ -22,6 +23,7 @@ struct SpeechView: View {
 						.padding(10)
 					Button {
 						viewStore.send(.stopSpeech)
+						isSpeech = false
 					} label: {
 						Image(systemName: "stop.circle")
 							.symbolRenderingMode(.monochrome)

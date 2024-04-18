@@ -117,10 +117,8 @@ struct ProblemView: View {
 				viewStore.send(.stopSpeak)
 			}
 			.fullScreenCover(isPresented: viewStore.$isSpeech) {
-				SpeechView(store: Store(initialState: SpeechReducer.State(), reducer: {
-					SpeechReducer()
-				}))
-				.clearBackground()
+				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
+					.clearBackground()
 			}
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}

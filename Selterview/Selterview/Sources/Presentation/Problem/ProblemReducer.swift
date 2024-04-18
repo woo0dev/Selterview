@@ -27,6 +27,8 @@ struct ProblemReducer {
 		var questionIndex: Int
 		var questions: Questions
 		
+		var speechState: SpeechReducer.State = SpeechReducer.State()
+		
 		init(questions: Questions, questionIndex: Int) {
 			self.isAnswerSave = UserDefaults.standard.bool(forKey:"AnswerSave")
 			self.isFocusedAnswer = false
@@ -42,6 +44,8 @@ struct ProblemReducer {
 	}
 	
 	enum Action: BindableAction, Equatable {
+		case speechAction(SpeechReducer.Action)
+		
 		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
@@ -60,9 +64,18 @@ struct ProblemReducer {
 	}
 	
 	var body: some Reducer<State, Action> {
+		Scope(state: \.speechState, action: /Action.speechAction) {
+			SpeechReducer()
+		}
+		
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
+			case .speechAction:
+				if state.speechState.transcript.count > 0 {
+					state.answerText = state.speechState.transcript
+				}
+				return .none
 			case .previousQuestion:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""
@@ -147,6 +160,8 @@ struct ProblemReducer {
 				state.isQuestionTap = false
 				return .none
 			case .binding(_):
+				return .none
+			default:
 				return .none
 			}
 		}

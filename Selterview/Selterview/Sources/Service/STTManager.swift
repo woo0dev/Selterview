@@ -49,7 +49,6 @@ class STTManager: NSObject, ObservableObject, SFSpeechRecognizerDelegate {
 			if let result = result {
 				DispatchQueue.main.async {
 					strongSelf.transcript = result.bestTranscription.formattedString
-					print(strongSelf.transcript)
 				}
 				isFinal = result.isFinal
 			}
