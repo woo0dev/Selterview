@@ -31,7 +31,7 @@ struct DetailQuestionView: View {
 				}
 				.padding(10)
 			}
-			.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultFont(.title2), backgroundColor: .textBackgroundLightPurple)
+			.roundedStyle(maxWidth: .infinity, maxHeight: .infinity, font: .defaultMidiumFont(.title2), backgroundColor: .textBackgroundLightPurple)
 			.onDisappear {
 				viewStore.send(.stopSpeak)
 			}

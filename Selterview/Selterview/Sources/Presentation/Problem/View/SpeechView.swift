@@ -18,8 +18,9 @@ struct SpeechView: View {
 			VStack {
 				VStack {
 					Text("답변중...")
-						.font(.defaultFont(.title2))
+						.font(.defaultMidiumFont(.title2))
 						.foregroundStyle(.white)
+						.lineSpacing(5)
 						.padding(10)
 					Button {
 						viewStore.send(.stopSpeech)
@@ -32,7 +33,7 @@ struct SpeechView: View {
 					}
 					.padding([.bottom, .leading, .trailing])
 				}
-				.roundedStyle(maxWidth: 150, maxHeight: 150, font: .defaultFont(.title2), backgroundColor: .lightPurple)
+				.roundedStyle(maxWidth: 150, maxHeight: 150, font: .defaultMidiumFont(.title2), backgroundColor: .lightPurple)
 			}
 			.onAppear {
 				viewStore.send(.startSpeech)

@@ -24,6 +24,7 @@ struct ToastModifier: ViewModifier {
 						Text(message)
 							.foregroundStyle(.black)
 							.padding(.trailing, 20)
+							.lineSpacing(5)
 						Spacer()
 					}
 					.frame(maxWidth: .infinity, maxHeight: 50)
@@ -33,7 +34,7 @@ struct ToastModifier: ViewModifier {
 							isShowToast = false
 						}
 					}
-					.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultFont(.body), backgroundColor: .textBackgroundLightGray)
+					.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultMidiumFont(.body), backgroundColor: .textBackgroundLightGray)
 					.padding(20)
 				}
 			}

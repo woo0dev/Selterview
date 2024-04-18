@@ -24,6 +24,7 @@ struct RoundedModifier: ViewModifier {
 				.frame(maxWidth: maxWidth, maxHeight: maxHeight)
 				.font(font ?? .title)
 				.foregroundStyle(.white)
+				.lineSpacing(5)
 				.padding(5)
 		}
 	}

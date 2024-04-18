@@ -30,8 +30,9 @@ struct LoadingModifier: ViewModifier {
 					}
 					.padding(.bottom, 20)
 					Text(message)
-						.font(.defaultFont(.body))
+						.font(.defaultMidiumFont(.body))
 						.foregroundStyle(Color.white)
+						.lineSpacing(5)
 					Spacer()
 				}
 				.background(Color.clear)
