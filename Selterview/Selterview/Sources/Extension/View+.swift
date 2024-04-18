@@ -35,4 +35,8 @@ extension View {
 	func showToastView(isShowToast: Binding<Bool>, message: Binding<String>) -> some View {
 		self.modifier(ToastModifier(isShowToast: isShowToast, message: message))
 	}
+	
+	func clearBackground() -> some View {
+		self.modifier(ClearBackgroundViewModifier())
+	}
 }

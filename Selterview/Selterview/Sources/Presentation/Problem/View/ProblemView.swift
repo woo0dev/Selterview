@@ -116,9 +116,11 @@ struct ProblemView: View {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 				viewStore.send(.stopSpeak)
 			}
-			.sheet(isPresented: viewStore.$isSpeech) {
-				SpeechView()
-					.presentationDetents([.height(200)])
+			.fullScreenCover(isPresented: viewStore.$isSpeech) {
+				SpeechView(store: Store(initialState: SpeechReducer.State(), reducer: {
+					SpeechReducer()
+				}))
+				.clearBackground()
 			}
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
