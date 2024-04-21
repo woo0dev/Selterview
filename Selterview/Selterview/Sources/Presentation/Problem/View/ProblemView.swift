@@ -114,7 +114,7 @@ struct ProblemView: View {
 				.padding(30)
 			}
 			.onAppear {
-				viewStore.send(.networkCheck)
+				viewStore.send(.startNetworkCheck)
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
