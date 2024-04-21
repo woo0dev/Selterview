@@ -119,7 +119,7 @@ struct ProblemView: View {
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
 				viewStore.send(.stopSpeak)
-				viewStore.send(.)
+				viewStore.send(.stopNetworkCheck)
 			}
 			.fullScreenCover(isPresented: viewStore.$isSpeech) {
 				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
