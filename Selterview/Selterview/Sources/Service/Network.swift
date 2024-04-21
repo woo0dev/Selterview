@@ -7,32 +7,26 @@
 
 import Foundation
 import Network
-import ComposableArchitecture
 
-struct Network {
-	var networkCheck: () -> Bool
-}
-
-extension Network: DependencyKey {
-	static let liveValue = Network(
-		networkCheck: {
-			let queue = DispatchQueue.global()
-			let monitor: NWPathMonitor = NWPathMonitor()
-			var monitoringResult = false
-			
-			monitor.start(queue: queue)
-			monitor.pathUpdateHandler = { path in
-				monitoringResult = path.status == .satisfied
+final class NetworkCheck {
+	static let shared = NetworkCheck()
+	private let queue = DispatchQueue.global()
+	private let monitor: NWPathMonitor = NWPathMonitor()
+	public private(set) var isConnected: Bool = false
+	
+	public func startMonitoring() {
+		monitor.start(queue: queue)
+		monitor.pathUpdateHandler = { [weak self] path in
+			self?.isConnected = path.status == .satisfied
+			if self?.isConnected == true {
+				print("네트워크연결됨")
+			} else {
+				print("네트워크 연결 오류")
 			}
-			print(monitoringResult)
-			monitor.cancel()
-			return monitoringResult
-		})
-}
-
-extension DependencyValues {
-	var network: Network {
-		get { self[Network.self] }
-		set { self[Network.self] = newValue }
+		}
+	}
+	
+	public func stopMonitoring() {
+		monitor.cancel()
 	}
 }

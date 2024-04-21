@@ -12,7 +12,6 @@ import Dependencies
 @Reducer
 struct ProblemReducer {
 	@Dependency(\.openAIClient) var openAIClient
-	@Dependency(\.network) var network
 	
 	struct State: Equatable {
 		@BindingState var answerText: String
@@ -47,6 +46,8 @@ struct ProblemReducer {
 		case speechAction(SpeechReducer.Action)
 		
 		case previousQuestion
+		case startNetworkCheck
+		case stopNetworkCheck
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
@@ -88,6 +89,12 @@ struct ProblemReducer {
 				state.question = state.questions[state.questionIndex]
 				state.answerText = state.question.answer ?? ""
 				return .none
+			case .startNetworkCheck:
+				NetworkCheck.shared.startMonitoring()
+				return .none
+			case .stopNetworkCheck:
+				NetworkCheck.shared.stopMonitoring()
+				return .none
 			case .nextQuestionButtonTapped:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""
@@ -102,7 +109,7 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
-				if network.networkCheck() == false {
+				if NetworkCheck.shared.isConnected == false {
 					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
 				}
 				let answerText = state.answerText
