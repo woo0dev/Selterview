@@ -88,8 +88,6 @@ struct MainReducer {
 				for category in state.categories {
 					state.questions[category] = []
 				}
-				print(state.questions)
-//				state.selectedCategory = state.categories.first
 				return .concatenate(.send(.fetchQuestions))
 			case .addCategoryTapped:
 				state.isCategoryAddButtonTap = true

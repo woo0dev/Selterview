@@ -15,6 +15,8 @@
 		E2028AAB2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */; };
 		E205A3282B81E5D40029890E /* NPSfont_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E205A3272B81E5D40029890E /* NPSfont_regular.ttf */; };
 		E205A32A2B81E6170029890E /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E205A3292B81E6170029890E /* Font+.swift */; };
+		E20977EC2C6DB800000E5F10 /* DetailCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20977EB2C6DB800000E5F10 /* DetailCategoryView.swift */; };
+		E20977EE2C6DB871000E5F10 /* DetailCategoryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */; };
 		E222A05D2BB2C5F80067CA7A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222A05C2BB2C5F80067CA7A /* Network.swift */; };
 		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
 		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
@@ -90,6 +92,8 @@
 		E2028AAA2B6CD01C00B603E8 /* SelterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E205A3272B81E5D40029890E /* NPSfont_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NPSfont_regular.ttf; sourceTree = "<group>"; };
 		E205A3292B81E6170029890E /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		E20977EB2C6DB800000E5F10 /* DetailCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategoryView.swift; sourceTree = "<group>"; };
+		E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategoryReducer.swift; sourceTree = "<group>"; };
 		E222A05C2BB2C5F80067CA7A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
+				E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */,
 				E2327B3F2B7E56EA00397CEF /* AddReducer.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
 			);
@@ -304,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				E26EC4B72B6CE97C00B1CEEB /* MainView.swift */,
+				E20977EB2C6DB800000E5F10 /* DetailCategoryView.swift */,
 				E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */,
 				E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */,
 				E2327B3D2B7E54DF00397CEF /* SettingView.swift */,
@@ -522,6 +528,7 @@
 			files = (
 				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
 				E2327B3E2B7E54DF00397CEF /* SettingView.swift in Sources */,
+				E20977EC2C6DB800000E5F10 /* DetailCategoryView.swift in Sources */,
 				E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */,
 				E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */,
 				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
@@ -539,6 +546,7 @@
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
 				E25881DC2BD10F1900266A4E /* ClearBackgroundView.swift in Sources */,
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
+				E20977EE2C6DB871000E5F10 /* DetailCategoryReducer.swift in Sources */,
 				E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */,
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
 				E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */,

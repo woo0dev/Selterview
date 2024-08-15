@@ -22,7 +22,7 @@ struct MainView: View {
 						viewStore.send(.addCategoryTapped)
 					} label : {
 						Image(systemName: "plus.circle.fill")
-							.foregroundStyle(Color.accentColor)
+							.foregroundStyle(Color.accentTextColor)
 							.font(.system(size: 40))
 					}
 				}
@@ -40,16 +40,27 @@ struct MainView: View {
 										.padding(.leading, 10)
 									Spacer()
 								}
-								.roundedStyle(alignment: .topLeading, maxWidth: .infinity, minHeight: 100, maxHeight: 200, radius: 20, font: .defaultLightFont(.body), foregroundColor: .black, backgroundColor: .clear, borderColor: .accentColor)
+								.roundedStyle(alignment: .topLeading, maxWidth: .infinity, minHeight: 100, maxHeight: 200, radius: 20, font: .defaultLightFont(.body), foregroundColor: .black, backgroundColor: .clear, borderColor: .accentTextColor)
 								.padding(10)
 							})
 						}
 					}
 					.padding(.horizontal)
+					.overlay(Group {
+						if viewStore.questions.isEmpty {
+							Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
+								.foregroundStyle(.gray)
+								.multilineTextAlignment(.center)
+								.font(.defaultMidiumFont(.body))
+								.lineSpacing(5)
+						}
+					})
 					Spacer()
 				}
 				.navigationDestination(for: Int.self) { index in
-					Text(viewStore.categories[index])
+					DetailCategoryView(store: Store(initialState: DetailCategoryReducer.State(category: viewStore.categories[index], questions: viewStore.questions[viewStore.categories[index]] ?? []), reducer: {
+						DetailCategoryReducer()
+					}))
 				}
 			}
 			.onAppear {
