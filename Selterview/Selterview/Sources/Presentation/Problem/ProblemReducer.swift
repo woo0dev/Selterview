@@ -46,8 +46,6 @@ struct ProblemReducer {
 		case speechAction(SpeechReducer.Action)
 		
 		case previousQuestion
-		case startNetworkCheck
-		case stopNetworkCheck
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
@@ -89,12 +87,6 @@ struct ProblemReducer {
 				state.question = state.questions[state.questionIndex]
 				state.answerText = state.question.answer ?? ""
 				return .none
-			case .startNetworkCheck:
-				NetworkCheck.shared.startMonitoring()
-				return .none
-			case .stopNetworkCheck:
-				NetworkCheck.shared.stopMonitoring()
-				return .none
 			case .nextQuestionButtonTapped:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""
@@ -109,9 +101,6 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
-				if NetworkCheck.shared.isConnected == false {
-					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
-				}
 				let answerText = state.answerText
 				state.isTailQuestionCreating = true
 				state.answerText = ""
@@ -157,6 +146,7 @@ struct ProblemReducer {
 				state.isFocusedAnswer = false
 				return .none
 			case .catchError(let error):
+				state.isTailQuestionCreating = false
 				state.toastMessage = error
 				state.isShowToast = true
 				return .none

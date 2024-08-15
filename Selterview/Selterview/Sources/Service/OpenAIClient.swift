@@ -33,15 +33,26 @@ extension OpenAIClient: DependencyKey {
 				"model": "gpt-3.5-turbo",
 			]
 			
-			let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
+			var networkCheckCount = 0
+			NetworkCheck.shared.startMonitoring()
+			
+			while !NetworkCheck.shared.isConnected {
+				sleep(1)
+				networkCheckCount += 1
+				if networkCheckCount >= 5 {
+					throw ChatGPTFailure.networkNotConnected
+				}
+			}
+			
+			guard let jsonData = try? JSONSerialization.data(withJSONObject: requestData) else { throw ChatGPTFailure.networkNotConnected }
 			request.httpBody = jsonData
 			let (response, _) = try await URLSession.shared.data(for: request)
 			
 			if let json = try JSONSerialization.jsonObject(with: response, options: []) as? [String: Any],
 			   let choices = json["choices"] as? [[String: Any]],
 			   let firstChoice = choices.first,
-			   let message = firstChoice["message"] as? [String: String],
-			   let text = message["content"] {
+			   let message = firstChoice["message"] as? [String: Any],
+			   let text = message["content"] as? String {
 				return Question(title: text, category: "Tail")
 			} else {
 				throw ChatGPTFailure.jsonParsingError
@@ -59,6 +70,7 @@ extension DependencyValues {
 enum ChatGPTFailure: Error {
 	case urlConvertError
 	case jsonParsingError
+	case networkNotConnected
 }
 
 extension ChatGPTFailure: LocalizedError {
@@ -68,6 +80,8 @@ extension ChatGPTFailure: LocalizedError {
 			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
 		case .jsonParsingError:
 			return "꼬리 질문을 생성하지 못했습니다.\n잠시후 다시 시도해주세요."
+		case .networkNotConnected:
+			return "네트워크를 연결해주세요."
 		}
 	}
 }
