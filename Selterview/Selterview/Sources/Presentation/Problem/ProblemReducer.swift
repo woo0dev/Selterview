@@ -124,11 +124,11 @@ struct ProblemReducer {
 					return .concatenate(.send(.catchError(RealmFailure.questionUpdateError.errorDescription)))
 				}
 			case .updateQuestions:
-				do {
-					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
-				} catch {
-					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
-				}
+//				do {
+//					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
+//				} catch {
+//					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
+//				}
 				return .none
 			case .startSpeak:
 				TTSManager.shared.play(state.question.title)

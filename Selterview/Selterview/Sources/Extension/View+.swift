@@ -32,6 +32,10 @@ extension View {
 		self.modifier(RoundedModifier(maxWidth: maxWidth, maxHeight: maxHeight, backgroundColor: backgroundColor))
 	}
 	
+	func roundedStyle(alignment: Alignment?, maxWidth: CGFloat, minHeight: CGFloat?, maxHeight: CGFloat, radius: CGFloat?, font: Font?, foregroundColor: Color?, backgroundColor: Color, borderColor: Color?) -> some View {
+		self.modifier(RoundedModifier(alignment: alignment, maxWidth: maxWidth, minHeight: minHeight, maxHeight: maxHeight, radius: radius, font: font, foregroundColor: foregroundColor, backgroundColor: backgroundColor, borderColor: borderColor))
+	}
+	
 	func showToastView(isShowToast: Binding<Bool>, message: Binding<String>) -> some View {
 		self.modifier(ToastModifier(isShowToast: isShowToast, message: message))
 	}

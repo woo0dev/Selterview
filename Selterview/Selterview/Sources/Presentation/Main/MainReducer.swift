@@ -22,9 +22,9 @@ struct MainReducer {
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
-		var questions: Questions = []
+		var questions: [String: Questions] = [:]
 		var filteredQuestions: Questions = []
-		var categories: [String]? = nil
+		var categories: [String] = []
 	}
 	
 	enum Action: BindableAction, Equatable {
@@ -50,21 +50,19 @@ struct MainReducer {
 			switch action {
 			case .fetchQuestions:
 				do {
-					state.questions = try RealmManager.shared.readQuestions() ?? []
-					state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory })
+					let questions = try RealmManager.shared.readQuestions() ?? []
+					var filteredQuestions = state.questions
+					for question in questions {
+						filteredQuestions[question.category]?.append(question)
+					}
+					state.questions = filteredQuestions
 				} catch {
 					let effect: Effect<Action> = .send(.catchError(.questionsFetchError))
 					return .concatenate(effect)
 				}
 				return .none
 			case .addButtonTapped:
-				if state.categories == nil {
-					state.isCategoryAddButtonTap = true
-					state.toastMessage = "카테고리를 먼저 추가해주세요."
-					state.isShowToast = true
-				} else {
-					state.isAddButtonTap = true
-				}
+				state.isAddButtonTap = true
 				return .none
 			case .deleteButtonTapped(let question):
 				do {
@@ -86,8 +84,12 @@ struct MainReducer {
 				state.isSettingButtonTap = true
 				return .none
 			case .fetchCategories:
-				state.categories = UserDefaults.standard.array(forKey: "Categories") as? [String]
-				state.selectedCategory = state.categories?.first
+				state.categories = UserDefaults.standard.array(forKey: "Categories") as? [String] ?? []
+				for category in state.categories {
+					state.questions[category] = []
+				}
+				print(state.questions)
+//				state.selectedCategory = state.categories.first
 				return .concatenate(.send(.fetchQuestions))
 			case .addCategoryTapped:
 				state.isCategoryAddButtonTap = true
@@ -112,7 +114,6 @@ struct MainReducer {
 				return .none
 			case .deleteCategory:
 				guard let category = state.selectedCategory else { return .none }
-				var categories = state.categories ?? []
 				do {
 					for question in state.filteredQuestions {
 						try RealmManager.shared.deleteQuestion(question._id)
@@ -120,13 +121,13 @@ struct MainReducer {
 				} catch {
 					return .concatenate(.send(.catchError(.questionDeleteError)))
 				}
-				for index in categories.indices {
-					if categories[index] == category {
-						categories.remove(at: index)
+				for index in state.categories.indices {
+					if state.categories[index] == category {
+						state.categories.remove(at: index)
 						break
 					}
 				}
-				UserDefaults.standard.set(categories, forKey: "Categories")
+				UserDefaults.standard.set(state.categories, forKey: "Categories")
 				return .concatenate(.send(.fetchCategories))
 			case .deleteCategoryCancle:
 				state.isCategoryDeleteButtonTap = false
@@ -138,7 +139,7 @@ struct MainReducer {
 				state.error = error
 				return .none
 			case .binding(\.$selectedCategory):
-				state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory })
+//				state.filteredQuestions = state.questions.filter({ $0.category == state.selectedCategory })
 				return .none
 			case .binding(_):
 				return .none
