@@ -14,81 +14,113 @@ struct MainView: View {
 	var body: some View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
 			NavigationStack {
-				HStack {
-					Text("Selterview")
-						.font(Font.defaultBoldFont(.title))
-					Spacer()
-					Button {
-						viewStore.send(.addCategoryTapped)
-					} label : {
-						Image(systemName: "plus.circle.fill")
-							.foregroundStyle(Color.accentTextColor)
-							.font(.system(size: 40))
-					}
-				}
-				.padding([.leading, .trailing], 20)
-				ScrollView {
-					LazyVGrid(columns: [GridItem(.flexible())]) {
-						ForEach(viewStore.categories.indices, id: \.self) { index in
-							NavigationLink(value: index, label: {
-								VStack(alignment: .leading) {
-									Text(viewStore.categories[index])
-										.font(Font.defaultMidiumFont(.title))
-										.padding(10)
-									Text("\(viewStore.questions[viewStore.categories[index]]?.count ?? 0)문제")
-										.foregroundStyle(Color.gray)
-										.padding(.leading, 10)
-									Spacer()
-								}
-								.roundedStyle(alignment: .topLeading, maxWidth: .infinity, minHeight: 100, maxHeight: 200, radius: 20, font: .defaultLightFont(.body), foregroundColor: .black, backgroundColor: .clear, borderColor: .accentTextColor)
-								.padding(10)
-							})
+				VStack {
+					HeaderView(viewStore: viewStore)
+					BodyView(viewStore: viewStore)
+						.onAppear {
+							viewStore.send(.fetchCategories)
 						}
-					}
-					.padding(.horizontal)
-					.overlay(Group {
-						if viewStore.questions.isEmpty {
-							Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
-								.foregroundStyle(.gray)
-								.multilineTextAlignment(.center)
-								.font(.defaultMidiumFont(.body))
-								.lineSpacing(5)
+						.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
+							TextField("카테고리 이름", text: viewStore.$addCategoryText)
+							Button("취소") {
+								viewStore.send(.addCategoryCancel)
+							}
+							Button("추가") {
+								viewStore.send(.addCategory)
+							}
+						} message: {
+							Text("카테고리 이름을 입력해 주세요.")
 						}
-					})
-					Spacer()
+						.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
+							Button("취소") {
+								viewStore.send(.deleteCategoryCancle)
+							}
+							Button("삭제") {
+								viewStore.send(.deleteCategory)
+							}
+						} message: {
+							Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
+						}
+						.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+						.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 				}
 				.navigationDestination(for: Int.self) { index in
-					DetailCategoryView(store: Store(initialState: DetailCategoryReducer.State(category: viewStore.categories[index], questions: viewStore.questions[viewStore.categories[index]] ?? []), reducer: {
-						DetailCategoryReducer()
-					}))
+					DetailCategoryView(store: Store(
+						initialState: DetailCategoryReducer.State(
+							category: viewStore.categories[index],
+							questions: viewStore.questions[viewStore.categories[index]] ?? []
+						),
+						reducer: { DetailCategoryReducer() }
+					))
 				}
 			}
-			.onAppear {
-				viewStore.send(.fetchCategories)
+		}
+	}
+}
+
+private struct HeaderView: View {
+	let viewStore: ViewStoreOf<MainReducer>
+	
+	var body: some View {
+		HStack {
+			Text("Selterview")
+				.font(Font.defaultBoldFont(.title))
+			Spacer()
+			Button {
+				viewStore.send(.addCategoryTapped)
+			} label: {
+				Image(systemName: "plus.circle.fill")
+					.foregroundStyle(Color.accentTextColor)
+					.font(.system(size: 40))
 			}
-			.alert("카테고리 추가", isPresented: viewStore.$isCategoryAddButtonTap) {
-				TextField("카테고리 이름", text: viewStore.$addCategoryText)
-				Button("취소") {
-					viewStore.send(.addCategoryCancel)
+		}
+		.padding([.leading, .trailing], 20)
+	}
+}
+
+private struct BodyView: View {
+	let viewStore: ViewStoreOf<MainReducer>
+	
+	var body: some View {
+		ScrollView {
+			LazyVGrid(columns: [GridItem(.flexible())]) {
+				ForEach(viewStore.categories.indices, id: \.self) { index in
+					NavigationLink(value: index) {
+						VStack(alignment: .leading) {
+							Text(viewStore.categories[index])
+								.font(Font.defaultMidiumFont(.title))
+								.padding(10)
+							Text("\(viewStore.questions[viewStore.categories[index]]?.count ?? 0)문제")
+								.foregroundStyle(Color.gray)
+								.padding(.leading, 10)
+							Spacer()
+						}
+						.roundedStyle(
+							alignment: .topLeading,
+							maxWidth: .infinity,
+							minHeight: 100,
+							maxHeight: 200,
+							radius: 20,
+							font: .defaultLightFont(.body),
+							foregroundColor: .black,
+							backgroundColor: .clear,
+							borderColor: .accentTextColor
+						)
+						.padding(10)
+					}
 				}
-				Button("추가") {
-					viewStore.send(.addCategory)
-				}
-			} message: {
-				Text("카테고리 이름을 입력해 주세요.")
 			}
-			.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
-				Button("취소") {
-					viewStore.send(.deleteCategoryCancle)
+			.padding(.horizontal)
+			.overlay(Group {
+				if viewStore.categories.isEmpty {
+					Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
+						.foregroundStyle(.gray)
+						.multilineTextAlignment(.center)
+						.font(.defaultMidiumFont(.body))
+						.lineSpacing(5)
 				}
-				Button("삭제") {
-					viewStore.send(.deleteCategory)
-				}
-			} message: {
-				Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
-			}
-			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
-			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
+			})
+			Spacer()
 		}
 	}
 }
