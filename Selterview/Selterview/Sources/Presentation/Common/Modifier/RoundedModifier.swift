@@ -33,7 +33,7 @@ struct RoundedModifier: ViewModifier {
 				.font(font ?? .title)
 				.foregroundStyle(foregroundColor ?? .white)
 				.lineSpacing(5)
-				.padding(5)
+				.padding(10)
 		}
 	}
 }

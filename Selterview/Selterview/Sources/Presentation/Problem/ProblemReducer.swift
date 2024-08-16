@@ -21,7 +21,7 @@ struct ProblemReducer {
 		@BindingState var isShowToast: Bool
 		@BindingState var isSpeech: Bool
 		var question: Question
-		var isAnswerSave: Bool
+		var isAnswerSave: Bool = true
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
@@ -29,7 +29,6 @@ struct ProblemReducer {
 		var speechState: SpeechReducer.State = SpeechReducer.State()
 		
 		init(questions: Questions, questionIndex: Int) {
-			self.isAnswerSave = UserDefaults.standard.bool(forKey:"AnswerSave")
 			self.isFocusedAnswer = false
 			self.questions = questions
 			self.questionIndex = questionIndex
@@ -44,7 +43,6 @@ struct ProblemReducer {
 	
 	enum Action: BindableAction, Equatable {
 		case speechAction(SpeechReducer.Action)
-		
 		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
