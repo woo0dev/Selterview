@@ -19,7 +19,7 @@ struct DotView: View {
 		Circle()
 			.frame(maxWidth: 20, maxHeight: 20)
 			.scaleEffect(scale)
-			.foregroundStyle(Color.white)
+			.foregroundStyle(Color.accentTextColor)
 			.animation(.easeInOut(duration: 0.6).repeatForever().delay(delay))
 			.onAppear {
 				withAnimation {
