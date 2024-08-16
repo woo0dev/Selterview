@@ -30,20 +30,46 @@ private struct HeaderView: View {
 				.font(Font.defaultBoldFont(.title))
 				.padding(.leading, 20)
 			Spacer()
-			NavigationLink {
-				ProblemView(store: Store(
-					initialState: ProblemReducer.State(
-						questions: viewStore.questions,
-						questionIndex: Int.random(in: 0..<viewStore.questions.count)
-					),
-					reducer: { ProblemReducer() }
-				))
-			} label: {
+			if viewStore.questions.isEmpty {
 				Image(systemName: "shuffle")
+					.font(Font.defaultBoldFont(.title))
+					.foregroundStyle(Color.accentTextColor.opacity(0.2))
+					.padding(.trailing, 10)
+			} else {
+				NavigationLink {
+					ProblemView(store: Store(
+						initialState: ProblemReducer.State(
+							questions: viewStore.questions,
+							questionIndex: Int.random(in: 0..<viewStore.questions.count)
+						),
+						reducer: { ProblemReducer() }
+					))
+				} label: {
+					Image(systemName: "shuffle")
+						.font(Font.defaultBoldFont(.title))
+						.foregroundStyle(Color.accentTextColor)
+						.padding(.trailing, 10)
+				}
+			}
+			Button(action: {
+				viewStore.send(.addButtonTapped)
+			}, label: {
+				Image(systemName: "plus")
 					.font(Font.defaultBoldFont(.title))
 					.foregroundStyle(Color.accentTextColor)
 					.padding(.trailing, 20)
+			})
+		}
+		.alert("질문 추가", isPresented: viewStore.$isAddButtonTap) {
+			TextField("질문", text: viewStore.$addQuestionTitle)
+			Button("취소") {
+				viewStore.send(.addQuestionCancel)
 			}
+			Button("추가") {
+				viewStore.send(.addQuestion(Question(title: viewStore.addQuestionTitle, category: viewStore.category)))
+			}
+		} message: {
+			Text("질문을 입력해 주세요.")
 		}
 	}
 }

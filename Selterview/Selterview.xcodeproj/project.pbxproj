@@ -21,9 +21,6 @@
 		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
 		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
 		E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */; };
-		E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */; };
-		E2327B3E2B7E54DF00397CEF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3D2B7E54DF00397CEF /* SettingView.swift */; };
-		E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2327B3F2B7E56EA00397CEF /* AddReducer.swift */; };
 		E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2345A272B8CBDCD00281186 /* ToastModifier.swift */; };
 		E25881D42BC5670700266A4E /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E25881D32BC5670700266A4E /* CustomDump */; };
 		E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881D52BD0DB3F00266A4E /* STTManager.swift */; };
@@ -52,7 +49,6 @@
 		E2984FCC2BD131D900A9964B /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC32BD131D900A9964B /* GmarketSansLight.otf */; };
 		E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */; };
 		E2D0118C2B7390B300CD844D /* MainReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0118B2B7390B300CD844D /* MainReducer.swift */; };
-		E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */; };
 		E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */; };
 		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
 		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
@@ -98,9 +94,6 @@
 		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		E2252B722B74F6D00076AAF8 /* ErrorAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertModifier.swift; sourceTree = "<group>"; };
-		E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionView.swift; sourceTree = "<group>"; };
-		E2327B3D2B7E54DF00397CEF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		E2327B3F2B7E56EA00397CEF /* AddReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReducer.swift; sourceTree = "<group>"; };
 		E2345A272B8CBDCD00281186 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		E25881D52BD0DB3F00266A4E /* STTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STTManager.swift; sourceTree = "<group>"; };
 		E25881D72BD0F09300266A4E /* SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechView.swift; sourceTree = "<group>"; };
@@ -121,7 +114,6 @@
 		E2984FC32BD131D900A9964B /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
 		E2BA5B802B7CE54D0013CCF6 /* RoundedModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModifier.swift; sourceTree = "<group>"; };
 		E2D0118B2B7390B300CD844D /* MainReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReducer.swift; sourceTree = "<group>"; };
-		E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		E2E3225E2B6E41DF00D5D081 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		E2E322632B6E4AB000D5D081 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		E2E73E852B73AD9500510550 /* ProblemReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemReducer.swift; sourceTree = "<group>"; };
@@ -299,7 +291,6 @@
 			children = (
 				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
 				E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */,
-				E2327B3F2B7E56EA00397CEF /* AddReducer.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
 			);
 			path = Main;
@@ -310,9 +301,6 @@
 			children = (
 				E26EC4B72B6CE97C00B1CEEB /* MainView.swift */,
 				E20977EB2C6DB800000E5F10 /* DetailCategoryView.swift */,
-				E2E322572B6D08AA00D5D081 /* CategoryPickerView.swift */,
-				E2327B3B2B7E54D900397CEF /* AddQuestionView.swift */,
-				E2327B3D2B7E54DF00397CEF /* SettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -527,9 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
-				E2327B3E2B7E54DF00397CEF /* SettingView.swift in Sources */,
 				E20977EC2C6DB800000E5F10 /* DetailCategoryView.swift in Sources */,
-				E2327B3C2B7E54D900397CEF /* AddQuestionView.swift in Sources */,
 				E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */,
 				E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */,
 				E25881D62BD0DB3F00266A4E /* STTManager.swift in Sources */,
@@ -551,13 +537,11 @@
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
 				E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */,
 				E25881DA2BD0F90D00266A4E /* SpeechReducer.swift in Sources */,
-				E2327B402B7E56EA00397CEF /* AddReducer.swift in Sources */,
 				E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */,
 				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
 				E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */,
 				E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */,
 				E25881D82BD0F09300266A4E /* SpeechView.swift in Sources */,
-				E2E322582B6D08AA00D5D081 /* CategoryPickerView.swift in Sources */,
 				E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
 			);

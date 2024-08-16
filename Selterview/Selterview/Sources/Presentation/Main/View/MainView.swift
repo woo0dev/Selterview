@@ -31,16 +31,6 @@ struct MainView: View {
 						} message: {
 							Text("카테고리 이름을 입력해 주세요.")
 						}
-						.alert("카테고리 삭제", isPresented: viewStore.$isCategoryDeleteButtonTap) {
-							Button("취소") {
-								viewStore.send(.deleteCategoryCancle)
-							}
-							Button("삭제") {
-								viewStore.send(.deleteCategory)
-							}
-						} message: {
-							Text("카테고리 삭제 시 관련 질문들도 함께 삭제됩니다.\n삭제 하시겠습니까?")
-						}
 						.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 						.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 				}

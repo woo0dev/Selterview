@@ -11,6 +11,8 @@ import ComposableArchitecture
 @Reducer
 struct DetailCategoryReducer {
 	struct State: Equatable {
+		@BindingState var addQuestionTitle: String = ""
+		@BindingState var isAddButtonTap: Bool = false
 		@BindingState var isError: Bool = false
 		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isShowToast: Bool = false
@@ -26,6 +28,9 @@ struct DetailCategoryReducer {
 	}
 	
 	enum Action: BindableAction, Equatable {
+		case addButtonTapped
+		case addQuestion(Question)
+		case addQuestionCancel
 		case deleteButtonTapped(Question)
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
@@ -35,6 +40,22 @@ struct DetailCategoryReducer {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
+			case .addButtonTapped:
+				state.isAddButtonTap = true
+				return .none
+			case .addQuestion(let question):
+				do {
+					try RealmManager.shared.writeQuestion(question)
+					state.questions = state.questions + [question]
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionAddError))
+					return .concatenate(effect)
+				}
+				return .none
+			case .addQuestionCancel:
+				state.addQuestionTitle = ""
+				state.isAddButtonTap = false
+				return .none
 			case .deleteButtonTapped(let question):
 				do {
 					try RealmManager.shared.deleteQuestion(question._id)
