@@ -20,6 +20,7 @@ struct ProblemReducer {
 		@BindingState var isQuestionTap: Bool
 		@BindingState var isShowToast: Bool
 		@BindingState var isSpeech: Bool
+		var originalIndex: Int
 		var question: Question
 		var isAnswerSave: Bool = true
 		var isFocusedAnswer: Bool
@@ -33,6 +34,7 @@ struct ProblemReducer {
 			self.questions = questions
 			self.questionIndex = questionIndex
 			self.answerText = questions[questionIndex].answer ?? ""
+			self.originalIndex = questionIndex
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isQuestionTap = false
@@ -43,12 +45,13 @@ struct ProblemReducer {
 	
 	enum Action: BindableAction, Equatable {
 		case speechAction(SpeechReducer.Action)
+		case onAppear
+		case onDisappear
 		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
 		case questionSave(Question, String)
-		case updateQuestions
 		case startSpeak
 		case stopSpeak
 		case startSpeechButtonTapped
@@ -72,6 +75,13 @@ struct ProblemReducer {
 				if state.speechState.transcript.count > 0 {
 					state.answerText = state.speechState.transcript
 				}
+				return .none
+			case .onAppear:
+				state.question = state.questions[state.questionIndex]
+				state.answerText = state.question.answer ?? ""
+				return .none
+			case .onDisappear:
+				state.questionIndex = state.originalIndex
 				return .none
 			case .previousQuestion:
 				if state.isTailQuestionCreating { return .none }
@@ -117,17 +127,10 @@ struct ProblemReducer {
 			case .questionSave(let question, let answer):
 				do {
 					try RealmManager.shared.updateQuestion(question, answer)
-					return .concatenate(.send(.updateQuestions))
+					return .none
 				} catch {
 					return .concatenate(.send(.catchError(RealmFailure.questionUpdateError.errorDescription)))
 				}
-			case .updateQuestions:
-//				do {
-//					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
-//				} catch {
-//					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
-//				}
-				return .none
 			case .startSpeak:
 				TTSManager.shared.play(state.question.title)
 				return .none
@@ -155,8 +158,6 @@ struct ProblemReducer {
 				state.isQuestionTap = false
 				return .none
 			case .binding(_):
-				return .none
-			default:
 				return .none
 			}
 		}

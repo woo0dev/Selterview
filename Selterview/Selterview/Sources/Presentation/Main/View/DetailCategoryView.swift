@@ -17,6 +17,9 @@ struct DetailCategoryView: View {
 				HeaderView(viewStore: viewStore)
 				BodyView(viewStore: viewStore)
 			}
+			.onAppear {
+				viewStore.send(.fetchQuestions)
+			}
 		}
 	}
 }

@@ -17,7 +17,6 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack(alignment: .topTrailing) {
 				VStack {
-					// TODO: 질문 카드 페이징 구현(가로)
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
 						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
@@ -26,51 +25,19 @@ struct ProblemView: View {
 								viewStore.send(.showQuestionDetailView)
 							}
 						}
-						.gesture(
-							DragGesture()
-							.onEnded { value in
-								viewStore.send(.stopSpeak)
-								if viewStore.answerText.count > 0 {
-									viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
-								}
-								if value.startLocation.x < value.location.x - 24 {
-									viewStore.send(.previousQuestion)
-								}
-								if value.startLocation.x > value.location.x + 24 {
-									viewStore.send(.nextQuestionButtonTapped)
-								}
-							}
+					AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
+						.roundedStyle(
+							alignment: .topLeading,
+							maxWidth: .infinity,
+							minHeight: 100,
+							maxHeight: .infinity,
+							radius: 20,
+							font: .defaultLightFont(.body),
+							foregroundColor: .black,
+							backgroundColor: .clear,
+							borderColor: .accentTextColor
 						)
-					if viewStore.isTailQuestionCreating {
-						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
-							.roundedStyle(
-								alignment: .topLeading,
-								maxWidth: .infinity,
-								minHeight: 100,
-								maxHeight: .infinity,
-								radius: 20,
-								font: .defaultLightFont(.body),
-								foregroundColor: .gray,
-								backgroundColor: .clear,
-								borderColor: .accentTextColor
-							)
-							.lineSpacing(5)
-							.animation(.easeIn, value: viewStore.question)
-					} else {
-						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
-							.roundedStyle(
-								alignment: .topLeading,
-								maxWidth: .infinity,
-								minHeight: 100,
-								maxHeight: .infinity,
-								radius: 20,
-								font: .defaultMidiumFont(.body),
-								foregroundColor: .black,
-								backgroundColor: .clear,
-								borderColor: .accentTextColor
-							)
-							.animation(.easeIn, value: viewStore.question)
-					}
+						.animation(.easeIn, value: viewStore.question)
 					FooterView(viewStore: viewStore)
 				}
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -103,14 +70,33 @@ struct ProblemView: View {
 				}
 				.padding(30)
 			}
+			.onAppear {
+				viewStore.send(.onAppear)
+			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+				viewStore.send(.onDisappear)
 				viewStore.send(.stopSpeak)
 			}
 			.fullScreenCover(isPresented: viewStore.$isSpeech) {
 				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
 					.clearBackground()
 			}
+			.gesture(
+				DragGesture()
+				.onEnded { value in
+					viewStore.send(.stopSpeak)
+					if viewStore.answerText.count > 0 {
+						viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+					}
+					if value.startLocation.x < value.location.x - 24 {
+						viewStore.send(.previousQuestion)
+					}
+					if value.startLocation.x > value.location.x + 24 {
+						viewStore.send(.nextQuestionButtonTapped)
+					}
+				}
+			)
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}

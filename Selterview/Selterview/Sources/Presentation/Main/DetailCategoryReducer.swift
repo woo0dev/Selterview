@@ -32,6 +32,7 @@ struct DetailCategoryReducer {
 		case addQuestion(Question)
 		case addQuestionCancel
 		case deleteButtonTapped(Question)
+		case fetchQuestions
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -61,6 +62,15 @@ struct DetailCategoryReducer {
 					try RealmManager.shared.deleteQuestion(question._id)
 				} catch {
 					let effect: Effect<Action> = .send(.catchError(.questionDeleteError))
+					return .concatenate(effect)
+				}
+				return .none
+			case .fetchQuestions:
+				do {
+					let questions = try RealmManager.shared.readQuestions() ?? []
+					state.questions = questions.filter({ $0.category == state.category})
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionsFetchError))
 					return .concatenate(effect)
 				}
 				return .none
