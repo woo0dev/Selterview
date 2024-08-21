@@ -19,6 +19,9 @@
 		E20977EE2C6DB871000E5F10 /* DetailCategoryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */; };
 		E20977F02C7478C8000E5F10 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20977EF2C7478C8000E5F10 /* SkeletonView.swift */; };
 		E20977F22C75C03C000E5F10 /* AddQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20977F12C75C03C000E5F10 /* AddQuestionView.swift */; };
+		E20977F62C75D974000E5F10 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E20977F52C75D8AB000E5F10 /* PrivacyInfo.xcprivacy */; };
+		E20977F72C75D974000E5F10 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E20977F52C75D8AB000E5F10 /* PrivacyInfo.xcprivacy */; };
+		E20977F82C75D975000E5F10 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E20977F52C75D8AB000E5F10 /* PrivacyInfo.xcprivacy */; };
 		E222A05D2BB2C5F80067CA7A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = E222A05C2BB2C5F80067CA7A /* Network.swift */; };
 		E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */; };
 		E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2252B6F2B74F5FB0076AAF8 /* View+.swift */; };
@@ -93,6 +96,7 @@
 		E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategoryReducer.swift; sourceTree = "<group>"; };
 		E20977EF2C7478C8000E5F10 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		E20977F12C75C03C000E5F10 /* AddQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionView.swift; sourceTree = "<group>"; };
+		E20977F52C75D8AB000E5F10 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E222A05C2BB2C5F80067CA7A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		E2252B6D2B74F4CF0076AAF8 /* OpenAIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIClient.swift; sourceTree = "<group>"; };
 		E2252B6F2B74F5FB0076AAF8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 				E205A3262B81E59B0029890E /* Font */,
 				E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */,
 				E2F985272B874B7D0053D46F /* API_Key.plist */,
+				E20977F52C75D8AB000E5F10 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				E2028A902B6CD01C00B603E8 /* Preview Assets.xcassets in Resources */,
 				E2984FCA2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
 				E2028A8D2B6CD01C00B603E8 /* Assets.xcassets in Resources */,
+				E20977F62C75D974000E5F10 /* PrivacyInfo.xcprivacy in Resources */,
 				E2984FC42BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +502,7 @@
 			files = (
 				E2984FC52BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
 				E2984FCB2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
+				E20977F72C75D974000E5F10 /* PrivacyInfo.xcprivacy in Resources */,
 				E2984FC82BD131D900A9964B /* GmarketSansBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +513,7 @@
 			files = (
 				E2984FC62BD131D900A9964B /* GmarketSansMedium.otf in Resources */,
 				E2984FCC2BD131D900A9964B /* GmarketSansLight.otf in Resources */,
+				E20977F82C75D975000E5F10 /* PrivacyInfo.xcprivacy in Resources */,
 				E2984FC92BD131D900A9964B /* GmarketSansBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,7 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woo0.Hatchling.Selterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -765,7 +773,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.woo0.Hatchling.Selterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
