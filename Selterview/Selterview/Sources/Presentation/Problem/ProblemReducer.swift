@@ -20,8 +20,9 @@ struct ProblemReducer {
 		@BindingState var isQuestionTap: Bool
 		@BindingState var isShowToast: Bool
 		@BindingState var isSpeech: Bool
+		var originalIndex: Int
 		var question: Question
-		var isAnswerSave: Bool
+		var isAnswerSave: Bool = true
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
 		var questions: Questions
@@ -29,11 +30,11 @@ struct ProblemReducer {
 		var speechState: SpeechReducer.State = SpeechReducer.State()
 		
 		init(questions: Questions, questionIndex: Int) {
-			self.isAnswerSave = UserDefaults.standard.bool(forKey:"AnswerSave")
 			self.isFocusedAnswer = false
 			self.questions = questions
 			self.questionIndex = questionIndex
 			self.answerText = questions[questionIndex].answer ?? ""
+			self.originalIndex = questionIndex
 			self.question = questions[questionIndex]
 			self.isTailQuestionCreating = false
 			self.isQuestionTap = false
@@ -44,15 +45,13 @@ struct ProblemReducer {
 	
 	enum Action: BindableAction, Equatable {
 		case speechAction(SpeechReducer.Action)
-		
+		case onAppear
+		case onDisappear
 		case previousQuestion
-		case startNetworkCheck
-		case stopNetworkCheck
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
 		case newTailQuestionCreated(Question)
 		case questionSave(Question, String)
-		case updateQuestions
 		case startSpeak
 		case stopSpeak
 		case startSpeechButtonTapped
@@ -77,6 +76,13 @@ struct ProblemReducer {
 					state.answerText = state.speechState.transcript
 				}
 				return .none
+			case .onAppear:
+				state.question = state.questions[state.questionIndex]
+				state.answerText = state.question.answer ?? ""
+				return .none
+			case .onDisappear:
+				state.questionIndex = state.originalIndex
+				return .none
 			case .previousQuestion:
 				if state.isTailQuestionCreating { return .none }
 				state.answerText = ""
@@ -88,12 +94,6 @@ struct ProblemReducer {
 				}
 				state.question = state.questions[state.questionIndex]
 				state.answerText = state.question.answer ?? ""
-				return .none
-			case .startNetworkCheck:
-				NetworkCheck.shared.startMonitoring()
-				return .none
-			case .stopNetworkCheck:
-				NetworkCheck.shared.stopMonitoring()
 				return .none
 			case .nextQuestionButtonTapped:
 				if state.isTailQuestionCreating { return .none }
@@ -109,9 +109,6 @@ struct ProblemReducer {
 				return .none
 			case .newTailQuestionCreateButtonTapped:
 				if state.isTailQuestionCreating { return .none }
-				if NetworkCheck.shared.isConnected == false {
-					return .concatenate(.send(.catchError("네트워크를 연결해주세요.")))
-				}
 				let answerText = state.answerText
 				state.isTailQuestionCreating = true
 				state.answerText = ""
@@ -130,17 +127,10 @@ struct ProblemReducer {
 			case .questionSave(let question, let answer):
 				do {
 					try RealmManager.shared.updateQuestion(question, answer)
-					return .concatenate(.send(.updateQuestions))
+					return .none
 				} catch {
 					return .concatenate(.send(.catchError(RealmFailure.questionUpdateError.errorDescription)))
 				}
-			case .updateQuestions:
-				do {
-					state.questions = try RealmManager.shared.readQuestions()?.filter({ $0.category == state.question.category }) ?? []
-				} catch {
-					return .concatenate(.send(.catchError(RealmFailure.questionsFetchError.errorDescription)))
-				}
-				return .none
 			case .startSpeak:
 				TTSManager.shared.play(state.question.title)
 				return .none
@@ -157,6 +147,7 @@ struct ProblemReducer {
 				state.isFocusedAnswer = false
 				return .none
 			case .catchError(let error):
+				state.isTailQuestionCreating = false
 				state.toastMessage = error
 				state.isShowToast = true
 				return .none
@@ -167,8 +158,6 @@ struct ProblemReducer {
 				state.isQuestionTap = false
 				return .none
 			case .binding(_):
-				return .none
-			default:
 				return .none
 			}
 		}

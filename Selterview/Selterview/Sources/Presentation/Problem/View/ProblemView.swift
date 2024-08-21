@@ -17,7 +17,6 @@ struct ProblemView: View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			ZStack(alignment: .topTrailing) {
 				VStack {
-					// TODO: 질문 카드 페이징 구현(가로)
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
 						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
@@ -26,62 +25,20 @@ struct ProblemView: View {
 								viewStore.send(.showQuestionDetailView)
 							}
 						}
-						.gesture(
-							DragGesture()
-							.onEnded { value in
-								viewStore.send(.stopSpeak)
-								if viewStore.answerText.count > 0 {
-									viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
-								}
-								if value.startLocation.x < value.location.x - 24 {
-									viewStore.send(.previousQuestion)
-								}
-								if value.startLocation.x > value.location.x + 24 {
-									viewStore.send(.nextQuestionButtonTapped)
-								}
-							}
+					AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
+						.roundedStyle(
+							alignment: .topLeading,
+							maxWidth: .infinity,
+							minHeight: 100,
+							maxHeight: .infinity,
+							radius: 20,
+							font: .defaultLightFont(.body),
+							foregroundColor: .black,
+							backgroundColor: .clear,
+							borderColor: .accentTextColor
 						)
-					if viewStore.isTailQuestionCreating {
-						Text("여기에 답을 작성하면 꼬리질문을 받을 수 있습니다.")
-							.frame(maxHeight: .infinity, alignment: .top)
-							.font(.defaultMidiumFont(.body))
-							.foregroundColor(.gray)
-							.lineSpacing(5)
-							.animation(.easeIn, value: viewStore.question)
-					} else {
-						AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
-							.frame(maxHeight: .infinity)
-							.animation(.easeIn, value: viewStore.question)
-					}
-					HStack {
-						Spacer()
-						Button("꼬리질문") {
-							viewStore.send(.stopSpeak)
-							if viewStore.answerText.count > 0 {
-								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
-							}
-							viewStore.send(.newTailQuestionCreateButtonTapped)
-						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
-						Spacer()
-						Button {
-							viewStore.send(.startSpeechButtonTapped)
-						} label: {
-							Image(systemName: "mic")
-								.symbolRenderingMode(.monochrome)
-						}
-						.roundedStyle(maxWidth: 50, maxHeight: 50, radius: 25, backgroundColor: .textBackgroundLightPurple)
-						Spacer()
-						Button("다음질문") {
-							viewStore.send(.stopSpeak)
-							if viewStore.answerText.count > 0 {
-								viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
-							}
-							viewStore.send(.nextQuestionButtonTapped)
-						}
-						.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
-						Spacer()
-					}
+						.animation(.easeIn, value: viewStore.question)
+					FooterView(viewStore: viewStore)
 				}
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 				.padding(20)
@@ -103,29 +60,82 @@ struct ProblemView: View {
 					}))
 				}
 				HStack {
-					Button {
-						viewStore.send(.startSpeak)
-					} label: {
-						Image(systemName: "speaker.wave.3")
-							.symbolRenderingMode(.monochrome)
-							.foregroundStyle(.white)
+					if !viewStore.isTailQuestionCreating {
+						Button {
+							viewStore.send(.startSpeak)
+						} label: {
+							Image(systemName: "speaker.wave.3")
+								.symbolRenderingMode(.monochrome)
+								.foregroundStyle(Color.accentTextColor)
+						}
 					}
 				}
 				.padding(30)
 			}
 			.onAppear {
-				viewStore.send(.startNetworkCheck)
+				viewStore.send(.onAppear)
 			}
 			.onDisappear {
 				viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+				viewStore.send(.onDisappear)
 				viewStore.send(.stopSpeak)
-				viewStore.send(.stopNetworkCheck)
 			}
 			.fullScreenCover(isPresented: viewStore.$isSpeech) {
 				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
 					.clearBackground()
 			}
+			.gesture(
+				DragGesture()
+				.onEnded { value in
+					viewStore.send(.stopSpeak)
+					if viewStore.answerText.count > 0 {
+						viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+					}
+					if value.startLocation.x < value.location.x - 24 {
+						viewStore.send(.previousQuestion)
+					}
+					if value.startLocation.x > value.location.x + 24 {
+						viewStore.send(.nextQuestionButtonTapped)
+					}
+				}
+			)
 			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
+		}
+	}
+}
+
+private struct FooterView: View {
+	let viewStore: ViewStoreOf<ProblemReducer>
+	
+	var body: some View {
+		HStack {
+			Spacer()
+			Button("꼬리질문") {
+				viewStore.send(.stopSpeak)
+				if viewStore.answerText.count > 0 {
+					viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+				}
+				viewStore.send(.newTailQuestionCreateButtonTapped)
+			}
+			.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
+			Spacer()
+			Button {
+				viewStore.send(.startSpeechButtonTapped)
+			} label: {
+				Image(systemName: "mic")
+					.symbolRenderingMode(.monochrome)
+			}
+			.roundedStyle(maxWidth: 50, maxHeight: 50, radius: 25, backgroundColor: .textBackgroundLightPurple)
+			Spacer()
+			Button("다음질문") {
+				viewStore.send(.stopSpeak)
+				if viewStore.answerText.count > 0 {
+					viewStore.send(.questionSave(viewStore.question, viewStore.answerText))
+				}
+				viewStore.send(.nextQuestionButtonTapped)
+			}
+			.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
+			Spacer()
 		}
 	}
 }

@@ -2,72 +2,40 @@
 //  AddQuestionView.swift
 //  Selterview
 //
-//  Created by woo0 on 2/15/24.
+//  Created by woo0 on 8/21/24.
 //
 
 import SwiftUI
-import ComposableArchitecture
 
 struct AddQuestionView: View {
-	@Binding var isShowAddModal: Bool
-	@FocusState var isFocused: Bool
-	
-	let store: StoreOf<AddReducer>
+	@Binding var questions: Questions
+	var category: String
 	
 	var body: some View {
-		WithViewStore(self.store, observe: { $0 }) { viewStore in
-			VStack(alignment: .leading) {
-				Menu {
-					ForEach(viewStore.categories, id: \.self) { category in
-						Button {
-							viewStore.send(.changeCategory(category))
-						} label: {
-							Text(category)
+		VStack(alignment: .leading) {
+			Text(category)
+				.font(Font.defaultBoldFont(.title))
+				.padding([.top, .leading], 20)
+			ScrollView {
+				VStack(alignment: .leading, spacing: 10) {
+					ForEach(0..<questions.count, id: \.self) { index in
+						HStack {
+							TextField("질문", text: $questions[index].title)
+								.roundedStyle(alignment: .leading, maxWidth: .infinity, minHeight: nil, maxHeight: 30, radius: nil, font: .defaultLightFont(.title3), foregroundColor: .gray, backgroundColor: .white, borderColor: .accentTextColor)
+								.padding(questions.count - 1 > index ? EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20) : EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+							if questions.count - 1 == index {
+								Button {
+									if !questions[questions.count-1].title.isEmpty {
+										questions.append(Question(title: "", category: category))
+									}
+								} label: {
+									Image(systemName: "plus")
+								}
+								.roundedStyle(alignment: .center, maxWidth: 30, minHeight: nil, maxHeight: 30, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .accentTextColor, backgroundColor: .white, borderColor: .accentTextColor)
+								.padding(.trailing, 10)
+							}
 						}
 					}
-				} label: {
-					Text(viewStore.selectedCategory)
-						.font(.defaultMidiumFont(.title))
-				}
-				.accentColor(Color.accentTextColor)
-				.shadow(radius: 5)
-				.padding(.bottom, 10)
-				TextEditor(text: viewStore.$questionTitle)
-					.font(.defaultMidiumFont(.body))
-					.lineSpacing(5)
-					.focused($isFocused)
-					.overlay(
-						RoundedRectangle(cornerRadius: 20)
-							.stroke(Color.borderColor, lineWidth: 3)
-					)
-					.onTapGesture {
-						viewStore.send(.disableFocus)
-					}
-					.onChange(of: viewStore.isFocused) {
-						isFocused = $0
-					}
-					.onChange(of: isFocused) { isFocused in
-						if isFocused {
-							viewStore.send(.enableFocus)
-						}
-					}
-				Button("추가하기") {
-					viewStore.send(.addButtonTapped)
-				}
-				.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
-			}
-			.onAppear {
-				viewStore.send(.fetchCategories)
-				UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.buttonBackgroundColor)
-				UISegmentedControl.appearance().backgroundColor = UIColor(Color.textBackgroundLightPurple)
-				UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-			}
-			.padding(20)
-			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
-			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
-			.onChange(of: viewStore.isComplete) { isComplete in
-				if isComplete {
-					isShowAddModal = false
 				}
 			}
 		}
