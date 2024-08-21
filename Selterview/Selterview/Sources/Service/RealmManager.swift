@@ -25,11 +25,11 @@ final class RealmManager: RealmManagerProtocol {
 		}
 	}
 	
-	func writeQuestion(_ question: Question) throws {
+	func writeQuestions(_ questions: Questions) throws {
 		do {
 			let realm = try Realm()
 			try realm.write {
-				realm.add(question)
+				realm.add(questions)
 			}
 		} catch {
 			throw RealmFailure.questionAddError
@@ -64,7 +64,7 @@ final class RealmManager: RealmManagerProtocol {
 
 protocol RealmManagerProtocol {
 	func readQuestions() throws -> Questions?
-	func writeQuestion(_ question: Question) throws
+	func writeQuestions(_ questions: Questions) throws
 	func updateQuestion(_ question: Question, _ answer: String) throws
 	func deleteQuestion(_ id: ObjectId) throws
 }

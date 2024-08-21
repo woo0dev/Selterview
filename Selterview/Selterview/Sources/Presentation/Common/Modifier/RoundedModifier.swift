@@ -23,7 +23,6 @@ struct RoundedModifier: ViewModifier {
 			RoundedRectangle(cornerRadius: radius ?? 10, style: .continuous)
 				.fill(backgroundColor)
 				.frame(maxWidth: maxWidth, minHeight: minHeight ?? 0, maxHeight: maxHeight, alignment: alignment ?? .center)
-				.shadow(radius: 5)
 				.overlay(
 					RoundedRectangle(cornerRadius: radius ?? 10)
 						.stroke(borderColor ?? Color.clear, lineWidth: 1)

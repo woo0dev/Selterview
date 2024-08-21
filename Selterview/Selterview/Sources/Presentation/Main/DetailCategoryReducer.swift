@@ -11,7 +11,7 @@ import ComposableArchitecture
 @Reducer
 struct DetailCategoryReducer {
 	struct State: Equatable {
-		@BindingState var addQuestionTitle: String = ""
+		@BindingState var addQuestions: Questions
 		@BindingState var isAddButtonTap: Bool = false
 		@BindingState var isError: Bool = false
 		@BindingState var isRandomStartButtonTap: Bool = false
@@ -24,12 +24,13 @@ struct DetailCategoryReducer {
 		init(category: String, questions: Questions) {
 			self.category = category
 			self.questions = questions
+			self.addQuestions = [Question(title: "", category: category)]
 		}
 	}
 	
 	enum Action: BindableAction, Equatable {
 		case addButtonTapped
-		case addQuestion(Question)
+		case addQuestion(Questions)
 		case addQuestionCancel
 		case deleteButtonTapped(Question)
 		case fetchQuestions
@@ -44,27 +45,29 @@ struct DetailCategoryReducer {
 			case .addButtonTapped:
 				state.isAddButtonTap = true
 				return .none
-			case .addQuestion(let question):
+			case .addQuestion(let questions):
 				do {
-					try RealmManager.shared.writeQuestion(question)
-					state.questions = state.questions + [question]
+					try RealmManager.shared.writeQuestions(questions)
+					state.questions = state.questions + questions
+					state.addQuestions = [Question(title: "", category: state.category)]
+					state.isAddButtonTap = false
 				} catch {
 					let effect: Effect<Action> = .send(.catchError(.questionAddError))
 					return .concatenate(effect)
 				}
 				return .none
 			case .addQuestionCancel:
-				state.addQuestionTitle = ""
+				state.addQuestions = [Question(title: "", category: state.category)]
 				state.isAddButtonTap = false
 				return .none
 			case .deleteButtonTapped(let question):
 				do {
 					try RealmManager.shared.deleteQuestion(question._id)
+					return .concatenate(.send(.fetchQuestions))
 				} catch {
 					let effect: Effect<Action> = .send(.catchError(.questionDeleteError))
 					return .concatenate(effect)
 				}
-				return .none
 			case .fetchQuestions:
 				do {
 					let questions = try RealmManager.shared.readQuestions() ?? []

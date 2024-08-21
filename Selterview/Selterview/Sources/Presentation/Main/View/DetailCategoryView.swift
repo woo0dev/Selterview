@@ -20,6 +20,8 @@ struct DetailCategoryView: View {
 			.onAppear {
 				viewStore.send(.fetchQuestions)
 			}
+			.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
+			.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 		}
 	}
 }
@@ -63,16 +65,21 @@ private struct HeaderView: View {
 					.padding(.trailing, 20)
 			})
 		}
-		.alert("질문 추가", isPresented: viewStore.$isAddButtonTap) {
-			TextField("질문", text: viewStore.$addQuestionTitle)
-			Button("취소") {
-				viewStore.send(.addQuestionCancel)
+		.sheet(isPresented: viewStore.$isAddButtonTap) {
+			AddQuestionView(questions: viewStore.$addQuestions, category: viewStore.category)
+			HStack {
+				Spacer()
+				Button("취소") {
+					viewStore.send(.addQuestionCancel)
+				}
+				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .red, backgroundColor: .clear, borderColor: .accentTextColor)
+				Spacer()
+				Button("추가") {
+					viewStore.send(.addQuestion(viewStore.addQuestions))
+				}
+				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .blue, backgroundColor: .clear, borderColor: .accentTextColor)
+				Spacer()
 			}
-			Button("추가") {
-				viewStore.send(.addQuestion(Question(title: viewStore.addQuestionTitle, category: viewStore.category)))
-			}
-		} message: {
-			Text("질문을 입력해 주세요.")
 		}
 	}
 }
