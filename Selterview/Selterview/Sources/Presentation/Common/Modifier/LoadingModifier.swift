@@ -9,35 +9,14 @@ import SwiftUI
 
 struct LoadingModifier: ViewModifier {
 	@Binding var isLoading: Bool
-	private let dotDelayMultiplyer = 2.0
-	private let dotDelayValue = 0.20
-	let message: String
-	let maxWidth: CGFloat
-	let maxHeight: CGFloat
 	
 	func body(content: Content) -> some View {
-		ZStack {
+		ZStack(alignment: .leading) {
 			content
 			if isLoading {
-				VStack {
-					Spacer()
-					HStack {
-						Spacer()
-						DotView(delay: 0)
-						DotView(delay: dotDelayValue)
-						DotView(delay: dotDelayMultiplyer * dotDelayValue)
-						Spacer()
-					}
-					.padding(.bottom, 20)
-					Text(message)
-						.font(.defaultMidiumFont(.body))
-						.foregroundStyle(Color.black)
-						.lineSpacing(5)
-					Spacer()
-				}
-				.background(Color.clear)
+				SkeletonView(isLoading: isLoading)
 			}
 		}
-		.frame(maxWidth: maxWidth, maxHeight: maxHeight)
+		.frame(maxWidth: .infinity, maxHeight: 150)
 	}
 }

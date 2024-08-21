@@ -60,12 +60,14 @@ struct ProblemView: View {
 					}))
 				}
 				HStack {
-					Button {
-						viewStore.send(.startSpeak)
-					} label: {
-						Image(systemName: "speaker.wave.3")
-							.symbolRenderingMode(.monochrome)
-							.foregroundStyle(Color.accentTextColor)
+					if !viewStore.isTailQuestionCreating {
+						Button {
+							viewStore.send(.startSpeak)
+						} label: {
+							Image(systemName: "speaker.wave.3")
+								.symbolRenderingMode(.monochrome)
+								.foregroundStyle(Color.accentTextColor)
+						}
 					}
 				}
 				.padding(30)
