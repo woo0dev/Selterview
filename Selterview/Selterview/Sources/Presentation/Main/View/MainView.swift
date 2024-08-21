@@ -101,17 +101,16 @@ private struct BodyView: View {
 				}
 			}
 			.padding(.horizontal)
-			.overlay(Group {
-				if viewStore.categories.isEmpty {
-					// TODO: se3에서 Layout 깨짐 현상
-					Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
-						.foregroundStyle(.gray)
-						.multilineTextAlignment(.center)
-						.font(.defaultMidiumFont(.body))
-						.lineSpacing(5)
-				}
-			})
 			Spacer()
 		}
+		.overlay(Group {
+			if viewStore.categories.isEmpty {
+				Text("등록된 카테고리가 없습니다.\n새 카테고리를 등록해주세요.")
+					.foregroundStyle(.gray)
+					.multilineTextAlignment(.center)
+					.font(.defaultMidiumFont(.body))
+					.lineSpacing(5)
+			}
+		})
 	}
 }

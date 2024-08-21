@@ -45,28 +45,3 @@ struct SkeletonBar: View {
 			}
 	}
 }
-
-//struct SkeletonBar: View {
-//	@State private var startPoint: CGFloat = -1.0
-//	
-//	var body: some View {
-//		GeometryReader { geometry in
-//			ZStack {
-//				Rectangle()
-//					.fill(Color.gray.opacity(0.3))
-//					.cornerRadius(4)
-//				LinearGradient(gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1), Color.gray.opacity(0.3)]), startPoint: .leading, endPoint: .trailing)
-//					.frame(width: 70)
-//					.offset(x: startPoint * geometry.size.width)
-//					.mask(
-//						Rectangle()
-//							.frame(width: geometry.size.width, height: geometry.size.height)
-//					)
-//					.animation(Animation.linear(duration: 2.0).repeatForever(autoreverses: false), value: startPoint)
-//					.onAppear {
-//						self.startPoint = 1.0
-//					}
-//			}
-//		}
-//	}
-//}
