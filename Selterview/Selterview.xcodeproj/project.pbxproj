@@ -57,7 +57,6 @@
 		E2E322642B6E4AB000D5D081 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E322632B6E4AB000D5D081 /* Color+.swift */; };
 		E2E73E862B73AD9500510550 /* ProblemReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E852B73AD9500510550 /* ProblemReducer.swift */; };
 		E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E73E8C2B73E97700510550 /* Selterview++Bundle.swift */; };
-		E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2C92B7E71650008DD9F /* Realm */; };
 		E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; };
 		E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F2B2CD2B7E789A0008DD9F /* RealmManager.swift */; };
 		E2F985282B874B7D0053D46F /* API_Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2F985272B874B7D0053D46F /* API_Key.plist */; };
@@ -135,7 +134,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2F2B2CC2B7E71650008DD9F /* RealmSwift in Frameworks */,
-				E2F2B2CA2B7E71650008DD9F /* Realm in Frameworks */,
 				E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */,
 				E25881D42BC5670700266A4E /* CustomDump in Frameworks */,
 			);
@@ -388,7 +386,6 @@
 			name = Selterview;
 			packageProductDependencies = (
 				E2770F7E2B738BC90059961E /* ComposableArchitecture */,
-				E2F2B2C92B7E71650008DD9F /* Realm */,
 				E2F2B2CB2B7E71650008DD9F /* RealmSwift */,
 				E25881D32BC5670700266A4E /* CustomDump */,
 			);
@@ -939,11 +936,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2770F7D2B738BC90059961E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		E2F2B2C92B7E71650008DD9F /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2F2B2C72B7E71590008DD9F /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
 		};
 		E2F2B2CB2B7E71650008DD9F /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
