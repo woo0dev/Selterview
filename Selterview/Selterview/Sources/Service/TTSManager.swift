@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-class TTSManager {
+class TTSManager: NSObject {
 	static let shared = TTSManager()
 	
 	private let audioSession = AVAudioSession()
@@ -16,7 +16,7 @@ class TTSManager {
 	internal func play(_ string: String) {
 		do {
 			try audioSession.setCategory(.playback, mode: .default, options: .duckOthers)
-			try audioSession.setActive(false)
+			try audioSession.setActive(true)
 		} catch let error {
 			print(error.localizedDescription)
 		}
@@ -24,6 +24,7 @@ class TTSManager {
 		let utterance = AVSpeechUtterance(string: string)
 		utterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
 		utterance.rate = 0.4
+		synthesizer.delegate = self
 		synthesizer.stopSpeaking(at: .immediate)
 		synthesizer.speak(utterance)
 	}
@@ -32,5 +33,16 @@ class TTSManager {
 		if synthesizer.isSpeaking {
 			synthesizer.stopSpeaking(at: .immediate)
 		}
+		do {
+			try audioSession.setActive(false, options: [])
+		} catch {
+			print(error.localizedDescription)
+		}
+	}
+}
+
+extension TTSManager: AVSpeechSynthesizerDelegate {
+	func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+		stop()
 	}
 }
