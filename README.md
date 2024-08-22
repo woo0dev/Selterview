@@ -20,7 +20,10 @@
 <br/>
  
 ## 🖼 Screenshot
-![Selterview-git-readme-image](https://github.com/woo0dev/Selterview/assets/57060443/fab228d0-412a-454c-99cf-5c37582bc68c)
+<img width="200" src="https://github.com/user-attachments/assets/e3a0f0c4-4afe-4744-82a0-262483adf265">
+<img width="200" src="https://github.com/user-attachments/assets/b4287aa2-ce77-4bd9-abb7-e27f2ed8fe1b">
+<img width="200" src="https://github.com/user-attachments/assets/8045a790-5bbb-4ab8-aebb-32c021856b5f">
+<img width="200" src="https://github.com/user-attachments/assets/95b90972-e51f-4e9c-8dea-4bb7b325b6db">
 
 
 
