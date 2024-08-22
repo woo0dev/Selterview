@@ -41,6 +41,7 @@
 		E26EC4C72B6CF2AE00B1CEEB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4C62B6CF2AE00B1CEEB /* Question.swift */; };
 		E2770F7F2B738BC90059961E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E2770F7E2B738BC90059961E /* ComposableArchitecture */; };
 		E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27888E82B750F3800983FAB /* LoadingModifier.swift */; };
+		E2868CD12C77186300468421 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E2F2B2CB2B7E71650008DD9F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28FA43A2B70ED8A005E11E2 /* AnswerView.swift */; };
 		E2984FC42BD131D900A9964B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */; };
 		E2984FC52BD131D900A9964B /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E2984FC12BD131D900A9964B /* GmarketSansMedium.otf */; };
@@ -78,6 +79,20 @@
 			remoteInfo = Selterview;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2868CD22C77186300468421 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2868CD12C77186300468421 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E2028A852B6CD01A00B603E8 /* Selterview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selterview.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -378,6 +393,7 @@
 				E2028A812B6CD01A00B603E8 /* Sources */,
 				E2028A822B6CD01A00B603E8 /* Frameworks */,
 				E2028A832B6CD01A00B603E8 /* Resources */,
+				E2868CD22C77186300468421 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
