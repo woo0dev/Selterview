@@ -65,21 +65,13 @@ private struct HeaderView: View {
 					.padding(.trailing, 20)
 			})
 		}
-		.sheet(isPresented: viewStore.$isAddButtonTap) {
-			AddQuestionView(questions: viewStore.$addQuestions, category: viewStore.category)
-			HStack {
-				Spacer()
-				Button("취소") {
-					viewStore.send(.addQuestionCancel)
-				}
-				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .red, backgroundColor: .clear, borderColor: .accentTextColor)
-				Spacer()
-				Button("추가") {
-					viewStore.send(.addQuestion(viewStore.addQuestions))
-				}
-				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .blue, backgroundColor: .clear, borderColor: .accentTextColor)
-				Spacer()
-			}
+		.fullScreenCover(isPresented: viewStore.$isAddQuestionPresented) {
+			AddQuestionView(store: Store(
+				initialState: AddQuestionReducer.State(
+					category: viewStore.category
+				),
+				reducer: { AddQuestionReducer() }
+			))
 		}
 	}
 }

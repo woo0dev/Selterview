@@ -35,6 +35,11 @@
 		E25881DE2BD10F5500266A4E /* ClearBackgroundViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25881DD2BD10F5500266A4E /* ClearBackgroundViewModifier.swift */; };
 		E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CC2B7E1309004847DF /* DetailQuestionView.swift */; };
 		E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26307CE2B7E1A00004847DF /* QuestionCard.swift */; };
+		E2677CBC2DB755E1003CD155 /* AddQuestionReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2677CBB2DB755E1003CD155 /* AddQuestionReducer.swift */; };
+		E2677CBE2DB761EE003CD155 /* AdditionalOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2677CBD2DB761EE003CD155 /* AdditionalOptions.swift */; };
+		E2677CC02DB772EC003CD155 /* AddOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2677CBF2DB772EC003CD155 /* AddOptionView.swift */; };
+		E2677CC22DB7730C003CD155 /* URLAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2677CC12DB7730C003CD155 /* URLAddView.swift */; };
+		E2677CC42DB77329003CD155 /* UserDefineAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2677CC32DB77329003CD155 /* UserDefineAddView.swift */; };
 		E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */; };
 		E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26D4B2C2BB6B4C300C2F249 /* DetailQuestionReducer.swift */; };
 		E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26EC4B72B6CE97C00B1CEEB /* MainView.swift */; };
@@ -123,6 +128,11 @@
 		E25881DD2BD10F5500266A4E /* ClearBackgroundViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBackgroundViewModifier.swift; sourceTree = "<group>"; };
 		E26307CC2B7E1309004847DF /* DetailQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuestionView.swift; sourceTree = "<group>"; };
 		E26307CE2B7E1A00004847DF /* QuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCard.swift; sourceTree = "<group>"; };
+		E2677CBB2DB755E1003CD155 /* AddQuestionReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionReducer.swift; sourceTree = "<group>"; };
+		E2677CBD2DB761EE003CD155 /* AdditionalOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptions.swift; sourceTree = "<group>"; };
+		E2677CBF2DB772EC003CD155 /* AddOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOptionView.swift; sourceTree = "<group>"; };
+		E2677CC12DB7730C003CD155 /* URLAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAddView.swift; sourceTree = "<group>"; };
+		E2677CC32DB77329003CD155 /* UserDefineAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefineAddView.swift; sourceTree = "<group>"; };
 		E26D4B262BB2F5EA00C2F249 /* TTSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSManager.swift; sourceTree = "<group>"; };
 		E26D4B2C2BB6B4C300C2F249 /* DetailQuestionReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailQuestionReducer.swift; sourceTree = "<group>"; };
 		E26EC4B72B6CE97C00B1CEEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -311,6 +321,7 @@
 			children = (
 				E2D0118B2B7390B300CD844D /* MainReducer.swift */,
 				E20977ED2C6DB871000E5F10 /* DetailCategoryReducer.swift */,
+				E2677CBB2DB755E1003CD155 /* AddQuestionReducer.swift */,
 				E26EC4B02B6CE77700B1CEEB /* View */,
 			);
 			path = Main;
@@ -322,6 +333,9 @@
 				E26EC4B72B6CE97C00B1CEEB /* MainView.swift */,
 				E20977EB2C6DB800000E5F10 /* DetailCategoryView.swift */,
 				E20977F12C75C03C000E5F10 /* AddQuestionView.swift */,
+				E2677CBF2DB772EC003CD155 /* AddOptionView.swift */,
+				E2677CC12DB7730C003CD155 /* URLAddView.swift */,
+				E2677CC32DB77329003CD155 /* UserDefineAddView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				E26EC4C62B6CF2AE00B1CEEB /* Question.swift */,
+				E2677CBD2DB761EE003CD155 /* AdditionalOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -538,6 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2677CC42DB77329003CD155 /* UserDefineAddView.swift in Sources */,
 				E2E3225F2B6E41DF00D5D081 /* ProblemView.swift in Sources */,
 				E20977EC2C6DB800000E5F10 /* DetailCategoryView.swift in Sources */,
 				E26D4B2D2BB6B4C300C2F249 /* DetailQuestionReducer.swift in Sources */,
@@ -551,23 +567,27 @@
 				E26307CD2B7E1309004847DF /* DetailQuestionView.swift in Sources */,
 				E20977F22C75C03C000E5F10 /* AddQuestionView.swift in Sources */,
 				E26EC4B82B6CE97C00B1CEEB /* MainView.swift in Sources */,
+				E2677CC02DB772EC003CD155 /* AddOptionView.swift in Sources */,
 				E222A05D2BB2C5F80067CA7A /* Network.swift in Sources */,
 				E205A32A2B81E6170029890E /* Font+.swift in Sources */,
 				E27888E92B750F3800983FAB /* LoadingModifier.swift in Sources */,
 				E28FA43B2B70ED8A005E11E2 /* AnswerView.swift in Sources */,
 				E25881DC2BD10F1900266A4E /* ClearBackgroundView.swift in Sources */,
 				E2252B732B74F6D00076AAF8 /* ErrorAlertModifier.swift in Sources */,
+				E2677CC22DB7730C003CD155 /* URLAddView.swift in Sources */,
 				E20977EE2C6DB871000E5F10 /* DetailCategoryReducer.swift in Sources */,
 				E2F2B2CE2B7E789A0008DD9F /* RealmManager.swift in Sources */,
 				E2BA5B812B7CE54D0013CCF6 /* RoundedModifier.swift in Sources */,
 				E2345A282B8CBDCD00281186 /* ToastModifier.swift in Sources */,
 				E25881DA2BD0F90D00266A4E /* SpeechReducer.swift in Sources */,
+				E2677CBE2DB761EE003CD155 /* AdditionalOptions.swift in Sources */,
 				E26D4B272BB2F5EA00C2F249 /* TTSManager.swift in Sources */,
 				E2252B702B74F5FB0076AAF8 /* View+.swift in Sources */,
 				E26307CF2B7E1A00004847DF /* QuestionCard.swift in Sources */,
 				E2252B6E2B74F4CF0076AAF8 /* OpenAIClient.swift in Sources */,
 				E25881D82BD0F09300266A4E /* SpeechView.swift in Sources */,
 				E2E73E8D2B73E97700510550 /* Selterview++Bundle.swift in Sources */,
+				E2677CBC2DB755E1003CD155 /* AddQuestionReducer.swift in Sources */,
 				E2028A892B6CD01A00B603E8 /* SelterviewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

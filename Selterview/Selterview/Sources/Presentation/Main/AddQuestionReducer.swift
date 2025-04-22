@@ -1,35 +1,36 @@
 //
-//  DetailCategoryReducer.swift
+//  AddQuestionReducer.swift
 //  Selterview
 //
-//  Created by woo0 on 8/15/24.
+//  Created by woo0 on 4/22/25.
 //
 
 import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct DetailCategoryReducer {
+struct AddQuestionReducer {
 	struct State: Equatable {
+		@BindingState var additionalOption: AdditionalOption = .none
+		@BindingState var addQuestions: Questions = []
 		@BindingState var isAddQuestionPresented: Bool = false
 		@BindingState var isError: Bool = false
-		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isShowToast: Bool = false
 		@BindingState var toastMessage: String = ""
+		@BindingState var urlString: String = ""
 		var category: String
 		var error: RealmFailure? = nil
-		var questions: Questions
 		
-		init(category: String, questions: Questions) {
+		init(category: String) {
 			self.category = category
-			self.questions = questions
 		}
 	}
 	
 	enum Action: BindableAction, Equatable {
-		case addButtonTapped
-		case deleteButtonTapped(Question)
-		case fetchQuestions
+		case test
+		case didSelectAddOption(AdditionalOption)
+		case addQuestions(Questions)
+		case addQuestionCancel
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -38,25 +39,26 @@ struct DetailCategoryReducer {
 		BindingReducer()
 		Reduce { state, action in
 			switch action {
-			case .addButtonTapped:
-				state.isAddQuestionPresented = true
+			case .test:
+				print(state.urlString)
+				state.additionalOption = .userDefined
 				return .none
-			case .deleteButtonTapped(let question):
+			case .didSelectAddOption(let additionalOption):
+				state.additionalOption = additionalOption
+				return .none
+			case .addQuestions(let questions):
 				do {
-					try RealmManager.shared.deleteQuestion(question._id)
-					return .concatenate(.send(.fetchQuestions))
+					try RealmManager.shared.writeQuestions(questions)
+					state.addQuestions = []
+					state.isAddQuestionPresented = false
 				} catch {
-					let effect: Effect<Action> = .send(.catchError(.questionDeleteError))
+					let effect: Effect<Action> = .send(.catchError(.questionAddError))
 					return .concatenate(effect)
 				}
-			case .fetchQuestions:
-				do {
-					let questions = try RealmManager.shared.readQuestions() ?? []
-					state.questions = questions.filter({ $0.category == state.category})
-				} catch {
-					let effect: Effect<Action> = .send(.catchError(.questionsFetchError))
-					return .concatenate(effect)
-				}
+				return .none
+			case .addQuestionCancel:
+				state.addQuestions = []
+				state.isAddQuestionPresented = false
 				return .none
 			case .catchError(let error):
 				state.isError = true
