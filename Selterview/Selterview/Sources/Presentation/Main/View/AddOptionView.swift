@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddOptionView: View {
-	let viewStore: ViewStoreOf<AddQuestionReducer>
+	let viewStore: ViewStoreOf<AddQuestionFeature>
 	
 	var body: some View {
 		GeometryReader { geometry in

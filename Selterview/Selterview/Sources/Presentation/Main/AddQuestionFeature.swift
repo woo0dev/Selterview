@@ -1,5 +1,5 @@
 //
-//  AddQuestionReducer.swift
+//  AddQuestionFeature.swift
 //  Selterview
 //
 //  Created by woo0 on 4/22/25.
@@ -10,14 +10,13 @@ import ComposableArchitecture
 import Dependencies
 
 @Reducer
-struct AddQuestionReducer {
+struct AddQuestionFeature {
 	@Dependency(\.openAIClient) var openAIClient
 	@Dependency(\.webScraperClient) var webScraperClient
 	
 	struct State: Equatable {
 		@BindingState var additionalOption: AdditionalOption = .none
-		@BindingState var addQuestions: Questions = []
-		@BindingState var isAddQuestionPresented: Bool = false
+		@BindingState var addQuestions: [QuestionDTO] = []
 		@BindingState var isExtracting: Bool = false
 		@BindingState var isError: Bool = false
 		@BindingState var isShowToast: Bool = false
@@ -35,11 +34,20 @@ struct AddQuestionReducer {
 		case extractTextFromURL
 		case extractInterviewQuestions(String)
 		case didFinishExtractingQuestions(String)
-		case addQuestions(Questions)
+		case addQuestions([QuestionDTO])
+		case addEmptyQuestion(Int)
+		case updateQuestionTitle(Int, String)
+		case deleteQuestion(Int)
 		case didFinishAddingQuestions
 		case addQuestionCancel
 		case catchError(String)
 		case binding(BindingAction<State>)
+		
+		case delegate(DelegateAction)
+		
+		enum DelegateAction: Equatable {
+			case dismissRequested
+		}
 	}
 	
 	var body: some Reducer<State, Action> {
@@ -59,7 +67,7 @@ struct AddQuestionReducer {
 					}
 				} catch: { error, send in
 					await send(.catchError(error.localizedDescription))
-				}.cancellable(id: AddQuestionReducer.CancelID.extractTextFromURL)
+				}.cancellable(id: AddQuestionFeature.CancelID.extractTextFromURL)
 				
 			case .extractInterviewQuestions(let texts):
 				return .run { send in
@@ -68,11 +76,11 @@ struct AddQuestionReducer {
 					}
 				} catch: { error, send in
 					await send(.catchError(error.localizedDescription))
-				}.cancellable(id: AddQuestionReducer.CancelID.extractInterviewQuestions)
+				}.cancellable(id: AddQuestionFeature.CancelID.extractInterviewQuestions)
 				
 			case .didFinishExtractingQuestions(let questions):
 				state.isExtracting = false
-				state.addQuestions = questions.split(separator: ",").map { Question(title: "\($0)", category: state.category) }
+				state.addQuestions = questions.split(separator: ",").map { QuestionDTO(id: nil, title: "\($0)", category: state.category) }
 				return .none
 				
 			case .addQuestions(let questions):
@@ -83,14 +91,25 @@ struct AddQuestionReducer {
 					await send(.catchError(RealmFailure.questionAddError.errorDescription))
 				}
 				
-			case .didFinishAddingQuestions:
-				state.addQuestions = []
-				state.isAddQuestionPresented = false
+			case .addEmptyQuestion(let index):
+				state.addQuestions.insert(QuestionDTO(id: nil, title: "", category: state.category), at: index + 1)
 				return .none
 				
+			case .updateQuestionTitle(let index, let title):
+				state.addQuestions[index].title = title
+				return .none
+				
+			case .deleteQuestion(let index):
+				state.addQuestions.remove(at: index)
+				return .none
+				
+			case .didFinishAddingQuestions:
+				return .send(.delegate(.dismissRequested))
+				
 			case .addQuestionCancel:
-				state.addQuestions = []
-				state.isAddQuestionPresented = false
+				return .send(.delegate(.dismissRequested))
+				
+			case .delegate:
 				return .none
 				
 			case .catchError(let errorDescription):

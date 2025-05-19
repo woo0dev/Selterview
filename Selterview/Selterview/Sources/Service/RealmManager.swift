@@ -16,44 +16,53 @@ final class RealmManager: RealmManagerProtocol {
 		Realm.Configuration.defaultConfiguration = config
 	}
 	
-	func readQuestions() throws -> Questions? {
+	func readQuestions() throws -> [QuestionDTO]? {
 		do {
 			let realm = try Realm()
-			return realm.objects(Question.self).map({ $0 })
+			let objects = realm.objects(Question.self)
+			return objects.map { QuestionDTO(from: $0) }
 		} catch {
 			throw RealmFailure.questionsFetchError
 		}
 	}
 	
-	func writeQuestions(_ questions: Questions) throws {
+	func writeQuestions(_ questions: [QuestionDTO]) throws {
 		do {
 			let realm = try Realm()
 			try realm.write {
-				realm.add(questions)
+				for dto in questions {
+					realm.add(try dto.toRealmObject())
+				}
 			}
 		} catch {
 			throw RealmFailure.questionAddError
 		}
 	}
 	
-	func updateQuestion(_ question: Question, _ answer: String) throws {
+	func updateQuestion(_ question: QuestionDTO, _ answer: String) throws {
 		do {
 			let realm = try Realm()
 			try realm.write {
-				let question = question
-				question.answer = answer
-				realm.create(Question.self, value: question, update: .modified)
+				var updatedQuestionDTO = question
+				updatedQuestionDTO.answer = answer
+				let questionObject = try updatedQuestionDTO.toRealmObject()
+				realm.create(Question.self, value: questionObject, update: .modified)
 			}
 		} catch {
 			throw RealmFailure.questionUpdateError
 		}
 	}
 	
-	func deleteQuestion(_ id: ObjectId) throws {
+	func deleteQuestion(_ id: String) throws {
 		do {
 			let realm = try Realm()
+			guard let objectId = try? ObjectId(string: id) else {
+				throw RealmFailure.questionDeleteError
+			}
 			try realm.write {
-				guard let question = realm.object(ofType: Question.self, forPrimaryKey: id) else { throw RealmFailure.questionDeleteError }
+				guard let question = realm.object(ofType: Question.self, forPrimaryKey: objectId) else {
+					throw RealmFailure.questionDeleteError
+				}
 				realm.delete(question)
 			}
 		} catch {
@@ -63,10 +72,10 @@ final class RealmManager: RealmManagerProtocol {
 }
 
 protocol RealmManagerProtocol {
-	func readQuestions() throws -> Questions?
-	func writeQuestions(_ questions: Questions) throws
-	func updateQuestion(_ question: Question, _ answer: String) throws
-	func deleteQuestion(_ id: ObjectId) throws
+	func readQuestions() throws -> [QuestionDTO]?
+	func writeQuestions(_ questions: [QuestionDTO]) throws
+	func updateQuestion(_ question: QuestionDTO, _ answer: String) throws
+	func deleteQuestion(_ id: String) throws
 }
 
 enum RealmFailure: Error, Equatable {
@@ -76,6 +85,7 @@ enum RealmFailure: Error, Equatable {
 	case questionAddError
 	case questionUpdateError
 	case questionDeleteError
+	case invalidObjectId
 }
 
 extension RealmFailure: LocalizedError {
@@ -93,6 +103,8 @@ extension RealmFailure: LocalizedError {
 			return "답변 저장을 실패했습니다."
 		case .questionDeleteError:
 			return "질문 삭제에 실패했습니다."
+		case .invalidObjectId:
+			return "잘못된 질문입니다."
 		}
 	}
 }

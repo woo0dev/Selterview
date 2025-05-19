@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct ProblemView: View {
 	@FocusState var isFocused: Bool
 	
-	let store: StoreOf<ProblemReducer>
+	let store: StoreOf<ProblemFeature>
 	
  	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
@@ -55,8 +55,8 @@ struct ProblemView: View {
 					}
 				}
 				.sheet(isPresented: viewStore.$isQuestionTap) {
-					DetailQuestionView(store: Store(initialState: DetailQuestionReducer.State(question: viewStore.question), reducer: {
-						DetailQuestionReducer()
+					DetailQuestionView(store: Store(initialState: DetailQuestionFeature.State(question: viewStore.question), reducer: {
+						DetailQuestionFeature()
 					}))
 				}
 				HStack {
@@ -105,7 +105,7 @@ struct ProblemView: View {
 }
 
 private struct FooterView: View {
-	let viewStore: ViewStoreOf<ProblemReducer>
+	let viewStore: ViewStoreOf<ProblemFeature>
 	
 	var body: some View {
 		HStack {

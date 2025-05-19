@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddQuestionView: View {
-	let store: StoreOf<AddQuestionReducer>
+	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
@@ -19,6 +19,16 @@ struct AddQuestionView: View {
 						.font(Font.defaultBoldFont(.title))
 						.padding(.vertical, 20)
 					Spacer()
+					Button(action: {
+						viewStore.send(.addQuestionCancel)
+					}, label: {
+						Text("취소")
+					})
+					Button(action: {
+						viewStore.send(.addQuestions(viewStore.addQuestions))
+					}, label: {
+						Text("완료")
+					})
 				}
 				Spacer()
 				if viewStore.additionalOption == .none {

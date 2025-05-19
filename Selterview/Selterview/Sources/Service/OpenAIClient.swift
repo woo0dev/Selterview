@@ -9,7 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 struct OpenAIClient {
-	var fetchTailQuestion: (_ question: String, _ answer: String) async throws -> Question?
+	var fetchTailQuestion: (_ question: String, _ answer: String) async throws -> QuestionDTO?
 	var extractInterviewQuestions: (_ fromURL: String) async throws -> String?
 }
 
@@ -55,7 +55,7 @@ extension OpenAIClient: DependencyKey {
 			   let firstChoice = choices.first,
 			   let message = firstChoice["message"] as? [String: Any],
 			   let text = message["content"] as? String {
-				return Question(title: text, category: "Tail")
+				return QuestionDTO(id: nil, title: text, category: "Tail")
 			} else {
 				throw ChatGPTFailure.jsonParsingError
 			}
@@ -71,7 +71,7 @@ extension OpenAIClient: DependencyKey {
 			let requestData = [
 				"messages": [["role": "system", "content": "너는 HTML로 크롤링한 콘텐츠에서 '질문'만 정확히 추출하여 깔끔하게 가공하는 전문가야. 출력 형식은 '질문1, 질문2, 질문3, ...' 처럼 쉼표로만 구분된 하나의 문자열이야. 질문이 아닌 문장은 모두 제거해. 질문은 반드시 물음표(?)로 끝나는 문장만 인정해. 질문이 여러 줄로 나뉘었으면 하나로 자연스럽게 이어 붙여. 숫자, 기호, 태그, 줄바꿈, 목록 기호 등은 모두 무시하고 질문 텍스트만 깔끔하게 남겨."],
 					["role": "user", "content": "다음 텍스트에서 질문만 추출해서 쉼표로 구분한 하나의 문자열로 만들어줘:\n\n\(texts)"]],
-				"max_tokens": 2000,
+				"max_tokens": 200,
 				"model": "gpt-4o",
 			]
 			
