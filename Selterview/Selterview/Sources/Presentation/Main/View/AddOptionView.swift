@@ -9,38 +9,40 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddOptionView: View {
-	let viewStore: ViewStoreOf<AddQuestionFeature>
+	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
-		GeometryReader { geometry in
-			let totalPadding: CGFloat = 150
-			let squareSize = max((geometry.size.width - totalPadding) / 2, 50)
-			VStack {
-				Spacer()
-				HStack {
+		WithViewStore(store, observe: \.self) { viewStore in
+			GeometryReader { geometry in
+				let totalPadding: CGFloat = 150
+				let squareSize = max((geometry.size.width - totalPadding) / 2, 50)
+				VStack {
 					Spacer()
-					Button(action: {
-						viewStore.send(.didSelectAddOption(.url))
-					}, label: {
-						Text("링크로 추가하기")
-							.frame(width: squareSize, height: squareSize)
-							.font(.defaultMidiumFont(.title))
-					})
-					.tint(.accentTextColor)
-					.buttonStyle(.bordered)
-					Spacer()
-					Button(action: {
-						viewStore.send(.didSelectAddOption(.userDefined))
-					}, label: {
-						Text("직접 추가하기")
-							.frame(width: squareSize, height: squareSize)
-							.font(.defaultMidiumFont(.title))
-					})
-					.tint(.accentTextColor)
-					.buttonStyle(.bordered)
+					HStack {
+						Spacer()
+						Button(action: {
+							viewStore.send(.didSelectAddOption(.url))
+						}, label: {
+							Text("링크로 추가하기")
+								.frame(width: squareSize, height: squareSize)
+								.font(.defaultMidiumFont(.title))
+						})
+						.tint(.accentTextColor)
+						.buttonStyle(.bordered)
+						Spacer()
+						Button(action: {
+							viewStore.send(.didSelectAddOption(.userDefined))
+						}, label: {
+							Text("직접 추가하기")
+								.frame(width: squareSize, height: squareSize)
+								.font(.defaultMidiumFont(.title))
+						})
+						.tint(.accentTextColor)
+						.buttonStyle(.bordered)
+						Spacer()
+					}
 					Spacer()
 				}
-				Spacer()
 			}
 		}
 	}
