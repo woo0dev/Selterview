@@ -35,6 +35,7 @@ struct AddQuestionFeature {
 		case extractInterviewQuestions(String)
 		case didFinishExtractingQuestions(String)
 		case addQuestions([QuestionDTO])
+		case addFirstQuestion
 		case addEmptyQuestion(Int)
 		case updateQuestionTitle(Int, String)
 		case deleteQuestion(Int)
@@ -90,6 +91,10 @@ struct AddQuestionFeature {
 				} catch: { error, send in
 					await send(.catchError(RealmFailure.questionAddError.errorDescription))
 				}
+				
+			case .addFirstQuestion:
+				state.addQuestions.append(QuestionDTO(id: nil, title: "", category: state.category))
+				return .none
 				
 			case .addEmptyQuestion(let index):
 				state.addQuestions.insert(QuestionDTO(id: nil, title: "", category: state.category), at: index + 1)

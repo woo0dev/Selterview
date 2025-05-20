@@ -31,7 +31,7 @@ final class RealmManager: RealmManagerProtocol {
 			let realm = try Realm()
 			try realm.write {
 				for dto in questions {
-					realm.add(try dto.toRealmObject())
+					if !dto.title.isEmpty { realm.add(try dto.toRealmObject()) }
 				}
 			}
 		} catch {

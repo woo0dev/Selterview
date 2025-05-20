@@ -36,7 +36,7 @@ struct AddQuestionView: View {
 				} else if viewStore.additionalOption == .url {
 					URLAddView(viewStore: viewStore)
 				} else {
-					UserDefineAddView()
+					UserDefineAddView(viewStore: viewStore)
 				}
 				Spacer()
 			}
