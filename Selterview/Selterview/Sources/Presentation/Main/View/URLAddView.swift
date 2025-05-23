@@ -20,7 +20,7 @@ struct URLAddView: View {
 				} else if viewStore.addQuestions.isEmpty {
 					VStack {
 						TextField("여기에 링크를 입력해주세요.", text: viewStore.$urlString)
-							.roundedStyle(backgroundColor: .backgroundLightGray.opacity(0.5))
+							.roundedStyle(backgroundColor: Color(.systemBackground))
 						Button(action: {
 							viewStore.send(.extractTextFromURL)
 						}, label: {

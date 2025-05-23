@@ -20,7 +20,7 @@ struct AddOptionView: View {
 					}, label: {
 						ZStack {
 							Circle()
-								.foregroundStyle(Color.clear)
+								.foregroundStyle(Color(.systemBackground))
 								.overlay(content: {
 									Circle()
 										.stroke(Color.accentTextColor, lineWidth: 2)
@@ -35,7 +35,7 @@ struct AddOptionView: View {
 					}, label: {
 						ZStack {
 							Circle()
-								.foregroundStyle(Color.clear)
+								.foregroundStyle(Color(.systemBackground))
 								.overlay(content: {
 									Circle()
 										.stroke(Color.accentTextColor, lineWidth: 2)

@@ -73,6 +73,7 @@ private struct HeaderView: View {
 				)
 			) { addQuestionStore in
 				AddQuestionView(store: addQuestionStore)
+					.background(Color(.systemGray6))
 			}
 		}
 	}
