@@ -12,8 +12,8 @@ extension View {
 		self.modifier(ErrorAlertModifier(isPresented: showAlert, message: message))
 	}
 	
-	func showLoadingView(isLoading: Binding<Bool>) -> some View {
-		self.modifier(LoadingModifier(isLoading: isLoading))
+	func showLoadingView(isLoading: Binding<Bool>, loadingMassage: String) -> some View {
+		self.modifier(LoadingModifier(isLoading: isLoading, loadingMassage: loadingMassage))
 	}
 	
 	func roundedStyle(alignment: Alignment = .center, radius: CGFloat = 10, font: Font = .defaultMidiumFont(.body), foregroundColor: Color = .primary, backgroundColor: Color = .clear, borderColor: Color = .clear) -> some View {
