@@ -16,27 +16,28 @@ struct UserDefineAddView: View {
 			ScrollView {
 				LazyVStack(spacing: 16) {
 					ForEach(viewStore.addQuestions.indices, id: \.self) { index in
-						HStack {
+						HStack(spacing: 16) {
+							Button {
+								viewStore.send(.deleteQuestion(index))
+							} label: {
+								Image(systemName: "trash")
+									.foregroundColor(.red)
+									.font(.system(size: 24))
+							}
 							TextEditor(text: viewStore.binding(
 								get: { $0.addQuestions[index].title },
 								send: { .updateQuestionTitle(index, $0) }
 							))
 							.frame(minHeight: 80)
-							.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.5)))
-							HStack {
-								Button {
-									viewStore.send(.deleteQuestion(index))
-								} label: {
-									Image(systemName: "trash")
-										.foregroundColor(.red)
-								}
-								Button {
-									viewStore.send(.addEmptyQuestion(index))
-								} label: {
-									Image(systemName: "plus")
-								}
+							.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.borderColor))
+							Button {
+								viewStore.send(.addEmptyQuestion(index))
+							} label: {
+								Image(systemName: "plus")
+									.font(.system(size: 24))
 							}
 						}
+						.padding(.horizontal, 20)
 					}
 				}
 			}
@@ -45,4 +46,8 @@ struct UserDefineAddView: View {
 			}
 		}
 	}
+}
+
+#Preview {
+	UserDefineAddView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
 }

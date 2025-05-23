@@ -44,3 +44,7 @@ struct AddQuestionView: View {
 		.padding(.horizontal, 20)
 	}
 }
+
+#Preview {
+	AddQuestionView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
+}

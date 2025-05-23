@@ -18,18 +18,19 @@ struct URLAddView: View {
 					ProgressView("추출 중...")
 						.progressViewStyle(CircularProgressViewStyle())
 				} else if viewStore.addQuestions.isEmpty {
-					VStack(spacing: 20) {
-						TextField(text: viewStore.$urlString, label: {
-							Text("여기에 링크를 입력해주세요.")
-						})
-						.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .title3, backgroundColor: .backgroundLightGray)
+					VStack {
+						TextField("여기에 링크를 입력해주세요.", text: viewStore.$urlString)
+							.roundedStyle(backgroundColor: .backgroundLightGray.opacity(0.5))
 						Button(action: {
 							viewStore.send(.extractTextFromURL)
 						}, label: {
 							Text("변환하기")
+								.tint(.accentTextColor)
 						})
-						.roundedStyle(maxWidth: .infinity, maxHeight: 50, backgroundColor: .buttonBackgroundColor)
+						.roundedStyle(backgroundColor: .white, borderColor: .borderColor)
 					}
+					.fixedSize(horizontal: false, vertical: true)
+					.padding()
 				} else {
 					ScrollView {
 						LazyVStack(spacing: 16) {
@@ -62,4 +63,8 @@ struct URLAddView: View {
 			}
 		}
 	}
+}
+
+#Preview {
+	URLAddView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
 }

@@ -17,9 +17,6 @@ struct QuestionCard: View {
 			.opacity(isTailQuestionCreating ? 0.3 : 1)
 			.roundedStyle(
 				alignment: .topLeading,
-				maxWidth: .infinity,
-				minHeight: 100,
-				maxHeight: 200,
 				radius: 20,
 				font: .defaultMidiumFont(.body),
 				foregroundColor: .black,

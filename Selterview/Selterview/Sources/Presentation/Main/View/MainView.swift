@@ -76,27 +76,19 @@ private struct BodyView: View {
 			LazyVGrid(columns: [GridItem(.flexible())]) {
 				ForEach(viewStore.categories.indices, id: \.self) { index in
 					NavigationLink(value: index) {
-						VStack(alignment: .leading) {
+						VStack(alignment: .center, spacing: 10) {
 							Text(viewStore.categories[index])
 								.font(Font.defaultMidiumFont(.title))
-								.padding(10)
 							Text("\(viewStore.questions[viewStore.categories[index]]?.count ?? 0)문제")
-								.foregroundStyle(Color.gray)
-								.padding(.leading, 10)
-							Spacer()
 						}
+						.padding(10)
 						.roundedStyle(
 							alignment: .topLeading,
-							maxWidth: .infinity,
-							minHeight: 100,
-							maxHeight: 200,
 							radius: 20,
 							font: .defaultLightFont(.body),
-							foregroundColor: .black,
-							backgroundColor: .clear,
-							borderColor: .accentTextColor
+							foregroundColor: Color(.systemBackground),
+							backgroundColor: .secondary
 						)
-						.padding(10)
 					}
 				}
 			}

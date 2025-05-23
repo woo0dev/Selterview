@@ -32,9 +32,6 @@ struct DetailQuestionView: View {
 			}
 			.roundedStyle(
 				alignment: .topLeading,
-				maxWidth: .infinity,
-				minHeight: 200,
-				maxHeight: .infinity,
 				radius: 20,
 				font: .defaultMidiumFont(.body),
 				foregroundColor: .black,
