@@ -37,7 +37,7 @@ struct UserDefineAddView: View {
 									.font(.system(size: 24))
 							}
 						}
-						.padding(.horizontal, 20)
+						.padding(1)
 					}
 				}
 			}

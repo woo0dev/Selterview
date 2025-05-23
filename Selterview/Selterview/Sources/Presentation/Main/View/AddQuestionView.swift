@@ -17,7 +17,6 @@ struct AddQuestionView: View {
 				HStack {
 					Text(viewStore.category)
 						.font(Font.defaultBoldFont(.title))
-						.padding(.vertical, 20)
 					Spacer()
 					Button(action: {
 						viewStore.send(.addQuestionCancel)
@@ -30,6 +29,7 @@ struct AddQuestionView: View {
 						Text("완료")
 					})
 				}
+				.padding(.vertical, 20)
 				Spacer()
 				if viewStore.additionalOption == .none {
 					AddOptionView(store: store)
