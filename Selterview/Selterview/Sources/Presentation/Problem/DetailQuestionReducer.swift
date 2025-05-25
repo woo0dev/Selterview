@@ -1,5 +1,5 @@
 //
-//  DetailQuestionFeature.swift
+//  DetailQuestionReducer.swift
 //  Selterview
 //
 //  Created by woo0 on 3/29/24.
@@ -9,13 +9,13 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct DetailQuestionFeature {
+struct DetailQuestionReducer {
 	@ObservableState
 	struct State: Equatable {
 		var isSpeaking: Bool = false
-		var question: QuestionDTO
+		var question: Question
 		
-		init(question: QuestionDTO) {
+		init(question: Question) {
 			self.question = question
 		}
 	}

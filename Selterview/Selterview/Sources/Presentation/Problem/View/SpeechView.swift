@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct SpeechView: View {
 	@Binding var isSpeech: Bool
 	
-	let store: StoreOf<SpeechFeature>
+	let store: StoreOf<SpeechReducer>
 	
 	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in

@@ -1,5 +1,5 @@
 //
-//  MainFeature.swift
+//  MainReducer.swift
 //  Selterview
 //
 //  Created by woo0 on 2/7/24.
@@ -9,7 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct MainFeature {
+struct MainReducer {
 	struct State: Equatable {
 		@BindingState var addCategoryText: String = ""
 		@BindingState var toastMessage: String = ""
@@ -17,7 +17,7 @@ struct MainFeature {
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
-		var questions: [String: [QuestionDTO]] = [:]
+		var questions: [String: Questions] = [:]
 		var categories: [String] = []
 	}
 	

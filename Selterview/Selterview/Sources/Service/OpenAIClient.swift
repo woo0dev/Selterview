@@ -9,8 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 struct OpenAIClient {
-	var fetchTailQuestion: (_ question: String, _ answer: String) async throws -> QuestionDTO?
-	var extractInterviewQuestions: (_ fromURL: String) async throws -> String?
+	var fetchTailQuestion: (_ question: String, _ answer: String) async throws -> Question?
 }
 
 extension OpenAIClient: DependencyKey {
@@ -31,7 +30,7 @@ extension OpenAIClient: DependencyKey {
 			let requestData = [
 				"messages": [[ "role": "user", "content": message ]],
 				"max_tokens": 500,
-				"model": "gpt-4o",
+				"model": "gpt-3.5-turbo",
 			]
 			
 			var networkCheckCount = 0

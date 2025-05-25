@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
 
 struct AddQuestionView: View {
-	let store: StoreOf<AddQuestionFeature>
+	@Binding var questions: Questions
+	var category: String
 	
 	var body: some View {
 		WithViewStore(store, observe: \.self) { viewStore in
@@ -41,7 +41,6 @@ struct AddQuestionView: View {
 				Spacer()
 			}
 		}
-		.padding(.horizontal, 20)
 	}
 }
 
