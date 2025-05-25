@@ -1,5 +1,5 @@
 //
-//  ProblemFeature.swift
+//  ProblemReducer.swift
 //  Selterview
 //
 //  Created by woo0 on 2/7/24.
@@ -10,7 +10,7 @@ import ComposableArchitecture
 import Dependencies
 
 @Reducer
-struct ProblemFeature {
+struct ProblemReducer {
 	@Dependency(\.openAIClient) var openAIClient
 	
 	struct State: Equatable {
@@ -21,15 +21,15 @@ struct ProblemFeature {
 		@BindingState var isShowToast: Bool
 		@BindingState var isSpeech: Bool
 		var originalIndex: Int
-		var question: QuestionDTO
+		var question: Question
 		var isAnswerSave: Bool = true
 		var isFocusedAnswer: Bool
 		var questionIndex: Int
-		var questions: [QuestionDTO]
+		var questions: Questions
 		
-		var speechState: SpeechFeature.State = SpeechFeature.State()
+		var speechState: SpeechReducer.State = SpeechReducer.State()
 		
-		init(questions: [QuestionDTO], questionIndex: Int) {
+		init(questions: Questions, questionIndex: Int) {
 			self.isFocusedAnswer = false
 			self.questions = questions
 			self.questionIndex = questionIndex
@@ -44,14 +44,14 @@ struct ProblemFeature {
 	}
 	
 	enum Action: BindableAction, Equatable {
-		case speechAction(SpeechFeature.Action)
+		case speechAction(SpeechReducer.Action)
 		case onAppear
 		case onDisappear
 		case previousQuestion
 		case nextQuestionButtonTapped
 		case newTailQuestionCreateButtonTapped
-		case newTailQuestionCreated(QuestionDTO)
-		case questionSave(QuestionDTO, String)
+		case newTailQuestionCreated(Question)
+		case questionSave(Question, String)
 		case startSpeak
 		case stopSpeak
 		case startSpeechButtonTapped
@@ -65,7 +65,7 @@ struct ProblemFeature {
 	
 	var body: some Reducer<State, Action> {
 		Scope(state: \.speechState, action: /Action.speechAction) {
-			SpeechFeature()
+			SpeechReducer()
 		}
 		
 		BindingReducer()

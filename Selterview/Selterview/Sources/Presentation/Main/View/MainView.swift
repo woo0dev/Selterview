@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MainView: View {
-	let store: StoreOf<MainFeature>
+	let store: StoreOf<MainReducer>
 	
 	var body: some View {
 		WithViewStore(self.store, observe: { $0 }) { viewStore in
@@ -36,11 +36,11 @@ struct MainView: View {
 				}
 				.navigationDestination(for: Int.self) { index in
 					DetailCategoryView(store: Store(
-						initialState: DetailCategoryFeature.State(
+						initialState: DetailCategoryReducer.State(
 							category: viewStore.categories[index],
 							questions: viewStore.questions[viewStore.categories[index]] ?? []
 						),
-						reducer: { DetailCategoryFeature() }
+						reducer: { DetailCategoryReducer() }
 					))
 				}
 			}
@@ -49,7 +49,7 @@ struct MainView: View {
 }
 
 private struct HeaderView: View {
-	let viewStore: ViewStoreOf<MainFeature>
+	let viewStore: ViewStoreOf<MainReducer>
 	
 	var body: some View {
 		HStack {
@@ -69,7 +69,7 @@ private struct HeaderView: View {
 }
 
 private struct BodyView: View {
-	let viewStore: ViewStoreOf<MainFeature>
+	let viewStore: ViewStoreOf<MainReducer>
 	
 	var body: some View {
 		ScrollView {

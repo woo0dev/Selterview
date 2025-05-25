@@ -12,8 +12,8 @@ import ComposableArchitecture
 struct SelterviewApp: App {
     var body: some Scene {
         WindowGroup {
-			MainView(store: Store(initialState: MainFeature.State()) {
-				MainFeature()
+			MainView(store: Store(initialState: MainReducer.State()) {
+				MainReducer()
 			})
         }
     }
