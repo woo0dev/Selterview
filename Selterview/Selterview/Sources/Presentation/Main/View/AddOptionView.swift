@@ -9,39 +9,49 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddOptionView: View {
-	let viewStore: ViewStoreOf<AddQuestionFeature>
+	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
-		GeometryReader { geometry in
-			let totalPadding: CGFloat = 150
-			let squareSize = max((geometry.size.width - totalPadding) / 2, 50)
-			VStack {
-				Spacer()
-				HStack {
-					Spacer()
+		WithViewStore(store, observe: \.self) { viewStore in
+			ZStack {
+				HStack(spacing: 20) {
 					Button(action: {
 						viewStore.send(.didSelectAddOption(.url))
 					}, label: {
-						Text("링크로 추가하기")
-							.frame(width: squareSize, height: squareSize)
-							.font(.defaultMidiumFont(.title))
+						ZStack {
+							Circle()
+								.foregroundStyle(Color(.systemBackground))
+								.overlay(content: {
+									Circle()
+										.stroke(Color.accentTextColor, lineWidth: 2)
+								})
+							Text("링크로\n추가하기")
+								.font(.defaultMidiumFont(.title))
+								.tint(.accentTextColor)
+						}
 					})
-					.tint(.accentTextColor)
-					.buttonStyle(.bordered)
-					Spacer()
 					Button(action: {
 						viewStore.send(.didSelectAddOption(.userDefined))
 					}, label: {
-						Text("직접 추가하기")
-							.frame(width: squareSize, height: squareSize)
-							.font(.defaultMidiumFont(.title))
+						ZStack {
+							Circle()
+								.foregroundStyle(Color(.systemBackground))
+								.overlay(content: {
+									Circle()
+										.stroke(Color.accentTextColor, lineWidth: 2)
+								})
+							Text("직접\n추가하기")
+								.font(.defaultMidiumFont(.title))
+								.tint(.accentTextColor)
+						}
 					})
-					.tint(.accentTextColor)
-					.buttonStyle(.bordered)
-					Spacer()
 				}
-				Spacer()
+				.padding(20)
 			}
 		}
 	}
+}
+
+#Preview {
+	AddOptionView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
 }

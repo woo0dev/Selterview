@@ -12,12 +12,11 @@ struct AddQuestionView: View {
 	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
-		WithViewStore(store, observe: { $0 }) { viewStore in
+		WithViewStore(store, observe: \.self) { viewStore in
 			VStack {
 				HStack {
 					Text(viewStore.category)
 						.font(Font.defaultBoldFont(.title))
-						.padding(.vertical, 20)
 					Spacer()
 					Button(action: {
 						viewStore.send(.addQuestionCancel)
@@ -30,17 +29,22 @@ struct AddQuestionView: View {
 						Text("완료")
 					})
 				}
+				.padding(.vertical, 20)
 				Spacer()
 				if viewStore.additionalOption == .none {
-					AddOptionView(viewStore: viewStore)
+					AddOptionView(store: store)
 				} else if viewStore.additionalOption == .url {
-					URLAddView(viewStore: viewStore)
+					URLAddView(store: store)
 				} else {
-					UserDefineAddView(viewStore: viewStore)
+					UserDefineAddView(store: store)
 				}
 				Spacer()
 			}
 		}
 		.padding(.horizontal, 20)
 	}
+}
+
+#Preview {
+	AddQuestionView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
 }

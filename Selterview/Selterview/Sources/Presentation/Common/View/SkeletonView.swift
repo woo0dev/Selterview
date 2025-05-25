@@ -9,12 +9,15 @@ import Foundation
 import SwiftUI
 
 struct SkeletonView: View {
+	let loadingMassage: String
 	let isLoading: Bool
 
 	var body: some View {
 		ZStack {
 			if isLoading {
 				VStack(alignment: .leading, spacing: 8) {
+					Text(loadingMassage)
+						.foregroundStyle(.gray.opacity(0.5))
 					SkeletonBar(width: 250)
 					SkeletonBar(width: 200)
 					SkeletonBar(width: 150)
