@@ -9,8 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct DetailQuestionView: View {
-	
-	let store: StoreOf<DetailQuestionReducer>
+	let store: StoreOf<DetailQuestionFeature>
 	
 	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuestionCard: View {
 	@Binding var isTailQuestionCreating: Bool
-	var question: Question
+	var question: QuestionDTO
 	
 	var body: some View {
 		Text(isTailQuestionCreating ? "질문을 생성하고 있습니다." : "질문:\n\(question.title)")

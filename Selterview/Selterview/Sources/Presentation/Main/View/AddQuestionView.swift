@@ -6,38 +6,41 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct AddQuestionView: View {
-	@Binding var questions: Questions
-	var category: String
+	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
-		VStack(alignment: .leading) {
-			Text(category)
-				.font(Font.defaultBoldFont(.title))
-				.padding([.top, .leading], 20)
-			ScrollView {
-				VStack(alignment: .leading, spacing: 10) {
-					ForEach(0..<questions.count, id: \.self) { index in
-						HStack {
-							TextField("질문", text: $questions[index].title)
-								.roundedStyle(alignment: .leading, maxWidth: .infinity, minHeight: nil, maxHeight: 30, radius: nil, font: .defaultLightFont(.title3), foregroundColor: .gray, backgroundColor: .white, borderColor: .accentTextColor)
-								.padding(questions.count - 1 > index ? EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20) : EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
-							if questions.count - 1 == index {
-								Button {
-									if !questions[questions.count-1].title.isEmpty {
-										questions.append(Question(title: "", category: category))
-									}
-								} label: {
-									Image(systemName: "plus")
-								}
-								.roundedStyle(alignment: .center, maxWidth: 30, minHeight: nil, maxHeight: 30, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .accentTextColor, backgroundColor: .white, borderColor: .accentTextColor)
-								.padding(.trailing, 10)
-							}
-						}
-					}
+		WithViewStore(store, observe: { $0 }) { viewStore in
+			VStack {
+				HStack {
+					Text(viewStore.category)
+						.font(Font.defaultBoldFont(.title))
+						.padding(.vertical, 20)
+					Spacer()
+					Button(action: {
+						viewStore.send(.addQuestionCancel)
+					}, label: {
+						Text("취소")
+					})
+					Button(action: {
+						viewStore.send(.addQuestions(viewStore.addQuestions))
+					}, label: {
+						Text("완료")
+					})
 				}
+				Spacer()
+				if viewStore.additionalOption == .none {
+					AddOptionView(viewStore: viewStore)
+				} else if viewStore.additionalOption == .url {
+					URLAddView(viewStore: viewStore)
+				} else {
+					UserDefineAddView(viewStore: viewStore)
+				}
+				Spacer()
 			}
 		}
+		.padding(.horizontal, 20)
 	}
 }

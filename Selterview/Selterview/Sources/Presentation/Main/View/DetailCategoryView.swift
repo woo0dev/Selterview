@@ -9,12 +9,12 @@ import SwiftUI
 import ComposableArchitecture
 
 struct DetailCategoryView: View {
-	let store: StoreOf<DetailCategoryReducer>
+	let store: StoreOf<DetailCategoryFeature>
 	
 	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
 			VStack(alignment: .leading) {
-				HeaderView(viewStore: viewStore)
+				HeaderView(store: store)
 				BodyView(viewStore: viewStore)
 			}
 			.onAppear {
@@ -27,76 +27,70 @@ struct DetailCategoryView: View {
 }
 
 private struct HeaderView: View {
-	let viewStore: ViewStoreOf<DetailCategoryReducer>
+	let store: StoreOf<DetailCategoryFeature>
 	
 	var body: some View {
-		HStack {
-			Text(viewStore.category)
-				.font(Font.defaultBoldFont(.title))
-				.padding(.leading, 20)
-			Spacer()
-			if viewStore.questions.isEmpty {
-				Image(systemName: "shuffle")
+		WithViewStore(store, observe: { $0}) { viewStore in
+			HStack {
+				Text(viewStore.category)
 					.font(Font.defaultBoldFont(.title))
-					.foregroundStyle(Color.accentTextColor.opacity(0.2))
-					.padding(.trailing, 10)
-			} else {
-				NavigationLink {
-					ProblemView(store: Store(
-						initialState: ProblemReducer.State(
-							questions: viewStore.questions,
-							questionIndex: Int.random(in: 0..<viewStore.questions.count)
-						),
-						reducer: { ProblemReducer() }
-					))
-				} label: {
+					.padding(.leading, 20)
+				Spacer()
+				if viewStore.questions.isEmpty {
 					Image(systemName: "shuffle")
 						.font(Font.defaultBoldFont(.title))
-						.foregroundStyle(Color.accentTextColor)
+						.foregroundStyle(Color.accentTextColor.opacity(0.2))
 						.padding(.trailing, 10)
+				} else {
+					NavigationLink {
+						ProblemView(store: Store(
+							initialState: ProblemFeature.State(
+								questions: viewStore.questions,
+								questionIndex: Int.random(in: 0..<viewStore.questions.count)
+							),
+							reducer: { ProblemFeature() }
+						))
+					} label: {
+						Image(systemName: "shuffle")
+							.font(Font.defaultBoldFont(.title))
+							.foregroundStyle(Color.accentTextColor)
+							.padding(.trailing, 10)
+					}
 				}
+				Button(action: {
+					viewStore.send(.addButtonTapped)
+				}, label: {
+					Image(systemName: "plus")
+						.font(Font.defaultBoldFont(.title))
+						.foregroundStyle(Color.accentTextColor)
+						.padding(.trailing, 20)
+				})
 			}
-			Button(action: {
-				viewStore.send(.addButtonTapped)
-			}, label: {
-				Image(systemName: "plus")
-					.font(Font.defaultBoldFont(.title))
-					.foregroundStyle(Color.accentTextColor)
-					.padding(.trailing, 20)
-			})
-		}
-		.sheet(isPresented: viewStore.$isAddButtonTap) {
-			AddQuestionView(questions: viewStore.$addQuestions, category: viewStore.category)
-			HStack {
-				Spacer()
-				Button("취소") {
-					viewStore.send(.addQuestionCancel)
-				}
-				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .red, backgroundColor: .clear, borderColor: .accentTextColor)
-				Spacer()
-				Button("추가") {
-					viewStore.send(.addQuestion(viewStore.addQuestions))
-				}
-				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .blue, backgroundColor: .clear, borderColor: .accentTextColor)
-				Spacer()
+			.fullScreenCover(
+				store: store.scope(
+					state: \.$addQuestionState,
+					action: DetailCategoryFeature.Action.addQuestionState
+				)
+			) { addQuestionStore in
+				AddQuestionView(store: addQuestionStore)
 			}
 		}
 	}
 }
 
 private struct BodyView: View {
-	let viewStore: ViewStoreOf<DetailCategoryReducer>
+	let viewStore: ViewStoreOf<DetailCategoryFeature>
 	
 	var body: some View {
 		List {
 			ForEach(viewStore.questions.indices, id: \.self) { index in
 				NavigationLink {
 					ProblemView(store: Store(
-						initialState: ProblemReducer.State(
+						initialState: ProblemFeature.State(
 							questions: viewStore.questions,
 							questionIndex: index
 						),
-						reducer: { ProblemReducer() }
+						reducer: { ProblemFeature() }
 					))
 				} label: {
 					Text(viewStore.questions[index].title)
