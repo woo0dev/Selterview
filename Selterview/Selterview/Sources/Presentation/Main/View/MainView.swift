@@ -91,6 +91,13 @@ private struct BodyView: View {
 							backgroundColor: Color(.systemBackground)
 						)
 					}
+					.contextMenu {
+						Button(role: .destructive) {
+							viewStore.send(.deleteCategory(viewStore.categories[index]))
+						} label: {
+							Label("삭제", systemImage: "trash")
+						}
+					}
 				}
 			}
 			.padding(.horizontal)
