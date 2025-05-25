@@ -27,7 +27,6 @@ struct MainReducer {
 		case addCategoryTapped
 		case addCategory
 		case addCategoryCancel
-		case deleteCategory(String)
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -73,11 +72,6 @@ struct MainReducer {
 				state.addCategoryText = ""
 				state.isCategoryAddButtonTap = false
 				return .none
-			case .deleteCategory(let category):
-				var categories = UserDefaults.standard.array(forKey: "Categories") as? [String] ?? []
-				categories.removeAll { $0 == category }
-				UserDefaults.standard.set(categories, forKey: "Categories")
-				return .concatenate(.send(.fetchCategories))
 			case .catchError(let error):
 				state.isError = true
 				state.toastMessage = error.errorDescription ?? "알 수 없는 에러가 발생했습니다."

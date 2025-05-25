@@ -34,7 +34,7 @@ struct ToastModifier: ViewModifier {
 							isShowToast = false
 						}
 					}
-					.roundedStyle(font: .defaultMidiumFont(.body), backgroundColor: .textBackgroundLightGray)
+					.roundedStyle(maxWidth: .infinity, maxHeight: 50, font: .defaultMidiumFont(.body), backgroundColor: .textBackgroundLightGray)
 					.padding(20)
 				}
 			}

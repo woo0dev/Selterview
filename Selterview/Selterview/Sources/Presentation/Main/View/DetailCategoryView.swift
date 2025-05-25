@@ -56,16 +56,6 @@ private struct HeaderView: View {
 						.padding(.trailing, 10)
 				}
 			}
-<<<<<<< HEAD
-			.fullScreenCover(
-				store: store.scope(
-					state: \.$addQuestionState,
-					action: DetailCategoryFeature.Action.addQuestionState
-				)
-			) { addQuestionStore in
-				AddQuestionView(store: addQuestionStore)
-					.background(Color(.systemGray6))
-=======
 			Button(action: {
 				viewStore.send(.addButtonTapped)
 			}, label: {
@@ -89,7 +79,6 @@ private struct HeaderView: View {
 				}
 				.roundedStyle(alignment: .center, maxWidth: 150, minHeight: nil, maxHeight: 50, radius: nil, font: .defaultMidiumFont(.title3), foregroundColor: .blue, backgroundColor: .clear, borderColor: .accentTextColor)
 				Spacer()
->>>>>>> 16b32aa37c08fccde866c1d668cc502a84234a9d
 			}
 		}
 	}

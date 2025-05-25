@@ -34,7 +34,6 @@ struct MainView: View {
 						.showErrorMessage(showAlert: viewStore.$isError, message: viewStore.error?.errorDescription ?? "알 수 없는 문제가 발생했습니다.")
 						.showToastView(isShowToast: viewStore.$isShowToast, message: viewStore.$toastMessage)
 				}
-				.background(Color(.systemGray6))
 				.navigationDestination(for: Int.self) { index in
 					DetailCategoryView(store: Store(
 						initialState: DetailCategoryReducer.State(
@@ -60,12 +59,12 @@ private struct HeaderView: View {
 			Button {
 				viewStore.send(.addCategoryTapped)
 			} label: {
-				Image(systemName: "plus")
+				Image(systemName: "plus.circle.fill")
 					.foregroundStyle(Color.accentTextColor)
 					.font(.system(size: 40))
 			}
 		}
-		.padding(20)
+		.padding([.leading, .trailing], 20)
 	}
 }
 
@@ -77,26 +76,27 @@ private struct BodyView: View {
 			LazyVGrid(columns: [GridItem(.flexible())]) {
 				ForEach(viewStore.categories.indices, id: \.self) { index in
 					NavigationLink(value: index) {
-						VStack(alignment: .center, spacing: 10) {
+						VStack(alignment: .leading) {
 							Text(viewStore.categories[index])
 								.font(Font.defaultMidiumFont(.title))
+								.padding(10)
 							Text("\(viewStore.questions[viewStore.categories[index]]?.count ?? 0)문제")
+								.foregroundStyle(Color.gray)
+								.padding(.leading, 10)
+							Spacer()
 						}
-						.padding(10)
 						.roundedStyle(
 							alignment: .topLeading,
+							maxWidth: .infinity,
+							minHeight: 100,
+							maxHeight: 200,
 							radius: 20,
 							font: .defaultLightFont(.body),
-							foregroundColor: .primary,
-							backgroundColor: Color(.systemBackground)
+							foregroundColor: .black,
+							backgroundColor: .clear,
+							borderColor: .accentTextColor
 						)
-					}
-					.contextMenu {
-						Button(role: .destructive) {
-							viewStore.send(.deleteCategory(viewStore.categories[index]))
-						} label: {
-							Label("삭제", systemImage: "trash")
-						}
+						.padding(10)
 					}
 				}
 			}

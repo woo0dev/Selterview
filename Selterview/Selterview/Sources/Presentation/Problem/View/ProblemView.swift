@@ -18,7 +18,7 @@ struct ProblemView: View {
 			ZStack(alignment: .topTrailing) {
 				VStack {
 					QuestionCard(isTailQuestionCreating: viewStore.$isTailQuestionCreating, question: viewStore.question)
-						.animation(.easeInOut, value: viewStore.question)
+						.animation(.easeIn, value: viewStore.question)
 						.onTapGesture {
 							viewStore.send(.stopSpeak)
 							if viewStore.isTailQuestionCreating == false {
@@ -28,6 +28,9 @@ struct ProblemView: View {
 					AnswerView(answerText: viewStore.$answerText, isFocused: _isFocused)
 						.roundedStyle(
 							alignment: .topLeading,
+							maxWidth: .infinity,
+							minHeight: 100,
+							maxHeight: .infinity,
 							radius: 20,
 							font: .defaultLightFont(.body),
 							foregroundColor: .black,
@@ -79,7 +82,6 @@ struct ProblemView: View {
 			}
 			.fullScreenCover(isPresented: viewStore.$isSpeech) {
 				SpeechView(isSpeech: viewStore.$isSpeech, store: self.store.scope(state: \.speechState, action: \.speechAction))
-					.frame(width: 150, height: 150, alignment: .center)
 					.clearBackground()
 			}
 			.gesture(
@@ -115,7 +117,7 @@ private struct FooterView: View {
 				}
 				viewStore.send(.newTailQuestionCreateButtonTapped)
 			}
-			.roundedStyle(font: .defaultMidiumFont(.title3), foregroundColor: .primary, backgroundColor: Color(.systemBackground), borderColor: .accentTextColor)
+			.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
 			Spacer()
 			Button {
 				viewStore.send(.startSpeechButtonTapped)
@@ -123,7 +125,7 @@ private struct FooterView: View {
 				Image(systemName: "mic")
 					.symbolRenderingMode(.monochrome)
 			}
-			.roundedStyle(radius: 25, foregroundColor: Color(.systemBackground), backgroundColor: .textBackgroundLightPurple)
+			.roundedStyle(maxWidth: 50, maxHeight: 50, radius: 25, backgroundColor: .textBackgroundLightPurple)
 			Spacer()
 			Button("다음질문") {
 				viewStore.send(.stopSpeak)
@@ -132,9 +134,8 @@ private struct FooterView: View {
 				}
 				viewStore.send(.nextQuestionButtonTapped)
 			}
-			.roundedStyle(font: .defaultMidiumFont(.title3), foregroundColor: .primary, backgroundColor: Color(.systemBackground), borderColor: .accentTextColor)
+			.roundedStyle(maxWidth: 150, maxHeight: 50, font: .defaultMidiumFont(.title3), backgroundColor: .buttonBackgroundColor)
 			Spacer()
 		}
-		.frame(height: 50)
 	}
 }

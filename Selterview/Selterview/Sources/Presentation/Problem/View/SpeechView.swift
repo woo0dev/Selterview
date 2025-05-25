@@ -33,7 +33,7 @@ struct SpeechView: View {
 					}
 					.padding([.bottom, .leading, .trailing])
 				}
-				.roundedStyle(font: .defaultMidiumFont(.title2), backgroundColor: .lightPurple)
+				.roundedStyle(maxWidth: 150, maxHeight: 150, font: .defaultMidiumFont(.title2), backgroundColor: .lightPurple)
 			}
 			.onAppear {
 				viewStore.send(.startSpeech)
