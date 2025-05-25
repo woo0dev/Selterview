@@ -1,5 +1,5 @@
 //
-//  DetailCategoryFeature.swift
+//  DetailCategoryReducer.swift
 //  Selterview
 //
 //  Created by woo0 on 8/15/24.
@@ -9,28 +9,31 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct DetailCategoryFeature {
+struct DetailCategoryReducer {
 	struct State: Equatable {
-		@PresentationState var addQuestionState: AddQuestionFeature.State? = nil
+		@BindingState var addQuestions: Questions
+		@BindingState var isAddButtonTap: Bool = false
 		@BindingState var isError: Bool = false
 		@BindingState var isRandomStartButtonTap: Bool = false
 		@BindingState var isShowToast: Bool = false
 		@BindingState var toastMessage: String = ""
 		var category: String
-		var questions: [QuestionDTO]
 		var error: RealmFailure? = nil
+		var questions: Questions
 		
-		init(category: String, questions: [QuestionDTO]) {
+		init(category: String, questions: Questions) {
 			self.category = category
 			self.questions = questions
+			self.addQuestions = [Question(title: "", category: category)]
 		}
 	}
 	
 	enum Action: BindableAction, Equatable {
 		case addButtonTapped
-		case deleteButtonTapped(QuestionDTO)
+		case addQuestion(Questions)
+		case addQuestionCancel
+		case deleteButtonTapped(Question)
 		case fetchQuestions
-		case addQuestionState(PresentationAction<AddQuestionFeature.Action>)
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -40,16 +43,27 @@ struct DetailCategoryFeature {
 		Reduce { state, action in
 			switch action {
 			case .addButtonTapped:
-				state.addQuestionState = AddQuestionFeature.State(category: state.category)
+				state.isAddButtonTap = true
+				return .none
+			case .addQuestion(let questions):
+				do {
+					try RealmManager.shared.writeQuestions(questions)
+					state.questions = state.questions + questions
+					state.addQuestions = [Question(title: "", category: state.category)]
+					state.isAddButtonTap = false
+				} catch {
+					let effect: Effect<Action> = .send(.catchError(.questionAddError))
+					return .concatenate(effect)
+				}
+				return .none
+			case .addQuestionCancel:
+				state.addQuestions = [Question(title: "", category: state.category)]
+				state.isAddButtonTap = false
 				return .none
 			case .deleteButtonTapped(let question):
 				do {
-					if let id = question.id {
-						try RealmManager.shared.deleteQuestion(id)
-						return .concatenate(.send(.fetchQuestions))
-					} else {
-						return .send(.catchError(.questionDeleteError))
-					}
+					try RealmManager.shared.deleteQuestion(question._id)
+					return .concatenate(.send(.fetchQuestions))
 				} catch {
 					let effect: Effect<Action> = .send(.catchError(.questionDeleteError))
 					return .concatenate(effect)
@@ -63,11 +77,6 @@ struct DetailCategoryFeature {
 					return .concatenate(effect)
 				}
 				return .none
-			case .addQuestionState(.presented(.delegate(.dismissRequested))):
-				state.addQuestionState = nil
-				return .send(.fetchQuestions)
-			case .addQuestionState:
-				return .none
 			case .catchError(let error):
 				state.isError = true
 				state.toastMessage = error.errorDescription ?? "알 수 없는 에러가 발생했습니다."
@@ -77,9 +86,6 @@ struct DetailCategoryFeature {
 			case .binding(_):
 				return .none
 			}
-		}
-		.ifLet(\.$addQuestionState, action: \.addQuestionState) {
-			AddQuestionFeature()
 		}
 	}
 }

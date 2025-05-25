@@ -12,8 +12,8 @@ import XCTest
 final class MainTests: XCTestCase {
 	@MainActor
 	func addQuestionTestFeature() async {
-		let store = TestStore(initialState: MainFeature.State()) {
-			MainFeature()
+		let store = TestStore(initialState: MainReducer.State()) {
+			MainReducer()
 		}
 		
 		await store.send(.addButtonTapped)
