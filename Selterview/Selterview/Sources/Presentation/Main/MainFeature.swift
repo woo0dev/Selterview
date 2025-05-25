@@ -1,5 +1,5 @@
 //
-//  MainReducer.swift
+//  MainFeature.swift
 //  Selterview
 //
 //  Created by woo0 on 2/7/24.
@@ -9,7 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct MainReducer {
+struct MainFeature {
 	struct State: Equatable {
 		@BindingState var addCategoryText: String = ""
 		@BindingState var toastMessage: String = ""
@@ -17,7 +17,7 @@ struct MainReducer {
 		@BindingState var isShowToast: Bool = false
 		@BindingState var isError: Bool = false
 		var error: RealmFailure? = nil
-		var questions: [String: Questions] = [:]
+		var questions: [String: [QuestionDTO]] = [:]
 		var categories: [String] = []
 	}
 	
@@ -27,6 +27,7 @@ struct MainReducer {
 		case addCategoryTapped
 		case addCategory
 		case addCategoryCancel
+		case deleteCategory(String)
 		case catchError(RealmFailure)
 		case binding(BindingAction<State>)
 	}
@@ -72,6 +73,11 @@ struct MainReducer {
 				state.addCategoryText = ""
 				state.isCategoryAddButtonTap = false
 				return .none
+			case .deleteCategory(let category):
+				var categories = UserDefaults.standard.array(forKey: "Categories") as? [String] ?? []
+				categories.removeAll { $0 == category }
+				UserDefaults.standard.set(categories, forKey: "Categories")
+				return .concatenate(.send(.fetchCategories))
 			case .catchError(let error):
 				state.isError = true
 				state.toastMessage = error.errorDescription ?? "알 수 없는 에러가 발생했습니다."

@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct SpeechView: View {
 	@Binding var isSpeech: Bool
 	
-	let store: StoreOf<SpeechReducer>
+	let store: StoreOf<SpeechFeature>
 	
 	var body: some View {
 		WithViewStore(store, observe: { $0 }) { viewStore in
@@ -33,7 +33,7 @@ struct SpeechView: View {
 					}
 					.padding([.bottom, .leading, .trailing])
 				}
-				.roundedStyle(maxWidth: 150, maxHeight: 150, font: .defaultMidiumFont(.title2), backgroundColor: .lightPurple)
+				.roundedStyle(font: .defaultMidiumFont(.title2), backgroundColor: .lightPurple)
 			}
 			.onAppear {
 				viewStore.send(.startSpeech)

@@ -9,28 +9,42 @@ import SwiftUI
 import ComposableArchitecture
 
 struct AddQuestionView: View {
-	let store: StoreOf<AddQuestionReducer>
+	let store: StoreOf<AddQuestionFeature>
 	
 	var body: some View {
-		WithViewStore(store, observe: { $0 }) { viewStore in
+		WithViewStore(store, observe: \.self) { viewStore in
 			VStack {
 				HStack {
 					Text(viewStore.category)
 						.font(Font.defaultBoldFont(.title))
-						.padding(.vertical, 20)
 					Spacer()
+					Button(action: {
+						viewStore.send(.addQuestionCancel)
+					}, label: {
+						Text("취소")
+					})
+					Button(action: {
+						viewStore.send(.addQuestions(viewStore.addQuestions))
+					}, label: {
+						Text("완료")
+					})
 				}
+				.padding(.vertical, 20)
 				Spacer()
 				if viewStore.additionalOption == .none {
-					AddOptionView(viewStore: viewStore)
+					AddOptionView(store: store)
 				} else if viewStore.additionalOption == .url {
-					URLAddView(viewStore: viewStore)
+					URLAddView(store: store)
 				} else {
-					UserDefineAddView()
+					UserDefineAddView(store: store)
 				}
 				Spacer()
 			}
 		}
 		.padding(.horizontal, 20)
 	}
+}
+
+#Preview {
+	AddQuestionView(store: Store(initialState: AddQuestionFeature.State(category: ""), reducer: { AddQuestionFeature() }))
 }
