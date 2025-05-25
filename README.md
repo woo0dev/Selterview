@@ -20,10 +20,22 @@
 <br/>
  
 ## 🖼 Screenshot
-<img width="200" src="https://github.com/user-attachments/assets/e3a0f0c4-4afe-4744-82a0-262483adf265">
-<img width="200" src="https://github.com/user-attachments/assets/b4287aa2-ce77-4bd9-abb7-e27f2ed8fe1b">
-<img width="200" src="https://github.com/user-attachments/assets/8045a790-5bbb-4ab8-aebb-32c021856b5f">
-<img width="200" src="https://github.com/user-attachments/assets/95b90972-e51f-4e9c-8dea-4bb7b325b6db">
+### 메인화면
+<img width="200" src="https://github.com/user-attachments/assets/fc7abf90-2642-4b08-9360-d6216f464bea">
+<img width="200" src="https://github.com/user-attachments/assets/752766bc-7019-4b88-bfef-d5be5a071f2a">
+
+### 질문 추가 화면
+<img width="200" src="https://github.com/user-attachments/assets/c8093b63-12e5-4867-afab-e65e182d67cf">
+<img width="200" src="https://github.com/user-attachments/assets/b80d879b-1c70-446f-b866-e70776ed091c">
+<img width="200" src="https://github.com/user-attachments/assets/cf691b03-0c5c-4073-abf7-6357a6fe17e9">
+
+### 질문 화면
+<img width="200" src="https://github.com/user-attachments/assets/ad327874-a511-4842-accb-137fb5250233">
+<img width="200" src="https://github.com/user-attachments/assets/f7faa375-231b-4989-8e3b-3ded21d3b338">
+<img width="200" src="https://github.com/user-attachments/assets/52b58ab2-49e3-4dd2-8aa5-5362d550ae3f">
+<img width="200" src="https://github.com/user-attachments/assets/c32d39a6-e582-4579-9636-b283f1278291">
+
+
 
 
 
