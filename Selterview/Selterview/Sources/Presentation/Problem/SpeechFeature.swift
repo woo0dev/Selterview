@@ -1,5 +1,5 @@
 //
-//  SpeechReducer.swift
+//  SpeechFeature.swift
 //  Selterview
 //
 //  Created by woo0 on 4/18/24.
@@ -9,7 +9,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct SpeechReducer {
+struct SpeechFeature {
 	@ObservableState
 	struct State: Equatable {
 		var transcript: String
